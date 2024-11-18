@@ -83,9 +83,43 @@
                         <title>about:blank</title>
                     </head>
                     <body>
-                        <iframe src="https://vseigru.net/11/igra-fortnajt-stroj-sejchas/" style="outline: none; border: none; width: 100vw; height: 100vh; position: fixed; inset: 0px;"></iframe>
-                    </body>
-                </html>
+<html>
+<head>
+<title>Игра Фортнайт: Строй Сейчас - Vseigru.net</title>
+<link rel="stylesheet" href="/lib/game-loader/gameloader2020.css" />
+<script src="/lib/game-loader/gameloader2020.js"></script>
+<script src="/lib/game-loader/gameloader-helper.js"></script>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<script type="text/javascript">
+	var options = {
+		author: "Vseigru",
+		logo: "logo.jpg",
+		gameName: "Игра Фортнайт: Строй Сейчас",
+		gameNameEu: "Fortnite: BuildNow GG",
+		gameUrl: "32619",
+		moreLink: ("https://vseigru.net"),
+		allowFullscreen: true,
+		locale: "ru_RU",
+		loader: "unity2020",
+		loaderOptions: {
+			unityLoaderUrl: "Build/BuildNow.loader.js",
+			unityConfigOptions: {
+				dataUrl: "Build/BuildNow.data",
+				frameworkUrl: "Build/BuildNow.framework.js",
+			    codeUrl: "Build/BuildNow.wasm",
+				streamingAssetsUrl: "StreamingAssets"
+			}
+		},
+    };
+	GameInit.load(options);	  
+</script>
+</body>
+</html>
+</body>
+</html>
             `);
 
             newWindow.document.close(); // Close the document to render it
