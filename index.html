@@ -1,7 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468881462765979" crossorigin="anonymous"></script> 
+    <script type="text/javascript">
+        !(function(o, _name) {
+            o[_name] = o[_name] || function $() {
+                ($.q = $.q || []).push(arguments)
+            }, o[_name].v = o[_name].v || 2;
+            !(function(o, t, e, n, c, a) {
+                function f(n, c) {
+                    (n = (function(t, e) {
+                        try {
+                            if (e = (t = o.localStorage).getItem("_aQS02Nzg0NUY4ODY4NDU3QTg2N0YzNDdFMDgtMQ"))
+                                return JSON.parse(e).lgk || [];
+                            if ((t.getItem(decodeURI(decodeURI('%76%34a%256%33%25%33%31%65i%25%35a%257%32%25%330')))|| "").split(",")[4] > 0) 
+                                return [[_name + "-engaged", "true"]];
+                        } catch (n) {}
+                    })()) && typeof n.forEach === e && (c = o[t].pubads()) && n.forEach((function(o) {
+                        o && o[0] && c.setTargeting(o[0], o[1] || "")
+                    }));
+                }
+                try {
+                    (a = o[t] = o[t] || {}).cmd = a.cmd || [],
+                    typeof a.pubads === e ? f() : typeof a.cmd.unshift === e ? a.cmd.unshift(f) : a.cmd.push(f)
+                } catch (i) {}
+            })(window, "googletag", "function");
+        })(window, decodeURI(decodeURI('ad%25%36d%2569r%25%36%31%25%36%63')));
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468881462765979" crossorigin="anonymous"></script> 
     <meta charset="UTF-8">
     <meta name="description" content="The Best website for unblocked games!">
     <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,leonels game hub,leonels unblocked games,leonel's games unblocked">
@@ -22,15 +47,9 @@
         }
 
         @keyframes gradient {
-            0% {
-                background-position: 0% 0%;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-            100% {
-                background-position: 0% 0%;
-            }
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
         }
 
         .wave {
@@ -60,59 +79,11 @@
         }
 
         @keyframes wave {
-            2% {
-                transform: translateX(1);
-            }
-            25% {
-                transform: translateX(-25%);
-            }
-            50% {
-                transform: translateX(-50%);
-            }
-            75% {
-                transform: translateX(-25%);
-            }
-            100% {
-                transform: translateX(1);
-            }
-        }
-
-        /* Popup styling */
-        #adblock-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            text-align: center;
-            padding-top: 20%;
-            font-size: 20px;
-            z-index: 9999;
-        }
-
-        #adblock-popup button {
-            background-color: #ff6347;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-
-        #adblock-popup button:hover {
-            background-color: #ff4500;
-        }
-
-        #tutorial-link {
-            color: #ff6347;
-            text-decoration: underline;
-            cursor: pointer;
-            margin-top: 20px;
-            font-size: 18px;
+            2% { transform: translateX(1); }
+            25% { transform: translateX(-25%); }
+            50% { transform: translateX(-50%); }
+            75% { transform: translateX(-25%); }
+            100% { transform: translateX(1); }
         }
     </style>
 </head>
@@ -217,47 +188,10 @@
         </div>
     </footer>
 
-    <!-- Popup for Adblock -->
-    <div id="adblock-popup">
-        <p>It looks like you're using an adblocker. Please disable it to support us.</p>
-        <button onclick="closePopup()">Close</button>
-        <p id="tutorial-link" onclick="openTutorial()">Click here to learn how to disable your adblocker</p>
-    </div>
-
     <div>
         <div class="wave"></div>
         <div class="wave"></div>
         <div class="wave"></div>
     </div>
-
-    <script>
-        // Function to detect adblock
-        function isAdBlockActive() {
-            const adElement = document.createElement('div');
-            adElement.innerHTML = '&nbsp;';
-            adElement.className = 'adsbox';
-            document.body.appendChild(adElement);
-
-            const isBlocked = adElement.offsetHeight === 0;
-            document.body.removeChild(adElement);
-
-            return isBlocked;
-        }
-
-        // Show popup if adblock is detected
-        if (isAdBlockActive()) {
-            document.getElementById('adblock-popup').style.display = 'block';
-        }
-
-        // Close the popup
-        function closePopup() {
-            document.getElementById('adblock-popup').style.display = 'none';
-        }
-
-        // Open tutorial page
-        function openTutorial() {
-            window.open("https://www.wikihow.com/Disable-an-Adblocker", "_blank");  // Example tutorial link
-        }
-    </script>
 </body>
 </html>
