@@ -17,26 +17,9 @@
     #canvas {
       display: block;
     }
-    #launchButton {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
-  <button id="launchButton" onclick="window.location.href='https://rawcdn.githack.com/genizy/google-class/main/crazycattle3d/'">
-    Launch CrazyCattle3D
-  </button>
-
   <canvas id="canvas" tabindex="0"></canvas>
   <noscript>Your browser does not support JavaScript.</noscript>
   <script src="CrazyCattle3D.js"></script>
@@ -44,4 +27,28 @@
     const GODOT_CONFIG = {
       args: [],
       canvasResizePolicy: 2,
-      ensureCrossOriginIsolationHeaders:
+      ensureCrossOriginIsolationHeaders: false,
+      executable: "CrazyCattle3D",
+      experimentalVK: false,
+      fileSizes: {
+        "CrazyCattle3D.pck": 25322272,
+        "CrazyCattle3D.wasm": 43699190
+      },
+      focusCanvas: true,
+      gdextensionLibs: [],
+      serviceWorker: "CrazyCattle3D.service.worker.js"
+    };
+
+    // 🧠 Fix gzip issue by overriding instantiateStreaming
+    WebAssembly.instantiateStreaming = async (respPromise, importObject) => {
+      const response = await respPromise;
+      const buffer = await response.arrayBuffer();
+      return WebAssembly.instantiate(buffer, importObject);
+    };
+
+    // 🚀 Start the game
+    const engine = new Engine(GODOT_CONFIG);
+    engine.startGame();
+  </script>
+</body>
+</html>
