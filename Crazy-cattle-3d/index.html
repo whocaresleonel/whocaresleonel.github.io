@@ -39,14 +39,13 @@
       serviceWorker: "CrazyCattle3D.service.worker.js"
     };
 
-    // 🧠 Fix gzip issue by overriding instantiateStreaming
+    // Fix: Patch instantiateStreaming, ensure importObject is passed properly
     WebAssembly.instantiateStreaming = async (respPromise, importObject) => {
       const response = await respPromise;
       const buffer = await response.arrayBuffer();
-      return WebAssembly.instantiate(buffer, importObject);
+      return WebAssembly.instantiate(buffer, importObject || {});
     };
 
-    // 🚀 Start the game
     const engine = new Engine(GODOT_CONFIG);
     engine.startGame();
   </script>
