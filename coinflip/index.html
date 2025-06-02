@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Online Coin Flip Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    #coin {
+      font-size: 80px;
+      margin: 20px;
+    }
+    table {
+      margin: auto;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+    }
+    th {
+      background: #eee;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🪙 Coin Flip Game</h1>
+<input type="text" id="playerName" placeholder="Enter your name" />
+<button onclick="flipCoin()">Flip Coin</button>
+
+<div id="coin">❓</div>
+<div id="result"></div>
+
+<h2>🏆 Leaderboard</h2>
+<table>
+  <thead><tr><th>Name</th><th>Wins</th></tr></thead>
+  <tbody id="leaderboardBody"></tbody>
+</table>
+
+<script>
+  const BIN_ID = "683d94d68960c979a5a43641";
+  const API_KEY = "$2a$10$y3RxWR0k1Hbs/87Ml9Hj8.8kryR.S0dCHpCYZ3h5lMKvd5qiXA/6C";
+  const BASE_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+  const headers = {
+    "Content-Type": "application/json",
+    "X-Master-Key": API_KEY
+  };
+
+  async function getLeaderboard() {
+    try {
+      const res = await fetch(BASE_URL + "/latest", { headers });
+      const data = await res.json();
+      return data.record.leaderboard || [];
+    } catch (err) {
+      console.error("Failed to load leaderboard:", err);
+      return [];
+    }
+  }
+
+  async function updateLeaderboard(updatedList) {
+    try {
+      await fetch(BASE_URL, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify({ leaderboard: updatedList })
+      });
+    } catch (err) {
+      console.error("Failed to update leaderboard:", err);
+    }
+  }
+
+  async function flipCoin() {
+    const name = document.getElementById("playerName").value.trim();
+    if (!name) return alert("Enter your name!");
+
+    const result = Math.random() < 0.5 ? "Heads" : "Tails";
+    document.getElementById("coin").textContent = result === "Heads" ? "🙂" : "🙃";
+    document.getElementById("result").textContent = `${name} got ${result}!`;
+
+    let lea
