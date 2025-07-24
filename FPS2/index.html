@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS2 Multiplayer shooter</title>
+    <style>
+      html, body {
+        overflow: hidden !important;
+        cursor: url(./cursors/cursor0.cur), auto !important;
+      }
+      body {
+        background: #fff;
+        background: linear-gradient(90deg, #fff 0%, #38b6ff 100%);
+      }
+      @font-face {
+        font-family: "BigShouldersDisplayBold";
+        src: url(./fonts/BigShouldersDisplay/BigShouldersDisplay-Bold.ttf);
+      }
+      @font-face {
+        font-family: "BigShouldersDisplayRegular";
+        src: url(./fonts/BigShouldersDisplay/BigShouldersDisplay-Light.ttf);
+      }
+      @font-face {
+        font-family: "AgrandirWideBlack";
+        src: url(./fonts/Agrandir/AgrandirWideBlack.ttf);
+      }
+      #heading0 {
+        position: relative;
+        left: 50%;
+        margin: 0;
+        width: 45%;
+        margin-left: -22.5%;
+      }
+      #heading1 {
+        color: #38b6ff;
+        font-family: "BigShouldersDisplayRegular";
+        font-size: 5.5vw;
+        text-align: center;
+      }
+      #background {
+        position: absolute;
+        width: 45%;
+        z-index: -1;
+        left: 50%;
+        margin-left: -22.5%;
+      }
+      #sidebar {
+        position: absolute;
+        top: 0;
+        height: 100vw !important;
+        margin: 0 !important;
+        width: 10%;
+        z-index: -1;
+        margin: 0;
+        left: 30px;
+      }
+      hr {
+        width: 50%;
+        padding: 0 !important;
+        background: #38b6ff;
+        outline: none !important;
+        border: none !important;
+        height: 4px;
+        margin-bottom: -2vw !important;
+        margin-top: -2vw !important;
+      }
+      img {
+        pointer-events: none !important;
+      }
+      * {
+        user-select: none !important;
+        cursor: url(./cursors/cursor0.cur), auto !important;
+      }
+      button.button {
+        position: relative;
+        background: #fff;
+        width: 50%;
+        height: 60px;
+        border: 5px solid #38b6ff;
+        text-align: center;
+        left: 50%;
+        margin-left: -25%;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        padding: 15px;
+        font-family: "AgrandirWideBlack" !important;
+        color: #38b6ff;
+        font-size: 15px;
+        transition: font-size .1s, padding .1s;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24);
+      }
+      button.button:hover {
+        font-size: 20px;
+        padding: 12px;
+      }
+      .cover {
+        position: fixed;
+        height: 50%;
+        width: 100%;
+        top: -100%;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: 0;
+        background: #fff;
+        z-index: 9999;
+        margin-top: -10px;
+        border-bottom: 10px solid #38b6ff;
+        padding-top: 50px;
+        text-align: center;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24);
+        border-image: linear-gradient(to bottom, #38b6ff, #fff) 1 / 10px;
+        transition: top .8s;
+      }
+      a {
+        color: #38b6ff !important;
+        font-family: "AgrandirWideBlack";
+        border-bottom: 2px solid #38b6ff;
+        text-decoration: none !important;
+      }
+      .swal-modal {
+        border-radius: none !important;
+        background: #fff;
+      }
+      .swal-modal * {
+        color: #38b6ff;
+        font-family: "AgrandirWideBlack";
+      }
+      .swal-error * {
+        color: #ff4444;
+        font-family: "AgrandirWideBlack";
+      }
+      .swal-error .swal-button {
+        background: #ff4444;
+        box-shadow: none !important;
+        color: #fff !important;
+      }
+      .swal-button {
+        background: #38b6ff;
+        box-shadow: none !important;
+        color: #fff !important;
+      }
+      .simple-keyboard {
+        position: fixed;
+        margin: 0;
+        bottom: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        z-index: 999999;
+        display: none;
+      }
+      #chatwin {
+        position: relative;
+        border: none;
+        margin: 0;
+      }
+      .tippy-box[data-theme~="fps"] {
+        background-color: #fff;
+        color: #38b6ff;
+        font-family: Arial, Helvetica, sans-serif;
+        border: 3px solid #38b6ff;
+      }
+      .tippy-arrow::before {
+        border-top-color: #fff !important;
+      }
+      .focusa {
+        outline: 3px solid #ddd !important;
+      }
+      .lobby {
+        font-family: Arial !important;
+      }
+      select {
+        background: #fff;
+        border: 2px solid #38b6ff;
+        border-radius: 0;
+        margin-bottom: 3px;
+      }
+      * {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24);
+      }
+      .swal-text {
+        font-family: Arial !important;
+      }
+      [id^="NotiflixNotify-"] {
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24);
+      }
+      .highlight {
+        background: yellow;
+      }
+      .listitem {
+        position: relative;
+        left: 0;
+        right: 0;
+        text-align: left;
+        font-family: Arial, Helvetica, sans-serif !important;
+      }
+      summary {
+        border-bottom: 1px solid #38b6ff !important;
+      }
+      .listitem * {
+        font-family: Arial, Helvetica, sans-serif !important;
+      }
+      .swal-modal {
+        overflow-y: scroll !important;
+      }
+      iframe {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        border: 0;
+        border-top: 1px solid #38b6ff !important;
+      }
+      * {
+        scrollbar-color: #fff #38b6ff !important;
+        scrollbar-width: thin !important;
+      }
+      ::-webkit-scrollbar-track {
+        border-radius: 0;
+      }
+      .login, .logout, .signup {
+        right: 20px;
+        position: absolute;
+        background: transparent;
+        backdrop-filter: blur(2px);
+        border: 4px solid #fff;
+        border-radius: 4px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24);
+        padding: 10px;
+        color: #fff;
+        font-family: "BigShouldersDisplayBold";
+        display: inline-flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 60px;
+        transition: box-shadow 1s;
+      }
+      .login:hover, .signup:hover {
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+      }
+      .banner {
+        opacity: 1;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        backdrop-filter: blur(15px);
+        width: 100%;
+        height: 100%;
+        transition: opacity 1.5s;
+        z-index: 999999999999999999999999;
+      }
+      *[id^="tippy-"] {
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24);
+        border-radius: none !important;
+      }
+    </style>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <script type="text/javascript" src="https://unpkg.com/parse@3.4.4/dist/parse.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KDN09VRHPS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KDN09VRHPS");
+    </script>
+  </head>
+  <body>
+    <div class="banner"></div>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <img id="background" src="text-images/rifles.png">
+    <img id="sidebar" src="text-images/Blue/sidebar.png">
+    <img id="heading0" src="text-images/Blue/heading.png">
+    <div class="login" style="top:20px" onclick="login()">Log in</div>
+    <div class="signup" style="top:120px" onclick="signup()">Sign up</div>
+    <hr>
+    <h1 id="heading1">MULTIPLAYER SHOOTER</h1>
+    <div class="buttons">
+      <button class="button" onclick="play(this)">PLAY</button>
+      <br>
+      <button class="button" onclick="chat(this)" id="chat">CHAT</button>
+      <br>
+      <button class="button" onclick="help()">HELP</button>
+    </div>
+    <p style="color:#38b6ff;font-family:Arial,Helvetica,sans-serif;font-weight:10;text-align:center;margin-top:0">&copy; 2021-2023 <a href="https://github.com/Parking-Master" style="font-family:Arial,Helvetica,sans-serif!important">Parking Master</a></p>
+    <div class="cover">
+      <span id="close" style="color:#ff4444;font-size:25px" onclick="play()">&times;</span>
+      <h1 style="font-family:'BigShouldersDisplayRegular';font-size:50px;color:#38b6ff">&bullet; PLAY &bullet;</h1>
+      <br>
+      <a href="" onclick="event.preventDefault(); playGame()">Quick play</a>
+      <br>
+      <br>
+      <a href="" onclick="event.preventDefault(); swal({ title: 'Forge mode', text: 'Create, edit and view models and maps, and craft your own game modes!', button: 'Go to forge' }).then((e) => e && location.assign('./forge.html'))">Forge mode</a>
+      <br>
+      <br>
+      <a href="" onclick="event.preventDefault(); openStore()">The store</a>
+      <br>
+      <br>
+      <a href="" onclick="event.preventDefault(); preferences()">Preferences</a>
+      <br>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alvaromontoro/gamecontroller.js@latest/dist/gamecontroller.min.js"></script>
+    <div class="simple-keyboard"></div>
+    <script src="https://parkingmaster.tk/notiflix/notiflix-3.2.8.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Parking-Master/FPS-Tipper@master/tipper.js" defer async="false"></script>
+    <script src="userman.js"></script>
+    <script>
+      /**
+        * @license
+        * Copyright (c) 2021 Parking-Master / (Gametime.js)
+        * Licensed under the MIT License (https://mit-license.org)
+        * More license and copyright information at https://github.com/Parking-Master/Gametime.js/blob/main/LICENSE
+      */
+      function setCookie(e, n, t) {
+        let i = "";
+        if (t) {
+        let o = new Date;
+        o.setTime(o.getTime() + 24 * t * 60 * 60 * 1e3), i = "; expires=" + o.toUTCString()
+        }
+        document.cookie = e + "=" + (n || "") + i + "; path=/"
+      }
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+        }
+        }
+        return null;
+      }
+      window.pubnub = undefined;
+      window.ms = Date.now();
+      window.addEventListener("load", () => {
+        ms = Date.now() - ms;
+      });
+      window.addEventListener("beforeunload", (() => {
+        setCookie("pubnub-time-token", `${(new Date).getTime()}0000`, 10)
+      })), window.gametime = {}, gametime.onconnect = null, gametime.ondisconnect = null, window.gametime.events = [], window.gametime.events.functions = [], gametime.connected = !1, gametime.set = function(e, n, t) {
+        return function(e, n, t) {
+          if ("key" == e) {
+            let e = n,
+            u = t;
+            let i = document.createElement("script");
+            i.src = "https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.min.js", document.body.appendChild(i);
+            let o = setInterval((function() {
+              if ("undefined" != typeof PubNub) {
+                clearInterval(o);
+                const n = PubNub.generateUUID();
+                pubnub = new PubNub({
+                  publishKey: e,
+                  subscribeKey: u,
+                  uuid: n
+                }), gametime.user = {}, gametime.user.id = n;
+                pubnub.addListener({
+                  message: function(e) {
+                    new Function("(" + decodeURIComponent(e.message) + ")();")()
+                  },
+                  presence: function(e) {
+                    console.log(e.uuid)
+                  }
+                }), setTimeout((function() {
+                  let f = ((ms.toFixed(0) - 0) / (ms*1.5));
+                  console.info("%cGametime.js connecting in " + f.toFixed(0) + " second(s)...", "font-family: Arial, helvetica, sans-serif;");
+                  delete ms;
+                  const e = encodeURIComponent('function(){console.info("%cGametime.js successfully connected!","font-family: Arial, helvetica, sans-serif;");}');
+                  pubnub.publish({
+                    channel: gametime.channel,
+                    message: e
+                  }, (function(e, n) {
+                  if (e.error) {
+                    gametime.connected = !1;
+                    throw new Error("An error occurred while trying to establish a connection with Gametime.js.\nMake sure the Publish/Subscribe keys are correct and that you are on the right channel.")
+                  } else {
+                  gametime.didConnect();
+                  gametime.connected = !0;
+                  if (typeof gametime.onconnect == "function") {
+                    gametime.onconnect();
+                  }
+                  }
+                  }))
+                }), 3e3)
+              }
+            }), 250)
+          } else "channel" == e ? (void 0 === pubnub ? setTimeout((function() {
+            pubnub.subscribe({
+              channels: [n],
+              timetoken: getCookie("pubnub-time-token"),
+              message: function(e) {
+              if ("unsubscribe" == e.type) return pubnub.unsubscribe({
+                channel: e.channel
+              })
+              },
+              withPresence: !0
+            })
+          }), 900) : pubnub.subscribe({
+            channels: [n],
+            withPresence: !0
+          }), window.gametime.channel = n) : "join-max-length" == e ? gametime.join.maxLength = "string" == typeof n ? parseFloat(n, 0) : n : "join-min-length" == e && (gametime.join.minLength = "string" == typeof n ? parseFloat(n, 0) : n)
+        }(e, n, t)
+      }, gametime.make = function(e) {
+        let n
+        return n = e, void window.gametime.events.push(n);
+      }, gametime.on = function(e, n) {
+        return function(e, n) {
+          if (!(window.gametime.events.indexOf(e) > -1)) throw new ReferenceError('Event "' + e.toString() + '" not found');
+          let t = document.createElement("script"),
+          i = (n = n.toString()).split("{")[0],
+          o = n.toString().split("{")[0].split("(").pop().split(")").shift(),
+          u = n.substring(n.indexOf('{') + 1);
+          o = o || "undefined";
+          n = i + "{pubnub.publish({channel:'" + gametime.channel + "',message:'" + (encodeURIComponent(i) + "{var " + o + ' = "ncmmmasptr__ + ' + o + ' + ncmmmasptr__";' + encodeURIComponent(u)).replace(/\'/g, "\\'").replace(/ncmmmasptr__/g, "'") + "'});}", t.textContent = "gametime.events.functions." + e + " = " + n + ";", document.body.appendChild(t)
+        }(e, n)
+      }, gametime.recursion = 0, gametime.run = function(e, n) {
+        return function(e, n) {
+          n && void 0 !== n || (n = [""]);
+          for (let t = [], i = 0; i < n.length; i++) t.push('"' + n[i] + '"'), new Function("gametime.events.functions." + e + "(" + t + ")")()
+        }(e, n)
+      }, window.gametime.join = {}, gametime.join.maxLength = 2, gametime.join.minLength = 2, gametime.disconnect = function() {
+        gametime.connected = !1, pubnub.publish({
+          channel: "control",
+          message: {
+            command: "unsubscribe",
+            channel: gametime.channel
+          }
+        });
+        pubnub.disconnect();
+      }
+      Notiflix.Loading.init({svgColor:"#38b6ff"});
+      window.addEventListener("load", function() {
+        window.gametime.connectedPlayers = 0;
+        window.willBeAutoHost = false;
+        window.isHost = false;
+        window.Guest = false;
+        window.gametime.idList = [];
+        gametime.make("collectId");
+        gametime.make("renderScene");
+        gametime.make("isGuest");
+        gametime.on("isGuest", () => {
+          !isHost && (gametime.user.position = 2, isGuest = true, isHost = false);
+        });
+        gametime.on("renderScene", function() {
+          gametime.connectedPlayers += 1;
+          setTimeout(() => {
+            if (gametime.connectedPlayers == 1) {
+              willBeAutoHost = true;
+            }
+          }, 0);
+        });
+        gametime.on("collectId", (id) => {
+          gametime.idList.push(id);
+          gametime.idList = [... new Set(gametime.idList)];
+        });
+        window.gametime.didConnect = function() {
+          gametime.run("collectId", [gametime.user.id]);
+          gametime.run("renderScene");
+          setInterval(() => {
+            gametime.user.position = (gametime.idList[0] == gametime.user.id) ? 1 : 2;
+          });
+          if (willBeAutoHost) {
+            isHost = true;
+            isGuest = false;
+          } else {
+            isHost = false;
+            isGuest = true;
+          }
+          gametime.run("isGuest");
+        };
+      });
+      // End Gametime.js import
+      gametime.init = function() {
+        gametime.set("key", "pub-c-61965947-3f17-4d68-97f4-7ff836c75b3e", "sub-c-5ebee0f0-c27d-48c1-bd20-4d167102bcc7");
+      }
+      gametime.init();
+      gametime.set("channel", "start_search" + Math.random());
+      gameControl.on("connect", (controller) => {
+        window.controller = controller;
+        lookSensitivity=.003;lookAcc=0;lookMax=.1;(()=>{let d=false;dl=!1,setInterval((()=>{let e;-1==navigator.getGamepads()[0].axes[0]&&(dl&&document.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowLeft"})),dl=!0,e=setInterval((()=>{if(-1!=navigator.getGamepads()[0].axes[0])return document.dispatchEvent(new KeyboardEvent("keyup",{key:"ArrowRight"})),document.dispatchEvent(new KeyboardEvent("keyup",{key:"ArrowLeft"})),dl=!1,clearInterval(e)})))})),dl=!1,setInterval((()=>{let e;1==navigator.getGamepads()[0].axes[0]&&(dl&&document.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight"})),dl=!0,e=setInterval((()=>{if(1!=navigator.getGamepads()[0].axes[0])return document.dispatchEvent(new KeyboardEvent("keyup",{key:"ArrowLeft"})),document.dispatchEvent(new KeyboardEvent("keyup",{key:"ArrowRight"})),dl=!1,clearInterval(e)})))})),controller.on("right0",(()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowDown"}))})).before("right0",(()=>{})).after("right0",(()=>{document.dispatchEvent(new KeyboardEvent("keyup",{key:"ArrowDown"}))})),controller.on("left0",(()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowUp"}))})).before("left0",(()=>{})).after("left0",(()=>{document.dispatchEvent(new KeyboardEvent("keyup",{key:"ArrowUp"}))})),controller.on("button16",(()=>{})).before("button16",()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.shoot}))}).after("button16",()=>{document.dispatchEvent(new KeyboardEvent("keyup",{key:keyControls.shoot}))}),controller.on("l1",(()=>{})).before("l1",(()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.switchWeapon}))}))})(),controller.on('up0',()=>{camera.rotation.y+=lookAcc;lookAcc>=lookMax||(lookAcc+=(lookSensitivity)),gametime.run("playerRotate", [camera.rotation.x+","+camera.rotation.y+","+camera.rotation.z+","+gametime.user.position])}).before('up0',()=>{camera.rotation.y+=lookAcc;lookAcc>=lookMax||(lookAcc+=(lookSensitivity)),gametime.run("playerRotate", [camera.rotation.x+","+camera.rotation.y+","+camera.rotation.z+","+gametime.user.position])}).after('up0',()=>{lookAcc=0}),controller.on('down0',()=>{camera.rotation.y+=-lookAcc;lookAcc>=lookMax||(lookAcc+=(lookSensitivity)),gametime.run("playerRotate", [camera.rotation.x+","+camera.rotation.y+","+camera.rotation.z+","+gametime.user.position])}).before('down0',()=>{camera.rotation.y+=-lookAcc;lookAcc>=lookMax||(lookAcc+=(lookSensitivity)),gametime.run("playerRotate", [camera.rotation.x+","+camera.rotation.y+","+camera.rotation.z+","+gametime.user.position])}).after('down0',()=>{lookAcc=0}),controller.on('left1',()=>{camera.rotation.x+=lookAcc;lookAcc>=lookMax||(lookAcc+=(lookSensitivity)),gametime.run("playerRotate", [camera.rotation.x+","+camera.rotation.y+","+camera.rotation.z+","+gametime.user.position])}).before('left1',()=>{camera.rotation.x+=lookAcc;lookAcc>=lookMax||(lookAcc+=(lookSensitivity)),gametime.run("playerRotate", [camera.rotation.x+","+camera.rotation.y+","+camera.rotation.z+","+gametime.user.position])}).after('left1',()=>{lookAcc=0}),controller.on('right1',()=>{camera.rotation.x+=-lookAcc;lookAcc>=lookMax||(lookAcc+=(lookSensitivity)),gametime.run("playerRotate", [camera.rotation.x+","+camera.rotation.y+","+camera.rotation.z+","+gametime.user.position])}).before('right1',()=>{camera.rotation.x+=-lookAcc;lookAcc>=lookMax||(lookAcc+=(lookSensitivity)),gametime.run("playerRotate", [camera.rotation.x+","+camera.rotation.y+","+camera.rotation.z+","+gametime.user.position])}).after('right1',()=>{lookAcc=0}),controller.on('button0',()=>{}).before('button0',()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.jump}))}).after('button0',()=>{}),controller.on('button1',()=>{}).before('button1',()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.punch}))}).after('button1',()=>{}),controller.on('button14',()=>{}).before('button14',()=>{isZoomed?document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.zoomOut})):document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.zoomIn}))}).after('button14',()=>{}),controller.on('button7',()=>{}).before('button7',()=>{isTouchingOrdinance?document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.interact})):(!isReloading&&document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.reload})))}).after('button7',()=>{}),controller.on('button15',()=>{}).before('button15',()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.throwGrenade}))}).after('button15',()=>{}),controller.on('button11',()=>{}).before('button11',()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:keyControls.pause}))}).after('button11',()=>{});
+      });
+      let Keyboard = SimpleKeyboard.default;
+      let keyboard = new Keyboard({
+        onChange: input => onChange(input),
+        onKeyPress: button => onKeyPress(button)
+      });
+      currentFocus = null;
+      currentScroll = 0;
+      focusMax = null;
+      function onKeyPress(button) {
+        console.log(button);
+      }
+      setInterval(() => {
+        for (let i = 0; i < document.querySelectorAll("a").length; i++) {
+          Object.values(document.querySelectorAll("a")[i].classList).indexOf("focus")>-1||document.querySelectorAll("a")[i].classList.add("focus");
+        }
+        for (let i = 0; i < document.querySelectorAll("button").length; i++) {
+          Object.values(document.querySelectorAll("button")[i].classList).indexOf("focus")>-1||document.querySelectorAll("button")[i].classList.add("focus");
+        }
+        for (let i = 0; i < document.querySelectorAll("input").length; i++) {
+          Object.values(document.querySelectorAll("input")[i].classList).indexOf("focus")>-1||document.querySelectorAll("input")[i].classList.add("focus");
+        }
+        if(currentFocus!=null&&document.querySelector(".tabfocus"+currentFocus).tagName.toLowerCase()=="input"){
+          document.querySelector(".tabfocus"+currentFocus).addEventListener("input", (event) => {
+            keyboard.setInput(event.target.value);
+          });
+          lockInput&&(document.querySelector(".simple-keyboard").style.display = "block");
+          document.querySelectorAll(".hg-button")[keyfocus].style.outline="4px solid #38b6ff";
+          let e=Object.values(document.querySelectorAll(".hg-button"));e=e.filter((function(e){return e!=document.querySelectorAll(".hg-button")[keyfocus]}));for(let t=0;t<e.length;t++)e[t].style.outline="none";
+          window.onChange = function(input) {
+            document.querySelector(".tabfocus"+currentFocus).value = input;
+            createlobbytext = input;
+          }
+        }else{
+          document.querySelector(".simple-keyboard").style.display = "none";
+        }
+        for (let i = 0; i < document.querySelectorAll(".focus").length; i++) {
+          Object.values(document.querySelectorAll(".focus")[0].classList).indexOf("tabfocus"+i)>-1||document.querySelectorAll(".focus")[i].classList.add("tabfocus"+i);
+          focusMax = document.querySelectorAll(".focus").length - 1;
+        }
+      });
+      setInterval(() => {
+        if (!currentFocus && currentFocus != 0) { return }
+        document.querySelector(".tabfocus"+currentFocus).style.outline = "4px solid #eee";
+        for (let i = 0; i < Object.values(document.querySelectorAll(".focus")).filter(e => e !== document.querySelector(".tabfocus"+currentFocus)).length; i++) {
+          Object.values(document.querySelectorAll(".focus")).filter(e => e !== document.querySelector(".tabfocus"+currentFocus))[i].style.outline = "none";
+        }
+      });
+      id = Math.random().toString();
+      lockInput = null;
+      Parse.initialize("Izi3O97u5yYIBD7nzBkFIaWJ38wr8w2Ani3eDgol","FKPsxeAmmINZlZwmPBL0U0dwPzvZGYHVp95jG7G2"),Parse.serverURL="https://parseapi.back4app.com/";
+      Lobby = new Parse.Object.extend("Lobby");
+      HelpLikes = new Parse.Object.extend("HelpLikes");
+      createlobbytext = "";
+      function code(){let r="";for(let a=1;a<=6;a++)r+=a%2==0?String.fromCharCode(26*Math.random()+65):Math.ceil(9*Math.random());return r}
+      function createLobby() {
+        swal({
+          title: "Create a lobby",
+          text: "Enter a lobby name (2-10 characters:)",
+          content: "input",
+          button: "Create"
+        }).then(() => {
+          let name = createlobbytext;
+          console.log(name)
+          if (!name) return;
+          if (name.length < 2) return swal("Lobby name should be over 2 characters.");
+          if (name.length > 10) return swal("Lobby name should be under 10 characters.");
+          let lobby = new Lobby();
+          lobby.set("name", name);
+          lobby.set("map", document.querySelector("#selectmap").value.split(" ")[0].toUpperCase().replace("ABANDONED", "CITY"));
+          lobby.set("mode", document.querySelector("#selectmode").value);
+          lobby.set("code", document.getElementsByName("code")[0].checked ? code() : "");
+          lobby.save().then(() => (console.log("Lobby \"" + name.toString() + "\" saved"), lobby.get("code").length > 0 ? location.assign("src.html?lobby=" + encodeURIComponent(name) + "&code=" + lobby.get("code")) : findLobby(name, "*", "*")));
+          createlobbytext = "";
+        });
+        setTimeout(() => { document.querySelector(".swal-content__input").addEventListener("keyup", () => { createlobbytext = document.querySelector(".swal-content__input").value }) }, 500);
+        document.querySelector(".swal-content").innerHTML += `
+        <br>
+        <div class="swal-title" style="font-size:20px!important">Other options</div>
+        <br>
+        <label for="selectmode">Mode:</label>
+        <select value="Slayer" id="selectmode">
+          <option value="Slayer">Slayer</option>
+          <option value="Snipers">Snipers</option>
+          <option value="Fiesta">Fiesta</option>
+          <option value="Oddball">Oddball</option>
+          <option value="Fistfight">Fistfight</option>
+        </select>
+        <br>
+        <label for="selectmap">Map:</label>
+        <select value="Cargo port" id="selectmap">
+          <option value="Cargo port">Cargo port</option>
+          <option value="Vertex">Vertex</option>
+          <option value="Ghost city">Ghost city</option>
+          <option value="Abandoned city">Abandoned city</option>
+        </select>
+        <br>
+        <br>
+        <input type="checkbox" name="code">
+        <label for="code">Players have to enter a code</label>
+        `;
+      }
+      function findLobby(selected, selectedMode, selectedMap) {
+        let hiddenLobbies = 0;
+        (async() => {
+          let e = !1;
+          const t = Parse.Object.extend("Lobby");
+          const n = new Parse.Query(t);
+          const s = await n.find();
+          for (let t = 0; t < s.length; t++) {
+            let lobbyLength = t;
+            const n = Parse.Object.extend("Lobby");
+            new Parse.Query(n).get(s[t].id).then((t => {
+              const n = { name: t.get("name"), time: t.get("createdAt"), code: t.get("code"), mode: t.get("mode"), map: t.get("map") };
+              if (e) {
+                (n.code.length > 0 || ((selectedMode == "*" ? false : n.mode != selectedMode) || (selectedMap == "*" ? false : n.map != selectedMap))) && hiddenLobbies++;
+                document.querySelector(".swal-content").innerHTML += (n.code.length > 0 || ((selectedMode == "*" ? false : n.mode != selectedMode) || (selectedMap == "*" ? false : n.map != selectedMap))) ? "" : '<div class="lobby" id="' + btoa(encodeURIComponent(n.name)).replace(/\=/gi,"") + '">"<a onclick="location.assign(\'./src.html?lobby=' + encodeURIComponent(n.name).replace(/(\')/, "") + '&map=' + n.map + '&mode=' + n.mode + '\')">' + (n.name.trim() == "" ? ("(blank space)") : n.name.trim()) + '</a>" : ' + n.time.toString().split(" ").reverse().splice(4).reverse().splice(1).join(" ").split(":").reverse().splice(1).reverse().join(":") + ", on <b>" + (n.map[0].toUpperCase() + n.map.toLowerCase().substr(1)) + "</b></div>";
+                if (lobbyLength + 1 >= s.length) {
+                  document.querySelector(".swal-content").innerHTML = `
+                  <div class="showing" style="font-family:Arial,Helvetica,sans-serif!important">Showing ${document.querySelectorAll(".lobby").length} lobbies, ${hiddenLobbies} hidden - <a href="" onclick="event.preventDefault(); findLobby(null, '*', '*'), this.remove()">Show all</a></div>
+                  ` + document.querySelector(".swal-content").innerHTML;
+                }
+              } else {
+                e = !0;
+                let content = document.createElement("div");
+                content.innerHTML = (n.code.length > 0 || ((selectedMode == "*" ? false : n.mode != selectedMode) || (selectedMap == "*" ? false : n.map != selectedMap))) ? "" : '<br><div class="lobby" id="' + btoa(encodeURIComponent(n.name)).replace(/\=/gi,"") + '">"<a onclick="location.assign(\'./src.html?lobby='+encodeURIComponent(encodeURIComponent(n.name)).replace(/(\')/, "") + '&map=' + n.map + '&mode=' + n.mode + '\')">' + n.name+'</a>" : ' + n.time.toString().split(" ").reverse().splice(4).reverse().splice(1).join(" ").split(":").reverse().splice(1).reverse().join(":") + ", on <b>" + (n.map[0].toUpperCase() + n.map.toLowerCase().substr(1)) + "</b></div>";
+                swal({
+                  title: "Find Lobby",
+                  content: content
+                });
+                if (lobbyLength + 1 >= s.length) {
+                  document.querySelector(".swal-content").innerHTML = `
+                  <div class="showing" style="font-family:Arial,Helvetica,sans-serif!important">Showing ${document.querySelectorAll(".lobby").length} lobbies, ${hiddenLobbies} hidden - <a href="" onclick="event.preventDefault(); findLobby(null, '*', '*'), this.remove()">Show all</a></div>
+                  ` + document.querySelector(".swal-content").innerHTML;
+                }
+              }
+            }));
+            setTimeout(() => {
+              if (selected) {
+                document.querySelector("#"+btoa(encodeURIComponent(selected)).replace(/(\=)/gi,"")).style.outline = "2px solid #38b6ff";
+                document.querySelector("#"+btoa(encodeURIComponent(selected)).replace(/(\=)/gi,"")).scrollIntoView();
+              }
+            }, 1000);
+          }
+        })();
+      }
+      function enterCode() {
+        swal({
+          title: "Enter a code",
+          text: "This will join a lobby with the selected code. Example: \"XXXXXX\"",
+          content: "input",
+          button: "Join"
+        }).then((name) => {
+          !name || swal({
+            title: "Searching...",
+            text: "Attempting to find lobby",
+            button: "Cancel"
+          });
+          !name || (async () => {
+            let e = !1;
+            let code = name.toUpperCase();
+            let codes = {};
+            const t = Parse.Object.extend("Lobby");
+            const n = new Parse.Query(t);
+            const s = await n.find();
+            let pause = false;
+            for (let t = 0; t < s.length; t++) {
+              let ot = t;
+              const n = Parse.Object.extend("Lobby");
+              new Parse.Query(n).get(s[t].id).then((t => {
+                const n = { name: t.get("name"), code: t.get("code"), map: t.get("map"), mode: t.get("mode") };
+                if (e) {
+                  codes[n.name] = (n.code);
+                } else {
+                  e = !0;
+                }
+                console.log(n.code, code);
+                console.log(n.code == code);
+                if (!pause) (n.code == (code) ? (pause = true, swal({ title: "Lobby found", text: "Do you want to join the lobby \"" + n.name + "\"?", buttons: ["Yes", "No"] }).then((e) => !e && location.assign("./src.html?lobby=" + encodeURIComponent(n.name) + "&code=" + code + "&map=" + n.map + "&mode=" + n.mode))) : ot + 1 >= s.length && swal({ title: "Lobby not found", text: "This lobby does not exist." }));
+              }));
+            }
+          })();
+        });
+      }
+      didPlay = false;
+      chatOpen = false;
+      window.onmessage = (e) => {
+        if (e.data == "close") document.querySelector("#chat").click();
+      };
+      document.addEventListener("click", (e) => {
+        if ((e.target.id != "chat" && (e != document.body ? true : !e.target.outerHTML.includes("tippy")))) {
+          chatOpen = true;
+          popper.remove();
+        }
+      });
+      let e = document.querySelector("#chat").onclick;
+      document.querySelector("#chat").onclick = null;
+      document.querySelector("#chat").click();
+      document.querySelector("#chat").onclick = e;
+      function chat(button) {
+        if (chatOpen) { return chatOpen = false, popper.remove() }
+        chatOpen = true;
+        let frame = document.createElement("iframe");
+        frame.src = "chat.html";
+        frame.id = "chatwin";
+        frame.style = "width:600px!important;height:400px!important";
+        popper = tippy("#chat", {
+          content: frame,
+          interactive: true,
+          hideOnClick: true,
+          trigger: "click",
+          theme: "fps",
+          maxWidth: frame.width
+        })[0].popper;
+      }
+      function play(button) {
+        if (!didPlay) {
+          didPlay = true;
+          document.querySelector(".cover").style.top = "0";
+          return;
+        }
+        didPlay = false;
+        document.querySelector(".cover").style.top = "-100%";
+      }
+      let users = 0;
+      function autoSearch() {
+        swal({
+          title: "Searching for match...",
+          text: "You will be notified when an active lobby is found.",
+          closeOnClickOutside: false,
+          closeOnEnterKey: false,
+          closeOnSpaceKey: false,
+          button: "Cancel"
+        }).then(() => {
+          clearInterval(search);
+        });
+        gametime.onconnect = function() {
+          users++;
+          if (users >= 2) {
+            swal({
+              title: "Match Found",
+              text: "Connecting users..."
+            });
+            setTimeout(() => location.assign("./src.html?lobby=" + gametime.channel), 2000);
+          }
+        };
+        gametime.make("ping");
+        gametime.make("sync");
+        gametime.make("connected");
+        pinged = false;
+        gametime.on("sync", function(data) {
+          data.split(",")[1] == id || gametime.set("channel", data.split(",")[0]);
+        });
+        gametime.on("ping", function(user) {
+          if (pinged && user == id) {
+            return gametime.run("connected", [gametime.channel]), gametime.run("connected", [gametime.channel]);
+          }
+          pinged = true;
+          setTimeout(() => (pinged = false), 10000);
+        });
+        gametime.on("connected", function(channel) {
+          swal({
+            title: "Match Found",
+            text: "There is 1 player in lobby \"" + channel + "\"",
+            button: "Cancel"
+          });
+          setTimeout(()  => (gametime.run("ping", [id]), gametime.run("ping", [id])), 100);
+          gametime.run("sync", [gametime.channel+","+id]);
+          gametime.run("sync", [channel+","+id]);
+          gametime.set("channel", channel);
+          setTimeout(() => location.assign("./src.html?lobby=" + channel), 6000);
+          clearInterval(search);
+        });
+        search = 0;
+        (async () => {
+          let e = !1;
+          const t = Parse.Object.extend("Lobby");
+          const n = new Parse.Query(t);
+          const s = await n.find();
+          let names = [];
+          let pause = false;
+          for (let t = 0; t < s.length; t++) {
+            let ot = t;
+            const n = Parse.Object.extend("Lobby");
+            new Parse.Query(n).get(s[t].id).then((t => {
+              const n = { name: t.get("name"), code: t.get("code") };
+              if (e) {
+                names.push(n.name);
+              } else {
+                names.push(n.name);
+                e = !0;
+              }
+            }));
+          }
+          search = setInterval(() => { gametime.set("channel", (names[Math.floor(Math.random()*names.length)])), console.log(gametime.channel), setTimeout(()  => (gametime.run("ping", [id]), gametime.run("ping", [id])), 100) }, 10000);
+        })();
+      }
+      let s = swal.close;
+      swal.close = function() {
+        currentFocus = 0;
+        s();
+      }
+      keyfocusmax=document.querySelectorAll(".hg-button").length;
+      keyfocus=0;
+      setInterval(() => { document.querySelector(".swal-button") != null && (document.querySelector(".swal-button").onclick = () => (currentFocus = 0)) }, 100);
+      gameControl.on("connect", (controller) => {
+        (()=>{let p=false;let d=false;dl=!1,setInterval((()=>{let e;-1==navigator.getGamepads()[0].axes[0]&&(dl&&(p||(p=true,keyfocus--)),dl=!0,e=setInterval((()=>{if(-1!=navigator.getGamepads()[0].axes[0])return dl=!1,p=false,clearInterval(e)})))})),dl=!1,setInterval((()=>{let e;1==navigator.getGamepads()[0].axes[0]&&(dl&&(p||(p=true,keyfocus++)),dl=!0,e=setInterval((()=>{if(1!=navigator.getGamepads()[0].axes[0])return dl=!1,p=false,clearInterval(e)})))}))})();
+        window.controller = controller;
+        controller.on("left0", () => {}).before("left0", () => lockInput?(keyfocus=keyfocus-Object.values(document.querySelectorAll(".hg-row")[Object.values(document.querySelectorAll(".hg-row")).indexOf(document.querySelectorAll(".hg-button")[keyfocus].parentElement)].children).length):(currentFocus==null?currentFocus=0:(currentFocus<1?currentFocus=focusMax:currentFocus--)));
+        controller.on("right0", () => {}).before("right0", () => lockInput?(keyfocus=keyfocus+Object.values(document.querySelectorAll(".hg-row")[Object.values(document.querySelectorAll(".hg-row")).indexOf(document.querySelectorAll(".hg-button")[keyfocus].parentElement)].children).length):(currentFocus==null?currentFocus=0:(currentFocus+1>focusMax?currentFocus=0:currentFocus++)));
+        controller.on("button0", () => {}).before("button0", () => {
+          lockInput&&(document.querySelector(".tabfocus"+currentFocus).value+=document.querySelectorAll(".hg-button")[keyfocus].textContent,createlobbytext=document.querySelector(".tabfocus"+currentFocus).value);
+          if(currentFocus!=null&&document.querySelector(".tabfocus"+currentFocus).tagName.toLowerCase()=="input"){
+            lockInput = document.querySelector(".tabfocus"+currentFocus);
+          }
+          (currentFocus==null||document.querySelector(".tabfocus"+currentFocus).click());
+        });
+        controller.on("button1", () => {}).before("button1", () => (keyfocus=0,lockInput=null,createlobbytext="",swal(),setTimeout(()=>swal.close())));
+        controller.on("right1", () => {typeof document.querySelector(".dialog-content")!="undefined"&&(document.querySelector(".dialog-content").scroll(0,currentScroll),currentScroll++)});
+        controller.on("button11", () => {lockInput&&(lockInput=null);currentFocus+1>focusMax?currentFocus=0:currentFocus++});
+        controller.on("button16", () => {currentFocus=focusMax});
+        controller.on("button15", () => {currentFocus=0});
+        controller.on("button15", () => {currentFocus=0});
+        controller.on("button3", () => {}).before("button3", () => {lockInput&&(lockInput.value=lockInput.value.split("").reverse().splice(1).reverse().join("")),createlobbytext=lockInput.value});
+        controller.on("button12", () => {}).before("button12", () => {location.reload()});
+      });
+      document.querySelector("#chat").click();
+      currentMode = "Slayer";
+      currentMap = "CARGO";
+      function chooseMode() {
+        let options = document.createElement("div");
+        options.innerHTML = `
+        <a href="" onclick="event.preventDefault(); currentMode = this.textContent.split(' ')[0]; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')" class="focusa">Slayer [MODE]</a>
+        <br>
+        <a href="" onclick="event.preventDefault(); currentMode = this.textContent.split(' ')[0]; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')">Snipers [MODE]</a>
+        <br>
+        <a href="" onclick="event.preventDefault(); currentMode = this.textContent.split(' ')[0]; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')">Fiesta [MODE]</a>
+        <br>
+        <a href="" onclick="event.preventDefault(); currentMode = this.textContent.split(' ')[0]; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')">Oddball [MODE]</a>
+        <br>
+        <a href="" onclick="event.preventDefault(); currentMode = this.textContent.split(' ')[0]; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')">Fistfight [MODE]</a>
+        `;
+        swal({
+          title: "Choose game mode",
+          content: options,
+          buttons: ["Cancel", "Next"]
+        }).then((e) => e && chooseMap());
+      }
+      function chooseMap() {
+        let options = document.createElement("div");
+        options.innerHTML = `
+        <a href="" onclick="event.preventDefault(); currentMap = 'CARGO'; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')" class="focusa">Cargo port [MAP]&ThickSpace;&ThickSpace;<img src="/images/maps/cargo.png" style="width:5%"></a>
+        <br>
+        <a href="" onclick="event.preventDefault(); currentMap = 'VERTEX'; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')">Vertex [MAP]&ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;<img src="/images/maps/vertex.png" style="width:5%"></a>
+        <br>
+        <a href="" onclick="event.preventDefault(); currentMap = 'GHOST'; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')">Ghost city [MAP]&ThickSpace;&ThickSpace;&ThickSpace;<img src="/images/maps/ghost.png" style="width:5%"></a>
+        <br>
+        <a href="" onclick="event.preventDefault(); currentMap = 'CITY'; for (let i = 0; i < document.querySelectorAll('.focusa').length; i++) { document.querySelectorAll('.focusa')[i].classList.toggle('focusa') } this.classList.add('focusa')" style="font-size:12px">Abandoned city [MAP]&ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;<img src="/images/maps/city.png" style="width:5%"></a>
+        `;
+        swal({
+          title: "Choose a map",
+          content: options,
+          buttons: ["Cancel", "Next"]
+        }).then((e) => {
+          e && swal({
+            title: "Next step",
+            text: "Good job! Now a list of lobbies will be shown based off of the options you chose. If you don't see one, try creating it!"
+          }).then(() => (swal("Loading..."), findLobby(null, currentMode, currentMap)));
+        });
+      }
+      function playGame() {
+        let options = document.createElement("div");
+        options.innerHTML = `
+        <a href="" onclick="event.preventDefault(); chooseMode()">Start playing</a>
+        <br>
+        <i>or</i>
+        <br>
+        <a href="" onclick="event.preventDefault(); createLobby()">Create a lobby</a>
+        <br>
+        <i>or</i>
+        <br>
+        <a href="" onclick="event.preventDefault(); enterCode()">Enter a code</a>
+        <br>
+        <br>
+        <div class="swal-text">Don't feel like waiting? Use <a href="" onclick="event.preventDefault(); autoSearch()" style="font-family:Arial!important">auto search</a></div>
+        <br>
+        <br>
+        <div class="swal-text"><a href="" onclick="event.preventDefault(); help(), help('game')" style="font-family:Arial!important;display:inline-flex;align-items:center;justify-content:center;text-align:center;position:relative;width:15px!important;height:15px;border-radius:50%;border:1px solid currentColor;cursor:pointer;font-size:10px;font-weight:bold;justify-content:center;align-items:center;transform:scale(2)">?</a></div>
+        `;
+        swal({
+          title: "Quick Play",
+          text: "Choose a lobby, wait for players, and start playing now!",
+          content: options,
+          button: "Close"
+        });
+      }
+      helpKeyUp = 0;
+      currentHelpResponse = null;
+      hasopen = [];
+      function help(text = null) {
+        if (text == null) {
+          let help = document.createElement("div");
+          help.innerHTML = `
+          <input type="text" style="padding:5px;font-size:20px;position:relative;top:0;width:60%;font-family:Arial!important;background:#fff;color:#38b6ff;border:none!important;outline:none!important;border-radius:2px;box-shadow:0 1px 6px rgba(0,0,0,0.1),0 1px 4px rgba(0,0,0,0.24)" id="helpsearch" placeholder="What do you need help with?" onkeyup="clearTimeout(helpKeyUp); event.preventDefault(); helpKeyUp = setTimeout(() => {this.value.trim() && help(this.value.trim()) }, 500)">
+          `;
+          swal({
+            icon: "icons/help.png",
+            title: "Help center",
+            content: help,
+            buttons: ["-", "-"]
+          }).then((e) => currentHelpResponse != null && !e && addHelpLikes());
+          document.querySelectorAll(".swal-button")[0].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:#fff"><path d="M5 22h-5v-12h5v12zm17.615-8.412c-.857-.115-.578-.734.031-.922.521-.16 1.354-.5 1.354-1.51 0-.672-.5-1.562-2.271-1.49-1.228.05-3.666-.198-4.979-.885.906-3.656.688-8.781-1.688-8.781-1.594 0-1.896 1.807-2.375 3.469-1.221 4.242-3.312 6.017-5.687 6.885v10.878c4.382.701 6.345 2.768 10.505 2.768 3.198 0 4.852-1.735 4.852-2.666 0-.335-.272-.573-.96-.626-.811-.062-.734-.812.031-.953 1.268-.234 1.826-.914 1.826-1.543 0-.529-.396-1.022-1.098-1.181-.837-.189-.664-.757.031-.812 1.133-.09 1.688-.764 1.688-1.41 0-.565-.424-1.109-1.26-1.221z"/></svg>`, document.querySelectorAll(".swal-button")[1].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:#fff"><path d="M5 14h-5v-12h5v12zm18.875-4.809c0-.646-.555-1.32-1.688-1.41-.695-.055-.868-.623-.031-.812.701-.159 1.098-.652 1.098-1.181 0-.629-.559-1.309-1.826-1.543-.766-.141-.842-.891-.031-.953.688-.053.96-.291.96-.626-.001-.931-1.654-2.666-4.852-2.666-4.16 0-6.123 2.067-10.505 2.768v10.878c2.375.869 4.466 2.644 5.688 6.886.478 1.661.781 3.468 2.374 3.468 2.375 0 2.594-5.125 1.688-8.781 1.312-.688 3.751-.936 4.979-.885 1.771.072 2.271-.818 2.271-1.49 0-1.011-.833-1.35-1.354-1.51-.609-.188-.889-.807-.031-.922.836-.112 1.26-.656 1.26-1.221z"/></svg>`;
+          document.querySelector(".swal-icon").style.width = "10%";
+        } else {
+          let origText = document.querySelector("#helpsearch").value;
+          document.querySelectorAll("details").forEach(x => x.remove());
+          document.querySelectorAll("#notfound").forEach(x => x.remove());
+          text = text.toString().toLowerCase().trim();
+          fetch("help/help_responses.json").then((res) => res.json()).then((e) => {
+            let responses = [];
+            let content = "";
+            for (let i = 0; i < Object.keys(e).length; i++) {
+              if (responses.length > 4) return;
+              window.getHelpLikes = function(currentHelpResponse) {
+                window.currentHelpResponse = currentHelpResponse;
+                return new Promise(function(resolve, reject) {
+                  (async() => {
+                    let e = !1;
+                    const t = Parse.Object.extend("HelpLikes");
+                    const n = new Parse.Query(t);
+                    const s = await n.find();
+                    for (let t = 0; t < s.length; t++) {
+                      const n = Parse.Object.extend("HelpLikes");
+                      new Parse.Query(n).get(s[t].id).then((t => {
+                        const n = { index: t.get("index") - 0, likes: t.get("likes") - 0 };
+                        if (e) {
+                          if (n.index == currentHelpResponse) {
+                            resolve(n.likes);
+                          }
+                        } else {
+                          if (n.index == currentHelpResponse) {
+                            resolve(n.likes);
+                          }
+                        }
+                      }));
+                    }
+                  })();
+                });
+              }
+              window.addHelpLikes = function() {
+                (async() => {
+                  let e = !1;
+                  const t = Parse.Object.extend("HelpLikes");
+                  const n = new Parse.Query(t);
+                  const s = await n.find();
+                  for (let t = 0; t < s.length; t++) {
+                    const n = Parse.Object.extend("HelpLikes");
+                    new Parse.Query(n).get(s[t].id).then((t => {
+                      const n = { index: t.get("index") - 0, likes: t.get("likes") - 0 };
+                      if (e) {
+                        if (n.index == currentHelpResponse) {
+                          t.set("likes", n.likes + 1);
+                          t.save();
+                        }
+                      } else {
+                        if (n.index == currentHelpResponse) {
+                          t.set("likes", n.likes + 1);
+                          t.save();
+                        }
+                      }
+                    }));
+                  }
+                })();
+              }
+              Object.keys(e)[i].toString().toLowerCase().trim().split(" ").forEach(x => {
+                text.split(" ").forEach(a => {
+                  if (x.includes(a.trim())) {
+                    (responses.push("<details class='listitem' onclick=\"currentHelpResponse == this.querySelector('summary').textContent.split('[')[1].split(']')[0] - 0 ? (this.hasAttribute('open') && (currentHelpResponse = null)) : void(0); !this.hasAttribute('open') && getHelpLikes(this.querySelector('summary').textContent.split('[')[1].split(']')[0] - 0).then((likes) => ((likes == 1 && (this.querySelector('#likes').parentElement.innerHTML = this.querySelector('#likes').parentElement.innerHTML.replace('users', 'user'))), this.querySelector('#likes').textContent = likes))\" id=\"hr-" + responses.length + "\"><summary><sup>[" + Object.keys(e).indexOf(Object.keys(e)[i]).toString() + "]</sup> " + Object.keys(e)[i].replace(new RegExp(text, "gi"), "<span class='highlight'>" + text + "</span>") + "</summary><iframe src='data:text/html," + encodeURIComponent(`<style>html,body,*{font-family:Arial,Helvetica,sans-serif!important;color:#38b6ff;text-shadow:1px 1px 3px rgba(0, 0, 0, 0.24)}</style>` + Object.values(e)[i]).replace(/'/g, "%27") + "'></iframe><p style=\"font-family:AgrandirWideBlack!important\"><span id=\"likes\" style=\"font-family:AgrandirWideBlack!important\">0</span> users found this helpful</p></details>"));
+                  }
+                });
+              });
+            }
+            if (responses.length < 1) {
+              responses = [];
+              responses.push("<i id='notfound'>No results found</i>");
+            }
+            responses.slice().sort(function(a,b){return a > b}).reduce(function(a,b){if (a.slice(-1)[0] !== b) a.push(b);return a;},[]);
+            responses.forEach((x) => {
+              content.includes(x) || (content += x);
+            });
+            document.querySelector(".swal-content").innerHTML += content;
+            document.querySelector("#helpsearch").value = origText;
+            document.querySelector("#helpsearch").focus();
+          });
+        }
+      }
+      function openWindow(src, closeCallback = () => {}) {
+        Notiflix.Loading.pulse();
+        let e = document.createElement("iframe");
+        let x = document.createElement("div");
+        x.style = `
+        position: fixed !important;
+        left: 20px !important;
+        top: 20px !important;
+        color: white !important;
+        z-index: 999999999999;
+        font-size: 25px;
+        `;
+        x.innerHTML = "&times;";
+        x.onclick = () => document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+        e.style = `
+        z-index: 999999999999;
+        opacity: 0;
+        position: fixed;
+        width: 75%;
+        height: 75%;
+        left: 50%;
+        margin-left: -37.5%;
+        border-radius: 6px;
+        border: 5px solid #38b6ff;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24);
+        transition: opacity 1s;
+        background: #fff;
+        top: 10%;
+        `;
+        e.src = src;
+        e.onload = () => (e.style.opacity = 1);
+        document.body.appendChild(e);
+        document.body.appendChild(x);
+        currentSLFrame = [e, x];
+        document.addEventListener("keydown", (e) => {
+          e.key == "Escape" && currentSLFrame && (Notiflix.Loading.remove(), currentSLFrame.forEach(x => x.remove()), currentSLFrame = null, closeCallback());
+        });
+      }
+      currentSLFrame = null;
+      function login() {
+        openWindow("login.html");
+      }
+      function signup() {
+        openWindow("signup.html");
+      }
+      function openStore() {
+        play();
+        openWindow("store.html", play);
+      }
+      function preferences() {
+        play();
+        openWindow("preferences.html", play);
+      }
+      window.addEventListener("message", (e) => (e.data == "login" && document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }), setTimeout(() => login(), 500))));
+      window.addEventListener("message", (e) => (e.data == "reload" && setTimeout(() => location.reload(), 1000)));
+      window.addEventListener("message", (e) => (e.data.startsWith("help-") && help(e.data.split("-")[1])));
+      if (userMan.isLoggedIn) {
+        userMan.update();
+        document.querySelector(".login").textContent = "Log out";
+        document.querySelector(".login").onclick = userMan.logOut;
+        document.querySelector(".login").className = "logout";
+        document.querySelector(".signup").style.background = "#f9f9f9";
+        document.querySelector(".signup").style.width = "100px";
+        document.querySelector(".signup").style.display = "inline-block";
+        document.querySelector(".signup").innerHTML = `
+        User: ${userMan.get("username")}
+        <br>
+        <div style="display:inline-flex;align-items:center;text-align:center;justify-content:center;margin-top:10px"><img src="icons/point.png" style="display:inline-block;width:20px;height:20px">&ThickSpace;Points:&nbsp;<span id="points">${userMan.get("points")}</span></div>
+        `;
+        document.querySelector(".signup").onclick = () => {
+          openWindow("/users/");
+        };
+        document.querySelector(".signup").setAttribute("onclick", "openWindow('/users/')");
+        document.querySelector("#points").style.fontSize = (((16 - ((userMan.get("points")).toString().length * 3)) * 2.25) > 16 ? 16 : ((16 - ((userMan.get("points")).toString().length * 3)) * 2.25)).toFixed(0) + "px";
+        document.documentElement.innerHTML = document.documentElement.innerHTML.replace(/(\#38b6ff)/gi, JSON.parse(atob(userMan.get("preferences"))).currentPageTheme.replace("Blue", "#38b6ff").replace("White", "#ddd").replace("Gray", "#a6a6a6").replace("Black", "#000").replace("Brown", "#a44f30").replace("Orange", "#ffa500").replace("Yellow", "#fdfb52").replace("Green", "#008000").replace("Red", "#ee2211").replace("Blue", "#38b6ff")).replace(/Blue/g, JSON.parse(atob(userMan.get("preferences"))).currentPageTheme);
+        document.querySelector(".logout").onclick = () => userMan.logOut(true);
+        document.querySelector(".logout").setAttribute("onclick", "userMan.logOut()");
+      }
+      if (!localStorage["bak-username"]) localStorage.setItem("bak-username", (() => { let p = ["User-"]; [1,1].forEach(i => p.push((() => { let r = (() => { let d = []; navigator.userAgent.split(" ").forEach(x => /^[a-zA-Z0-9]+$/gi.test(x) && d.push(x)); return d })(); return r[Math.floor(Math.random() * r.length)] })())); return p })().join("") + Math.random().toFixed(4).split(".")[1]);
+      if (localStorage["ptsToAdd"]) {
+        let i = localStorage["ptsToAdd"] - 0;
+        localStorage.removeItem("ptsToAdd");
+        if (userMan.isLoggedIn) {
+          userMan.set("points", (userMan.get("points") - 0) + i, (newKey, newValue) => {
+            document.querySelector("#points").textContent = newValue;
+          });
+        }
+      }
+      document.querySelector("#chat").click(), document.querySelector("#chat").click();
+      window.addEventListener("load", () => {
+        let e = 15;
+        let transition = setInterval(() => {
+          if (e <= 0) {
+            document.querySelector(".banner").remove();
+            return clearInterval(transition);
+          }
+          e += -.2;
+          document.querySelector(".banner").style = "backdrop-filter:blur(" + e + "px)!important";
+        });
+      });
+    </script>
+    <script>
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          if (document.querySelector(".banner") != null) {
+            swal({
+              icon: "error",
+              title: "Error",
+              className: "swal-error",
+              text: "An error occurred and stopped the page from loading.",
+              button: "Try again"
+            }).then(() => {
+              sessionStorage.clear();
+              userMan.logOut(true);
+            });
+          }
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>

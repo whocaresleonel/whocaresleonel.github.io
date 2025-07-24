@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change your preferences - FPS2</title>
+    <script type="text/javascript" src="https://unpkg.com/parse@3.4.4/dist/parse.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Parking-Master/Simple-Alert@latest/simplealert.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #fff;
+      }
+      html, body {
+        overflow-x: hidden !important;
+      }
+      input {
+        position: relative;
+        width: 50%;
+        height: 20px;
+        padding: 5px;
+        left: 50%;
+        margin-left: -25%;
+        margin-bottom: 50px;
+        outline: none !important;
+        border: 2px solid #38b6ff;
+        background: #fff;
+        color: #38b6ff;
+        border-radius: 3px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.15);
+      }
+      .swal-modal {
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.15);
+      }
+      .swal-modal *, .swal-text {
+        color: #38b6ff !important;
+      }
+      .swal-button {
+        background: #38b6ff !important;
+        color: #fff !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      button#submit {
+        position: relative;
+        background: #fff;
+        height: 40px;
+        padding: 5px;
+        display: inline-flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        outline: none !important;
+        width: 50%;
+        left: 50%;
+        margin-left: -25%;
+        cursor: default;
+        transition: background 1s;
+        border: 3px solid #38b6ff;
+        border-radius: 3px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24);
+        transition: box-shadow 1s;
+      }
+      button#submit:hover {
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+      }
+      p {
+        margin-bottom: 100px;
+      }
+      a {
+        color: #25750a;
+      }
+      * {
+        color: #38b6ff;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24);
+        cursor: url(./cursors/cursor0.cur), auto !important;
+        user-select: none !important;
+      }
+      #clearfix {
+        outline: none;
+        border: none;
+        background: #fff;
+        color: #333;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24) !important;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24) !important;
+        font-size: 18px;
+        padding: 6px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .card {
+        position: relative;
+        width: 180px;
+        height: 205px;
+        background: #fff;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24) !important;
+        border-radius: 3px;
+        display: inline-flex;
+      }
+      .card img:not(#point) {
+        position: relative;
+        left: 50%;
+        top: 10px;
+        width: 160px;
+        height: 183px;
+        margin-left: -80px;
+        border-radius: 3px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.24) !important;
+        transition: opacity .4s, filter .1s;
+        filter: brightness(50%);
+      }
+      .card img#point {
+        position: relative;
+        border-radius: 100%;
+        border: 2px solid gold;
+      }
+      .title {
+        position: relative;
+        text-align: center !important;
+        margin-top: 15px !important;
+        margin-left: 25px !important;
+        color: gold !important;
+      }
+      .secondary-title {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        margin-left: 0!important;
+        left: 0;
+        color: #fff !important;
+        bottom: 0;
+      }
+      .items {
+        position: absolute;
+        right: 0;
+        margin: 50px;
+        margin-top: 0 !important;
+        display: inline-block;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        left: 50%;
+        margin-left: -50%;
+      }
+      .title.equipped {
+        color: #fff !important;
+      }
+      .card img#point.owned {
+        border-color: #fff !important;
+      }
+      .card:hover img:not(#point) {
+        opacity: .5;
+      }
+      .card:active img:not(#point) {
+        filter: blur(3px);
+      }
+      .selectedCard {
+        outline: 3px solid #ddd;
+      }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KDN09VRHPS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KDN09VRHPS");
+    </script>
+  </head>
+  <body>
+    <script src="userman.js"></script>
+    <h1 style="position:relative;width:50%;display:inline-flex;align-items:center;text-align:center;justify-content:center;left:50%;margin-left:-25%;">Preferences</h1>
+    <p style="text-align:center">Change your loadout, character, and style in preferences.</p>
+    <div class="items"></div>
+    <div id="notloggedin" style="display:none;z-index:9999999999999999;position:fixed;left:0;top:0;bottom:0;right:0;width:100%;height:100%;padding:0;margin:0;background:rgba(0, 0, 0, 0.435)"><div style="z-index:9999999999999999;color:#fff;display:inline-block;font-size:35px;position:fixed;left:50%;width:60%;margin-left:-30%;top:50%;height:60%;margin-top:-10%;text-align:center;justify-content:center;align-items:center">You must be logged in to change your preferences.<br><br><button id="clearfix" onclick="location.replace('login.html?return=preferences.html')">Log in</button></div></div>
+    <script>
+      userMan.isLoggedIn || (document.querySelector("#notloggedin").style.display = "block");
+      Parse.initialize("Izi3O97u5yYIBD7nzBkFIaWJ38wr8w2Ani3eDgol","FKPsxeAmmINZlZwmPBL0U0dwPzvZGYHVp95jG7G2"),Parse.serverURL="https://parseapi.back4app.com/";
+      userMan.isLoggedIn || (document.querySelector("#notloggedin").style.display = "block");
+      currentSelectedItem = null;
+      function choose(item) {
+        let items = document.createElement("div");
+        let itemList = (() => { let items = []; [... new Set(userMan.get("items").split(","))].map((x) => { !x.trim() || items.push(x) }); return items })();
+        itemList.forEach(x => x.split(".")[0] == item.dataset.item && (items.innerHTML += `
+        <div class="card" data-item="${x.split(".")[1]}" data-full-item="${x}" onclick="document.querySelectorAll('.card').forEach(x => x.classList.remove('selectedCard')); this.classList.add('selectedCard'); currentSelectedItem = this.dataset.fullItem">
+          <img src="images/${x.split(".")[0].replace("Theme", "color").toLowerCase().trim() + "s"}/${x.split(".")[0].includes("Theme") ? x.split(".")[1].trim().toLowerCase() : x.split(".")[1].trim()}.png">
+          <br>
+          <p class="secondary-title equipped">${x.split(".")[0]}</p>
+        </div>
+        `));
+        swal({
+          title: "Choose item",
+          text: "These are the items you own",
+          content: items,
+          buttons: ["Choose", "Cancel"]
+        }).then(e => {
+          e = !e;
+          if (e) {
+            let oldPreferences = JSON.parse(atob(userMan.get("preferences")));
+            oldPreferences[item.dataset.item.replace("Character", "currentArmorSet").replace("Loadout", "currentLoadoutSet").replace("Theme", "currentPageTheme")] = currentSelectedItem.split(".")[1];
+            let newPreferences = btoa(JSON.stringify(oldPreferences));
+            console.log(newPreferences, oldPreferences);
+            userMan.set("preferences", newPreferences.toString(), function() { setTimeout(() => location.reload(), 500) });
+          }
+        });
+        Object.keys(JSON.parse(atob(userMan.get("preferences")))).forEach(x => {
+          Object.values(items.children).forEach(i => {
+            i.dataset.item == JSON.parse(atob(userMan.get("preferences")))[x] && (i.classList.add("selectedCard"));
+          });
+        });
+      }
+      let preferences = JSON.parse(atob(userMan.get("preferences")));
+      Object.keys(preferences).forEach(x => {
+        let data = x.replace("currentArmorSet", "Character").replace("currentLoadoutSet", "Loadout").replace("currentPageTheme", "Theme") + "." + preferences[x];
+        document.querySelector(".items").innerHTML += `
+        <div class="card" onclick="choose(this)" data-item="${data.split(".")[0]}">
+          <img src="images/${data.split(".")[0].replace("Theme", "color").toLowerCase().trim() + "s"}/${data.split(".")[0].replace("Theme", "color").toLowerCase().trim() == "color" ? data.split(".")[1].trim().toLowerCase() : data.split(".")[1].trim()}.png">
+          <br>
+          <p class="secondary-title equipped">${data.split(".")[0]}</p>
+        </div>
+        `;
+      });
+    </script>
+  </body>
+</html>
