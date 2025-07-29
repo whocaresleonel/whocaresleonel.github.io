@@ -3,162 +3,212 @@
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4639624745704856"
      crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="description" content="The Best website for unblocked games!">
-    <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,leonels game hub,leonels unblocked games,leonel's games unblocked">
-    <meta name="author" content="Leonel H">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leonels Game Hub</title>
-    <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            margin: auto;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            overflow: auto;
-            background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
-            animation: gradient 15s ease infinite;
-            background-size: 400% 400%;
-            background-attachment: fixed;
-        }
+<meta charset="UTF-8">
+<meta name="description" content="The Best website for unblocked games!">
+<meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,leonels game hub,leonels unblocked games,leonel's games unblocked">
+<meta name="author" content="Leonel H">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leonels Game Hub</title>
+<link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+<link rel="stylesheet" href="style.css">
+<style>
+    body {
+        margin: auto;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow: auto;
+        background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+        animation: gradient 15s ease infinite;
+        background-size: 400% 400%;
+        background-attachment: fixed;
+    }
 
-        @keyframes gradient {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }	
-            100% { background-position: 0% 0%; }
-        }
+    @keyframes gradient {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }    
+        100% { background-position: 0% 0%; }
+    }
 
-        .wave {
-            background: rgb(255 255 255 / 25%);
-            border-radius: 1000% 1000% 0 0;
-            position: fixed;
-            width: 200%;
-            height: 12em;
-            animation: wave 10s -3s linear infinite;
-            transform: translate3d(0, 0, 0);
-            opacity: 0.8;
-            bottom: 0;
-            left: 0;
-            z-index: -1;
-        }
+    .wave {
+        background: rgb(255 255 255 / 25%);
+        border-radius: 1000% 1000% 0 0;
+        position: fixed;
+        width: 200%;
+        height: 12em;
+        animation: wave 10s -3s linear infinite;
+        transform: translate3d(0, 0, 0);
+        opacity: 0.8;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+    }
 
-        .wave:nth-of-type(2) {
-            bottom: -1.25em;
-            animation: wave 18s linear reverse infinite;
-            opacity: 0.8;
-        }
+    .wave:nth-of-type(2) {
+        bottom: -1.25em;
+        animation: wave 18s linear reverse infinite;
+        opacity: 0.8;
+    }
 
-        .wave:nth-of-type(3) {
-            bottom: -2.5em;
-            animation: wave 20s -1s reverse infinite;
-            opacity: 0.9;
-        }
+    .wave:nth-of-type(3) {
+        bottom: -2.5em;
+        animation: wave 20s -1s reverse infinite;
+        opacity: 0.9;
+    }
 
-        @keyframes wave {
-            2% { transform: translateX(1); }
-            25% { transform: translateX(-25%); }
-            50% { transform: translateX(-50%); }
-            75% { transform: translateX(-25%); }
-            100% { transform: translateX(1); }
-        }
-    </style>
+    @keyframes wave {
+        2% { transform: translateX(1); }
+        25% { transform: translateX(-25%); }
+        50% { transform: translateX(-50%); }
+        75% { transform: translateX(-25%); }
+        100% { transform: translateX(1); }
+    }
+
+    /* New Styles for Heading & Layout */
+    .heading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0,0,0,0.6);
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 2rem;
+        font-weight: bold;
+        transition: top 0.3s ease;
+        z-index: 1000;
+        user-select: none;
+    }
+
+    /* Container for the game links grid */
+    .game-grid {
+        margin-top: 5rem; /* to avoid heading overlap */
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* smaller blocks */
+        gap: 1rem;
+        padding: 1rem 2rem;
+    }
+
+    /* Style each game link as a block */
+    .game-grid a {
+        display: block;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        text-decoration: none;
+        padding: 1rem;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 600;
+        box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .game-grid a:hover {
+        background-color: rgba(255, 255, 255, 0.35);
+        transform: scale(1.05);
+    }
+
+    footer {
+        margin-top: 3rem;
+        text-align: center;
+        color: white;
+    }
+</style>
 </head>
 <body>
     <div class="heading">
-        <h1>Leonels Game Hub</h1>
+        Leonels Game Hub
     </div>
-    <br><br><br><br>
-    <div>
-        <!-- Menu Links -->
-        <a href="1">1</a><br><br>
-        <a href="1v1.lol">1v1.lol</a><br><br>
-        <a href="10minutestilldawn">10 Minutes Till Dawn</a><br><br>
-        <a href="2048">2048</a><br><br>
-        <a href="adanceoffireandice">A Dance of Fire And Ice</a><br><br>
-        <a href="adarkroom">A Dark Room</a><br><br>
-        <a href="adrenalinechallenge">Adrenaline Challenge</a><br><br>
-        <a href="adventuredrivers">Adventure Drivers</a><br><br>
-        <a href="asteroids">Asteroids</a><br><br>
-        <a href="astray">Astray</a><br><br>
-        <a href="backcountry">Backcountry</a><br><br>
-        <a href="badicecream">Bad Ice Cream</a><br><br>
-        <a href="badicecream2">Bad Ice Cream 2</a><br><br>
-        <a href="badicecream3">Bad Ice Cream 3</a><br><br>
-        <a href="basketrandom">Basket Random</a><br><br>
-        <a href="bounceback">Bounceback</a><br><br>
-        <a href="boxingrandom">Boxing Random</a><br><br>
-        <a href="breaklock">BreakLock</a><br><br>
-        <a href="breakout">Breakout</a><br><br>
-        <a href="chess">Chess</a><br><br>
-        <a href="Crazy-cattle-3d">Crazy-cattle-3d</a><br><br>
-        <a href="chromedino">Chrome Dino</a><br><br>
-        <a href="connect3">Connect 3</a><br><br>
-        <a href="cookieclicker">Cookie Clicker</a><br><br>
-        <a href="cubefield">Cubefield</a><br><br>
-        <a href="doodlejump">Doodle Jump</a><br><br>
-        <a href="deadshot-io">deadshot-io</a><br><br>
-        <a href="ducklife">Duck Life</a><br><br>
-        <a href="ducklife2">Duck Life 2</a><br><br>
-        <a href="ducklife3">Duck Life 3</a><br><br>
-        <a href="ducklife4">Duck Life 4</a><br><br>
-        <a href="edgesurf">Edge Surf</a><br><br>
-        <a href="evilglitch">Evil Glitch</a><br><br>
-        <a href="factoryballsforever">Factory Balls Forever</a><br><br>
-        <a href="fireboyandwatergirlintheforesttemple">Fireboy and Watergirl in the Forest Temple</a><br><br>
-        <a href="flappybird">Flappy Bird</a><br><br>
-        <a href="funny-shooter">funny-shooter</a><br><br>
-        <a href="fifapacks">fifa packs</a><br><br>
-        <a href="friendlyfire">Friendly Fire</a><br><br>
-        <a href="geometrydash">Geometry Dash</a><br><br>
-        <a href="gopherkart">Gopher Kart</a><br><br>
-        <a href="granny">granny</a><br><br>
-        <a href="hextris">Hextris</a><br><br>
-        <a href="iceagebabyadventure">Ice Age Baby Adventure</a><br><br>
-        <a href="jumpingfrogspuzzle">Jumping frogs puzzle</a><br><br>
-        <a href="konnekt">Konnekt</a><br><br>
-        <a href="minecraft0.30">Minecraft 0.30</a><br><br>
-        <a href="minecraft1.3">Minecraft 1.3</a><br><br>
-        <a href="minecraft1.5.2">Minecraft 1.5.2</a><br><br>
-        <a href="madalin-stunt-cars2">Madalin stunt cars 2</a><br><br>
-        <a href="motox3m2">Moto X3M 2</a><br><br>
-        <a href="ovo">OvO</a><br><br>
-        <a href="pacman">Pac-Man</a><br><br>
-        <a href="pushback">Pushback</a><br><br>
-        <a href="racer">Racer</a><br><br>
-        <a href="radiusraid">Radius Raid</a><br><br>
-        <a href="retrobowl">Retro Bowl</a><br><br>
-        <a href="retrohaunt">Retrohaunt</a><br><br>
-        <a href="riddleschool">Riddle School</a><br><br>
-        <a href="riddleschool2">Riddle School 2</a><br><br>
-        <a href="riddleschool3">Riddle School 3</a><br><br>
-        <a href="riddleschool4">Riddle School 4</a><br><br>
-        <a href="riddleschool5">Riddle School 5</a><br><br>
-        <a href="roadblocks">Roadblocks</a><br><br>
-        <a href="sleepingbeauty">Sleeping Beauty</a><br><br>
-        <a href="slope">Slope</a><br><br>
-        <a href="snake">Snake</a><br><br>
-        <a href="snowrider3d">Snow Rider 3D</a><br><br>
-        <a href="soccerrandom">Soccer Random</a><br><br>
-        <a href="spacecompany">Space Company</a><br><br>
-        <a href="spaceinvaders">Space Invaders</a><br><br>
-        <a href="tetris">Tetris</a><br><br>
-        <a href="thechromaincident">The Chroma Incident</a><br><br>
-        <a href="thereisnogame">THERE IS NO GAME!</a><br><br>
-        <a href="towermaster">Tower Master</a><br><br>
-        <a href="tunnelrush">Tunnel Rush</a><br><br>
-        <a href="underrun">Under Run</a><br><br>
-        <a href="vex3">Vex 3</a><br><br>
-        <a href="vex4">Vex 4</a><br><br>
-        <a href="vex5">Vex 5</a><br><br>
-        <a href="vex6">Vex 6</a><br><br>
-        <a href="vex7">Vex 7</a><br><br>
-        <a href="volleyrandom">Volley Random</a><br><br>
-        <a href="webretro">Webretro (retro console emulator)</a><br><br>
-        <a href="worldshardestgame">World's Hardest Game</a><br><br>
-        <a href="worldshardestgame2">World's Hardest Game 2</a><br><br>
+
+    <div class="game-grid">
+        <a href="1">1</a>
+        <a href="1v1.lol">1v1.lol</a>
+        <a href="10minutestilldawn">10 Minutes Till Dawn</a>
+        <a href="2048">2048</a>
+        <a href="adanceoffireandice">A Dance of Fire And Ice</a>
+        <a href="adarkroom">A Dark Room</a>
+        <a href="adrenalinechallenge">Adrenaline Challenge</a>
+        <a href="adventuredrivers">Adventure Drivers</a>
+        <a href="asteroids">Asteroids</a>
+        <a href="astray">Astray</a>
+        <a href="backcountry">Backcountry</a>
+        <a href="badicecream">Bad Ice Cream</a>
+        <a href="badicecream2">Bad Ice Cream 2</a>
+        <a href="badicecream3">Bad Ice Cream 3</a>
+        <a href="basketrandom">Basket Random</a>
+        <a href="bounceback">Bounceback</a>
+        <a href="boxingrandom">Boxing Random</a>
+        <a href="breaklock">BreakLock</a>
+        <a href="breakout">Breakout</a>
+        <a href="chess">Chess</a>
+        <a href="Crazy-cattle-3d">Crazy-cattle-3d</a>
+        <a href="chromedino">Chrome Dino</a>
+        <a href="connect3">Connect 3</a>
+        <a href="cookieclicker">Cookie Clicker</a>
+        <a href="cubefield">Cubefield</a>
+        <a href="doodlejump">Doodle Jump</a>
+        <a href="deadshot-io">deadshot-io</a>
+        <a href="ducklife">Duck Life</a>
+        <a href="ducklife2">Duck Life 2</a>
+        <a href="ducklife3">Duck Life 3</a>
+        <a href="ducklife4">Duck Life 4</a>
+        <a href="edgesurf">Edge Surf</a>
+        <a href="evilglitch">Evil Glitch</a>
+        <a href="factoryballsforever">Factory Balls Forever</a>
+        <a href="fireboyandwatergirlintheforesttemple">Fireboy and Watergirl in the Forest Temple</a>
+        <a href="flappybird">Flappy Bird</a>
+        <a href="funny-shooter">funny-shooter</a>
+        <a href="fifapacks">fifa packs</a>
+        <a href="friendlyfire">Friendly Fire</a>
+        <a href="geometrydash">Geometry Dash</a>
+        <a href="gopherkart">Gopher Kart</a>
+        <a href="granny">granny</a>
+        <a href="hextris">Hextris</a>
+        <a href="iceagebabyadventure">Ice Age Baby Adventure</a>
+        <a href="jumpingfrogspuzzle">Jumping frogs puzzle</a>
+        <a href="konnekt">Konnekt</a>
+        <a href="minecraft0.30">Minecraft 0.30</a>
+        <a href="minecraft1.3">Minecraft 1.3</a>
+        <a href="minecraft1.5.2">Minecraft 1.5.2</a>
+        <a href="madalin-stunt-cars2">Madalin stunt cars 2</a>
+        <a href="motox3m2">Moto X3M 2</a>
+        <a href="ovo">OvO</a>
+        <a href="pacman">Pac-Man</a>
+        <a href="pushback">Pushback</a>
+        <a href="racer">Racer</a>
+        <a href="radiusraid">Radius Raid</a>
+        <a href="retrobowl">Retro Bowl</a>
+        <a href="retrohaunt">Retrohaunt</a>
+        <a href="riddleschool">Riddle School</a>
+        <a href="riddleschool2">Riddle School 2</a>
+        <a href="riddleschool3">Riddle School 3</a>
+        <a href="riddleschool4">Riddle School 4</a>
+        <a href="riddleschool5">Riddle School 5</a>
+        <a href="roadblocks">Roadblocks</a>
+        <a href="sleepingbeauty">Sleeping Beauty</a>
+        <a href="slope">Slope</a>
+        <a href="snake">Snake</a>
+        <a href="snowrider3d">Snow Rider 3D</a>
+        <a href="soccerrandom">Soccer Random</a>
+        <a href="spacecompany">Space Company</a>
+        <a href="spaceinvaders">Space Invaders</a>
+        <a href="tetris">Tetris</a>
+        <a href="thechromaincident">The Chroma Incident</a>
+        <a href="thereisnogame">THERE IS NO GAME!</a>
+        <a href="towermaster">Tower Master</a>
+        <a href="tunnelrush">Tunnel Rush</a>
+        <a href="underrun">Under Run</a>
+        <a href="vex3">Vex 3</a>
+        <a href="vex4">Vex 4</a>
+        <a href="vex5">Vex 5</a>
+        <a href="vex6">Vex 6</a>
+        <a href="vex7">Vex 7</a>
+        <a href="volleyrandom">Volley Random</a>
+        <a href="webretro">Webretro (retro console emulator)</a>
+        <a href="worldshardestgame">World's Hardest Game</a>
+        <a href="worldshardestgame2">World's Hardest Game 2</a>
         <a href="xx142b2.exe">xx142-b2.exe</a>
     </div>
-    <p>(More games coming soon!)</p>
+    <p style="color:white; text-align:center;">(More games coming soon!)</p>
     <footer>
         <div class="footer">
         </div>
@@ -169,6 +219,25 @@
         <div class="wave"></div>
         <div class="wave"></div>
     </div>
-	<script type="text/javascript"> var infolinks_pid = 3436703; var infolinks_wsid = 0; </script> <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+    <script type="text/javascript"> var infolinks_pid = 3436703; var infolinks_wsid = 0; </script> 
+    <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+
+    <script>
+    // Hide/show heading on scroll down/up
+    let lastScrollTop = 0;
+    const heading = document.querySelector('.heading');
+
+    window.addEventListener('scroll', () => {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if(scrollTop > lastScrollTop){
+            // scrolling down - hide heading
+            heading.style.top = '-60px'; // adjust as needed
+        } else {
+            // scrolling up - show heading
+            heading.style.top = '0';
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // for mobile or negative scroll
+    });
+    </script>
 </body>
 </html>
