@@ -1,1 +1,0 @@
-String.prototype.eachUpperCase = function() { let i = []; this.split(" ").map((e) => { return i.push(e[0].toUpperCase() + e.substr(1)) }); return i.join(" ") }
