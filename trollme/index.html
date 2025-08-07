@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///Users/4610/Desktop/trollme/Index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Constantly Moving Button (CSS Only)</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+
+  #container {
+    position: relative;
+    width: 90vw;
+    height: 80vh;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  #trollButton {
+    position: absolute;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    background: #ff4757;
+    color: white;
+    border-radius: 8px;
+    animation: moveAround 10s linear infinite;
+  }
+
+  @keyframes moveAround {
+    0% {
+      top: 0;
+      left: 0;
+    }
+    20% {
+      top: 70%;
+      left: 10%;
+    }
+    40% {
+      top: 20%;
+      left: 80%;
+    }
+    60% {
+      top: 60%;
+      left: 60%;
+    }
+    80% {
+      top: 10%;
+      left: 50%;
+    }
+    100% {
+      top: 0;
+      left: 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div id="container">
+    <button id="trollButton">Try to catch me!</button>
+  </div>
+
+
+</body></html>
