@@ -1,8 +1,192 @@
-     <html>
-                    <head>
-                        <title>Leonels learn hub</title>
-                    </head>
-                    <body>
-                        <iframe src="https://st.8games.net/7/igra-grenni-original/" style="outline: none; border: none; width: 100vw; height: 100vh; position: fixed; inset: 0px;"></iframe>
-                    </body>
-                </html>
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../ripped-games/granny/25022801/theme/game.css">
+    <script src="lib/gmsoftsdk_v5.js"></script>
+
+    <title>Granny Horror</title>
+    <meta name="description" content="Enter the terrifying house of Granny Horror and fight for your survival! Stay silent, solve puzzles, and escape before Granny finds you."/>
+    <style type="text/css">
+        .jss1:before {
+            top: 0;
+            width: 100%;
+            filter: blur(16px);
+            height: 100%;
+            content: "";
+            display: block;
+            opacity: .5;
+            z-index: 0;
+            position: absolute;
+            background-size: cover;
+            background-image: url("25022801/loading.png")
+        }
+    </style>
+
+    <script>
+        function firebaseLogEvent(eventName, parameters) {}
+
+        window.firebaseLogEvent = firebaseLogEvent;
+
+        var buildUrl = "Build";
+        var versionFolder = "25022801/";
+        buildUrl = "25022801/Build";
+        var loaderUrl = buildUrl + "/granny-horror-v25022801.loader.js";
+        var config = {
+            dataUrl: buildUrl + "/granny-horror-v25022801.data.unityweb",
+            frameworkUrl: buildUrl + "/granny-horror-v25022801.framework.js.unityweb",
+            codeUrl: buildUrl + "/granny-horror-v25022801.wasm.unityweb",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "1games.io",
+            productName: "Granny Horror",
+            productVersion: "25022801",
+            pubId: "",
+            matchWebGLToCanvasSize: false,
+            powerPreference: "high-performance",
+            webglContextAttributes: {
+                alpha: false,
+                antialias: true,
+                depth: true,
+                failIfMajorPerformanceCaveat: false,
+                powerPreference: "high-performance",
+                premultipliedAlpha: false,
+                preserveDrawingBuffer: false,
+                stencil: true
+            }
+        };
+        config.hostindex = 2;
+        config.gameId = "granny-horror";
+        config.eventLog=false;
+        config.buildAPI = "";
+        config.enableMoreGame="no";
+        config.enablePromotion = false;
+        config.unityAnalytics = false;
+        config.analytics = false;
+        config.cloudBuild = false;
+        config.gdHost=isHostOnGD();
+        if(config.gdHost){
+            config.enableMoreGame="no";
+            config.enablePromotion = false;
+            config.eventLog = false;
+            let pathSegments = window.location.pathname.split('/');
+            config.gdGameId = pathSegments[1];
+        }
+        function isHostOnGD() {
+            let domainParts = window.location.hostname.split('.');
+            let mainDomain = domainParts.slice(-2).join('.');
+            return (mainDomain=="gamedistribution.com");
+        }
+
+    </script>
+    <script id="gmsoft-jssdk" src="../ripped-games/granny/lib/gmsoftsdk_v5.js"></script>
+</head>
+
+<body>
+<div id="unity-container" style="display: none;">
+    <canvas id="unity-canvas"></canvas>
+</div>
+<div id="loadingBlock" style="">
+    <div class="jss31 jss34 jss1">
+        <div style="position: absolute; font-family: Arial, Helvetica, sans-serif;	bottom: 10px; right: 10px; font-size: 18px; color: #ffffff; opacity: 0.5;">25022801</div>
+        <div class="spinner"></div>
+        <div class="jss31 jss34 jss48" style="flex: 1 1 0%;">
+            <div class="jss32">
+                <div class="jss7 jss9 jss20 jss3">
+                    <div class="jss125">
+                        <div class="jss123">
+                            <img src="../ripped-games/granny/25022801/loading.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--PRODUCT_VERSION:25022801END-->
+        <div class="jss31 jss34" style="flex: 3 1 0%;">
+            <div class="jss32">
+                <div class="jss31 jss34 jss39 jss50 gameloader">
+                    <div class="jss32">
+                        <div class="gameloader-game-name">Granny Horror</div>
+                    </div>
+                    <div class="jss32">
+                        <div class="jss32 gameloader-logo">
+                            <img id="game-logo" src="../ripped-games/granny/25022801/loading.png">
+                        </div>
+                    </div>
+                    <div class="jss32">
+                        <div>
+                            <div class="gameloader-progressbar">
+                                <div class="gameloader-progressbar-progress" id="progress_fill"
+                                     style="width: 0%;"></div>
+                            </div>
+                            <div class="gameloader-progress-info">Game Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var progressElement = document.getElementById('progress_fill');
+    var container =	document.getElementById("unity-container");
+    var canvas =	document.getElementById("unity-canvas");
+    var loadingBar = document.querySelector("#loadingBlock");
+    var progressBarFull = document.querySelector("#progress_fill");
+    var progress_text = document.querySelector(".gameloader-progress-info");
+    let text_percent = "";
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+    var gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) {
+        alert('Your browser does not support WebGL. Please use a modern browser.');
+        return;
+    }
+
+    canvas.width = 1920;
+    canvas.height = 1080;
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.tabIndex = 1;
+
+
+    canvas.style.display = 'block';
+    canvas.style.outline = 'none';
+
+    createUnityInstance(canvas, config, (progress) => {
+        progressElement.style.width = 100 * progress + "%";
+        text_percent = "Downloading file: " + Math.round(progress*100) + "%";
+        progress_text.innerText = text_percent;
+        if (progress >= 99) {
+            progress_text.innerText = "Game Loading ...";
+        }
+    }).then((unityInstance) => {
+        window.unityInstance = unityInstance;
+
+        const originalSendMessage = unityInstance.SendMessage;
+        unityInstance.SendMessage = function(objectName, methodName, value) {
+            if (objectName === 'GmSoft' && methodName === 'SetParam' && arguments.length === 2) {
+                return originalSendMessage.call(this, objectName, methodName, '');
+            }
+            return originalSendMessage.apply(this, arguments);
+        };
+
+        setTimeout(function() {
+            loadingBar.style.display = "none";
+            container.style.display = "block";
+            canvas.focus();
+            window.focus();
+        }, 2000);
+    }).catch((message) => {
+        alert('Game failed to load: ' + message);
+    });
+    };
+    document.body.appendChild(script);
+</script>
+
+
+
+</body>
+</html>
+
