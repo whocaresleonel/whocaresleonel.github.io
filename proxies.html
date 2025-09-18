@@ -21,7 +21,6 @@
       background: rgba(0, 0, 0, 0.85);
       color: white;
       display: flex;
-      justify-content: space-between;
       align-items: center;
       z-index: 1001;
       user-select: none;
@@ -33,9 +32,8 @@
       letter-spacing: 1px;
     }
     .header-bar nav {
-      margin-left: auto;
-      padding-left: 3rem;
-      /* You can adjust padding-left for more/less shift */
+      margin-left: 3rem; /* Space between title and Home button */
+      padding-left: 0;
     }
     .header-bar a {
       color: white;
@@ -98,7 +96,7 @@
 <body>
   <div class="header-bar">
     <span class="site-title">Leonels Game Hub</span>
-    <nav style="margin-left:auto; padding-left: 3rem;">
+    <nav>
       <a href="index.html">Home</a>
     </nav>
   </div>
@@ -148,4 +146,3 @@
   </div>
 </body>
 </html>
-#
