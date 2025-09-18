@@ -33,8 +33,9 @@
       letter-spacing: 1px;
     }
     .header-bar nav {
-      display: flex;
-      gap: 1.5rem;
+      margin-left: auto;
+      padding-left: 3rem;
+      /* You can adjust padding-left for more/less shift */
     }
     .header-bar a {
       color: white;
@@ -97,9 +98,8 @@
 <body>
   <div class="header-bar">
     <span class="site-title">Leonels Game Hub</span>
-    <nav>
+    <nav style="margin-left:auto; padding-left: 3rem;">
       <a href="index.html">Home</a>
-      <a href="proxies.html">Proxies</a>
     </nav>
   </div>
   <div class="container">
@@ -115,13 +115,7 @@
         <a class="proxy-link" href="https://jubilant-space-enigma-5g4q4v96646gf77qr-8000.app.github.dev/" target="_blank">AnuraOS</a>
         <br>
         <small>
-          Modern proxy access. <br>
-          <span class="note">
-            <b>Be sure to read the documentation:</b>
-            <a class="doc-link" href="https://github.com/whocaresleonel/anuraOS/blob/main/files/readmeifyouhatecapchta.md" target="_blank">
-              @whocaresleonel/anuraOS/files/readmeifyouhatecapchta
-            </a>
-          </span>
+          Modern proxy access.
         </small>
       </li>
       <li>
