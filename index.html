@@ -15,17 +15,8 @@
       margin: auto;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       overflow: auto;
-      background: linear-gradient(315deg, rgba(101, 0, 94, 1) 3%, rgba(60, 132, 206, 1) 38%, rgba(48, 238, 226, 1) 68%, rgba(255, 25, 25, 1) 98%);
-      animation: gradient 15s ease infinite;
-      background-size: 400% 400%;
+      background: #000;
       background-attachment: fixed;
-      background-position: 0% 0%;
-    }
-
-    @keyframes gradient {
-      0% { background-position: 0% 0%; }
-      50% { background-position: 100% 100%; }
-      100% { background-position: 0% 0%; }
     }
 
     .wave {
@@ -62,20 +53,40 @@
       100% { transform: translateX(0%); }
     }
 
-    .heading {
+    .header-bar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.85);
       color: white;
-      text-align: center;
-      padding: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1001;
+      user-select: none;
+      padding: 0.5rem 2rem;
+    }
+    .header-bar .site-title {
       font-size: 2rem;
       font-weight: bold;
-      transition: top 0.3s ease;
-      z-index: 1000;
-      user-select: none;
+      letter-spacing: 1px;
+    }
+    .header-bar nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .header-bar a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+    .header-bar a:hover {
+      background: rgba(255,255,255,0.07);
     }
 
     .game-grid {
@@ -113,7 +124,13 @@
   </style>
 </head>
 <body>
-  <div class="heading">Leonels Game Hub</div>
+  <div class="header-bar">
+    <span class="site-title">Leonels Game Hub</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="proxies.html">Proxies</a>
+    </nav>
+  </div>
 
   <div class="game-grid">
     <a href="1">1</a>
@@ -222,10 +239,10 @@
 
   <script>
     let lastScrollTop = 0;
-    const heading = document.querySelector('.heading');
+    const headerBar = document.querySelector('.header-bar');
     window.addEventListener('scroll', () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      heading.style.top = (scrollTop > lastScrollTop) ? '-60px' : '0';
+      headerBar.style.top = (scrollTop > lastScrollTop) ? '-70px' : '0';
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
   </script>
