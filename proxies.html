@@ -32,7 +32,7 @@
       letter-spacing: 1px;
     }
     .header-bar nav {
-      margin-left: 3rem; /* Space between title and Home button */
+      margin-left: 3rem;
       padding-left: 0;
     }
     .header-bar a {
@@ -68,6 +68,9 @@
       background: rgba(255,255,255,0.08);
       padding: 1rem;
       border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .proxy-link {
       color: #00eaff;
@@ -91,6 +94,25 @@
     .doc-link:hover {
       color: #ff2555;
     }
+    .favicon {
+      width: 22px;
+      height: 22px;
+      vertical-align: middle;
+      margin-right: 8px;
+      border-radius: 4px;
+      background: #222;
+      object-fit: cover;
+    }
+    #see-more-btn {
+      padding:0.7rem 2rem;
+      font-size:1rem;
+      background:#222;
+      color:#00eaff;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      margin-top: 1.5rem;
+    }
   </style>
 </head>
 <body>
@@ -103,46 +125,129 @@
   <div class="container">
     <h1>Proxies</h1>
     <p>Use these proxies to access blocked sites and games at school or work:</p>
-    <ul>
+    <ul id="proxy-list">
+      <!-- Always visible links (original v1 style, with favicon) -->
       <li>
+        <img class="favicon" src="https://www.google.com/s2/favicons?domain=skyhigh-nu.vercel.app" alt="" onerror="handleFaviconError(this)">
         <a class="proxy-link" href="https://skyhigh-nu.vercel.app/" target="_blank">Intersteller</a>
-        <br>
-        <small>Simple, fast proxy for bypassing goguardian and fortinet.</small>
+        <small style="margin-left:10px;">Simple, fast proxy for bypassing goguardian and fortinet.</small>
       </li>
       <li>
-        <a class="proxy-link" href="https://emerald-old.vercel.app/" target="_blank">Emerald</a>
-        <br>
-        <small>
-          about:blank cloak but slow at best.
-        </small>
-      </li>
-      <li>
+        <img class="favicon" src="https://www.google.com/s2/favicons?domain=holyubofficial.net" alt="" onerror="handleFaviconError(this)">
         <a class="proxy-link" href="https://holyubofficial.net/" target="_blank">Holy Unblocker</a>
-        <br>
-        <small>super popular proxy</small>
+        <small style="margin-left:10px;">super popular proxy</small>
       </li>
       <li>
-        <a class="proxy-link" href="https://104.243.45.193.ip.addr.tools/" target="_blank">Daydreamx proxy (alt) </a>
-        <br>
-        <small></small>
+        <img class="favicon" src="https://www.google.com/s2/favicons?domain=104.243.45.193.ip.addr.tools" alt="" onerror="handleFaviconError(this)">
+        <a class="proxy-link" href="https://104.243.45.193.ip.addr.tools/" target="_blank">Daydreamx proxy (alt)</a>
       </li>
       <li>
-        <a class="proxy-link" href="https://104.243.38.145.ip.addr.tools/" target="_blank"> space proxy (alt)</a>
-        <br>
-        <small>easy to use proxy and most stable</small>
+        <img class="favicon" src="https://www.google.com/s2/favicons?domain=104.243.38.145.ip.addr.tools" alt="" onerror="handleFaviconError(this)">
+        <a class="proxy-link" href="https://104.243.38.145.ip.addr.tools/" target="_blank">Space proxy (alt)</a>
+        <small style="margin-left:10px;">easy to use proxy and most stable</small>
       </li>
       <li>
+        <img class="favicon" src="https://www.google.com/s2/favicons?domain=skylight.crabdance.com" alt="" onerror="handleFaviconError(this)">
         <a class="proxy-link" href="https://skylight.crabdance.com/" target="_blank">Daydreamx proxy</a>
-        <br>
-        <small>most stable proxy.</small>
+        <small style="margin-left:10px;">most stable proxy.</small>
       </li>
       <li>
+        <img class="favicon" src="https://www.google.com/s2/favicons?domain=frylight.jumpingcrab.com" alt="" onerror="handleFaviconError(this)">
         <a class="proxy-link" href="https://frylight.jumpingcrab.com/" target="_blank">Space proxy</a>
-        <br>
-        <small>most preferered.</small>
+        <small style="margin-left:10px;">most preferered.</small>
       </li>
     </ul>
+    <ul id="hidden-links" style="display:none;">
+      <!-- Space Proxies -->
+      <li>
+        <img class="favicon" src="space.png" alt="Space Proxy">
+        <a class="proxy-link" href="https://log-in.amplifyz.cfd.cdn.cloudflare.net" target="_blank">log-in.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="space.png" alt="Space Proxy">
+        <a class="proxy-link" href="https://register.amplifyz.cfd.cdn.cloudflare.net" target="_blank">register.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="space.png" alt="Space Proxy">
+        <a class="proxy-link" href="https://archive.amplifyz.cfd.cdn.cloudflare.net" target="_blank">archive.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="space.png" alt="Space Proxy">
+        <a class="proxy-link" href="https://homes.amplifyz.cfd.cdn.cloudflare.net" target="_blank">homes.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="space.png" alt="Space Proxy">
+        <a class="proxy-link" href="https://search.amplifyz.cfd.cdn.cloudflare.net" target="_blank">search.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="space.png" alt="Space Proxy">
+        <a class="proxy-link" href="https://info.ddnss.org" target="_blank">info.ddnss.org</a>
+      </li>
+      <li>
+        <img class="favicon" src="space.png" alt="Space Proxy">
+        <a class="proxy-link" href="https://104.243.38.145.ip.addr.tools" target="_blank">104.243.38.145.ip.addr.tools</a>
+      </li>
+      <li>
+        <img class="favicon" src="space.png" alt="Space Proxy">
+        <a class="proxy-link" href="https://study.bostoncareercounselor.com" target="_blank">study.bostoncareercounselor.com</a>
+      </li>
+      <!-- DDX Proxies -->
+      <li>
+        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
+        <a class="proxy-link" href="https://host.amplifyz.cfd.cdn.cloudflare.net" target="_blank">host.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
+        <a class="proxy-link" href="https://blog.amplifyz.cfd.cdn.cloudflare.net" target="_blank">blog.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
+        <a class="proxy-link" href="https://app.amplifyz.cfd.cdn.cloudflare.net" target="_blank">app.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
+        <a class="proxy-link" href="https://inbox.amplifyz.cfd.cdn.cloudflare.net" target="_blank">inbox.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
+        <a class="proxy-link" href="https://account.amplifyz.cfd.cdn.cloudflare.net" target="_blank">account.amplifyz.cfd.cdn.cloudflare.net</a>
+      </li>
+      <li>
+        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
+        <a class="proxy-link" href="https://web.ddnss.org" target="_blank">web.ddnss.org</a>
+      </li>
+      <li>
+        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
+        <a class="proxy-link" href="https://104.243.45.193.ip.addr.tools" target="_blank">104.243.45.193.ip.addr.tools</a>
+      </li>
+      <li>
+        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
+        <a class="proxy-link" href="https://math.bostoncareercounselor.com" target="_blank">math.bostoncareercounselor.com</a>
+      </li>
+    </ul>
+    <div style="text-align:center;">
+      <button id="see-more-btn">See more</button>
+    </div>
     <p style="margin-top:2rem;text-align:center;">If one doesn't work, try another! More proxies coming soon.</p>
   </div>
+  <script>
+    const btn = document.getElementById('see-more-btn');
+    const hidden = document.getElementById('hidden-links');
+    let expanded = false;
+    btn.onclick = function() {
+      expanded = !expanded;
+      hidden.style.display = expanded ? 'block' : 'none';
+      btn.textContent = expanded ? 'Show less' : 'See more';
+    };
+    // Favicon fallback handler for Google favicons
+    function handleFaviconError(img) {
+      if (!img.dataset.triedLocal) {
+        img.src = 'resources/favicon.ico';
+        img.dataset.triedLocal = "true";
+      } else {
+        img.src = 'data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" rx=\"4\" fill=\"%23222\"/><text x=\"11\" y=\"16\" font-size=\"12\" text-anchor=\"middle\" fill=\"white\">🌐</text></svg>';
+      }
+    }
+  </script>
 </body>
 </html>
