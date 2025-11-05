@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Full-Screen Iframe</title>
+  <title>leonels learn hub - buildnowgg </title>
   <style>
     html, body {
       margin: 0;
@@ -27,22 +27,27 @@
       border: none;
     }
 
-   
+    /* Black overlay to hide the navbar */
     .overlay {
       position: absolute;
       top: 0;
       left: 0;
-      width: 80px; /* adjust this width to match navbar size */
+      width: 82px;        /* fine-tuned width — adjust if needed */
       height: 100%;
       background-color: black;
       z-index: 10;
-      pointer-events: none; /* allows clicks through overlay */
+      pointer-events: auto;  /* blocks clicks so the bar can't be used */
     }
   </style>
 </head>
 <body>
   <div class="iframe-container">
-    <iframe src="https://frylight.jumpingcrab.com/&?q=BuildNow%20GG" allowfullscreen></iframe>
+    <iframe 
+      src="https://frylight.jumpingcrab.com/&?q=BuildNow%20GG" 
+      allowfullscreen>
+    </iframe>
+
+    <!-- This covers the navbar visually and blocks interaction -->
     <div class="overlay"></div>
   </div>
 </body>
