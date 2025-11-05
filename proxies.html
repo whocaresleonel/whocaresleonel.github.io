@@ -1,256 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Proxies - Leonels Game Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>proxys</title>
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #000;
-      color: #fff;
-      min-height: 100vh;
-    }
-    .header-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      display: flex;
-      align-items: center;
-      z-index: 1001;
-      user-select: none;
-      padding: 0.5rem 2rem;
-    }
-    .header-bar .site-title {
-      font-size: 2rem;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-    .header-bar nav {
-      margin-left: 3rem;
-      padding-left: 0;
-    }
-    .header-bar a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 500;
-      padding: 0.3rem 0.6rem;
-      border-radius: 5px;
-      transition: background 0.2s;
-    }
-    .header-bar a:hover {
-      background: rgba(255,255,255,0.07);
-    }
-    .container {
-      max-width: 800px;
-      margin: 7rem auto 2rem auto;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 0 24px rgba(0,0,0,0.3);
-    }
-    h1 {
-      text-align: center;
-      margin-top: 0;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 1rem 0;
-      background: rgba(255,255,255,0.08);
-      padding: 1rem;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .proxy-link {
-      color: #00eaff;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-    .proxy-link:hover {
-      color: #ff2555;
-    }
-    .note {
-      color: #ffd700;
-      margin-top: 1rem;
-      text-align: center;
-      font-size: 1rem;
-    }
-    .doc-link {
-      color: #00eaff;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-    .doc-link:hover {
-      color: #ff2555;
-    }
-    .favicon {
-      width: 22px;
-      height: 22px;
-      vertical-align: middle;
-      margin-right: 8px;
-      border-radius: 4px;
-      background: #222;
-      object-fit: cover;
-    }
-    #see-more-btn {
-      padding:0.7rem 2rem;
-      font-size:1rem;
-      background:#222;
-      color:#00eaff;
-      border:none;
-      border-radius:6px;
-      cursor:pointer;
-      margin-top: 1.5rem;
-    }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding: 2rem; line-height: 1.5; }
+    h1 { margin-bottom: 1rem; }
+    ul { padding-left: 1.25rem; }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <div class="header-bar">
-    <span class="site-title">Leonels Game Hub</span>
-    <nav>
-      <a href="index.html">Home</a>
-    </nav>
-  </div>
-  <div class="container">
-    <h1>Proxies</h1>
-    <p>Use these proxies to access blocked sites anywhere</p>
-    <ul id="proxy-list">
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=skyhigh-nu.vercel.app" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://skyhigh-nu.vercel.app/" target="_blank">Intersteller</a>
-        <small style="margin-left:10px;">Simple, fast proxy for bypassing goguardian and fortinet.</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=holyubofficial.net" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://holyubofficial.net/" target="_blank">Holy Unblocker</a>
-        <small style="margin-left:10px;">super popular proxy</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=letmeoutletmeout.xyz" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://letmeoutletmeout.xyz/" target="_blank">Holy Unblocker</a>
-        <small style="margin-left:10px;">holy unblocker</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=letmeoutletmeout.xyz" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://letmeoutletmeout.xyz/" target="_blank">Holy Unblocker</a>
-        <small style="margin-left:10px;">easy to use proxy and most stable</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=skylight.crabdance.com" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://skylight.crabdance.com/" target="_blank">Daydreamx proxy</a>
-        <small style="margin-left:10px;">most stable proxy.</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=frylight.jumpingcrab.com" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://frylight.jumpingcrab.com/" target="_blank">Space proxy</a>
-        <small style="margin-left:10px;">most preferered.</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=storemy.space" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://u:9de573@storemy.space/" target="_blank">AnuraOS proxy</a>
-        <small style="margin-left:10px;">(new proxy finally)im too tired to write descriptions deal with it</small>
-      </li>
-    </ul>
-    <ul id="hidden-links" style="display:none;">
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://log-in.amplifyz.cfd.cdn.cloudflare.net" target="_blank">log-in.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://register.amplifyz.cfd.cdn.cloudflare.net" target="_blank">register.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://archive.amplifyz.cfd.cdn.cloudflare.net" target="_blank">archive.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://homes.amplifyz.cfd.cdn.cloudflare.net" target="_blank">homes.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://search.amplifyz.cfd.cdn.cloudflare.net" target="_blank">search.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://info.ddnss.org" target="_blank">info.ddnss.org</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="holy unblocker">
-        <a class="proxy-link" href="https://letmeoutletmeout.xyz" target="_blank">Holy Unblocker</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://study.bostoncareercounselor.com" target="_blank">study.bostoncareercounselor.com</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://host.amplifyz.cfd.cdn.cloudflare.net" target="_blank">host.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://blog.amplifyz.cfd.cdn.cloudflare.net" target="_blank">blog.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://app.amplifyz.cfd.cdn.cloudflare.net" target="_blank">app.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://inbox.amplifyz.cfd.cdn.cloudflare.net" target="_blank">inbox.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://account.amplifyz.cfd.cdn.cloudflare.net" target="_blank">account.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://web.ddnss.org" target="_blank">web.ddnss.org</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://letmeoutletmeout.xyz" target="_blank">Holy Unblocker</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://math.bostoncareercounselor.com" target="_blank">math.bostoncareercounselor.com</a>
-      </li>
-    </ul>
-    <div style="text-align:center;">
-      <button id="see-more-btn">See more</button>
-    </div>
-    <p style="margin-top:2rem;text-align:center;">If one doesn't work, try another! More proxies coming soon.</p>
-  </div>
-  <script>
-    const btn = document.getElementById('see-more-btn');
-    const hidden = document.getElementById('hidden-links');
-    let expanded = false;
-    btn.onclick = function() {
-      expanded = !expanded;
-      hidden.style.display = expanded ? 'block' : 'none';
-      btn.textContent = expanded ? 'Show less' : 'See more';
-    };
-    // Favicon fallback handler for Google favicons
-    function handleFaviconError(img) {
-      if (!img.dataset.triedLocal) {
-        img.src = 'resources/favicon.ico';
-        img.dataset.triedLocal = "true";
-      } else {
-        img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" rx="4" fill="#222"/><text x="11" y="16" font-size="12" text-anchor="middle" fill="#fff">?</text></svg>';
-      }
-    }
-  </script>
+  <h1>proxys</h1>
+
+  <p>List of links:</p>
+  <ul>
+    <li>
+      <a href="https://frylight.jumpingcrab.com" target="_blank" rel="noopener noreferrer">
+        Space — frylight.jumpingcrab.com
+      </a>
+    </li>
+  </ul>
 </body>
 </html>
