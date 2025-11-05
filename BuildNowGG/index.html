@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Full-Screen Iframe</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+   
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 80px; /* adjust this width to match navbar size */
+      height: 100%;
+      background-color: black;
+      z-index: 10;
+      pointer-events: none; /* allows clicks through overlay */
+    }
+  </style>
+</head>
+<body>
+  <div class="iframe-container">
+    <iframe src="https://frylight.jumpingcrab.com/&?q=BuildNow%20GG" allowfullscreen></iframe>
+    <div class="overlay"></div>
+  </div>
+</body>
+</html>
