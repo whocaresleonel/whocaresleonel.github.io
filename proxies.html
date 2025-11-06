@@ -99,11 +99,7 @@
       align-items:center;
     }
 
-<<<<<<< HEAD
     .nav-links a, .nav-links button{
-=======
-    .nav-links a{
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
       color:var(--muted);
       text-decoration:none;
       padding:8px 12px;
@@ -111,26 +107,17 @@
       font-weight:600;
       font-size:14px;
       transition:all .18s ease;
-<<<<<<< HEAD
       background:transparent;
       border:0;
       cursor:pointer;
     }
     .nav-links a.primary, .nav-links button.primary{
-=======
-    }
-    .nav-links a.primary{
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
       background:linear-gradient(90deg, rgba(124,92,255,0.12), rgba(46,231,182,0.05));
       color: #eafbf5;
       box-shadow: 0 4px 18px rgba(2,6,23,0.5);
       border:1px solid rgba(255,255,255,0.03);
     }
-<<<<<<< HEAD
     .nav-links a:hover, .nav-links button:hover{ transform:translateY(-2px); color: #fff; }
-=======
-    .nav-links a:hover{ transform:translateY(-2px); color: #fff; }
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
     .nav-actions{
       display:flex;
       gap:8px;
@@ -288,11 +275,7 @@
       padding:18px;
       border:1px solid rgba(255,255,255,0.03);
     }
-<<<<<<< HEAD
     .mobile-panel a, .mobile-panel button{
-=======
-    .mobile-panel a{
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
       display:block;
       padding:12px 10px;
       color:var(--muted);
@@ -300,7 +283,6 @@
       border-radius:10px;
       margin-bottom:6px;
       font-weight:600;
-<<<<<<< HEAD
       background:transparent;
       border:0;
       text-align:left;
@@ -344,16 +326,12 @@
     }
     .form-actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:8px }
     .small-muted{ color:var(--muted); font-size:13px }
-=======
-    }
-    .mobile-panel a:hover{ color:#fff; background:rgba(255,255,255,0.02) }
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <a class="brand" href="#" aria-label="proxys home">
+      <a class="brand" href="index.html" aria-label="proxys home">
         <span class="logo">PX</span>
         <div>
           <h1>proxys</h1>
@@ -363,17 +341,10 @@
 
       <nav aria-label="Main navigation">
         <div class="nav-links" role="menu" aria-hidden="false">
-          <a href="#" role="menuitem">Home</a>
-          <a href="#" role="menuitem">About</a>
-<<<<<<< HEAD
-          <!-- Sources now points to the Discord invite the user provided -->
+          <a href="index.html" role="menuitem">Home</a>
+          <!-- About removed as requested -->
           <a href="https://discord.gg/unblock" role="menuitem" target="_blank" rel="noopener noreferrer">Sources</a>
-          <!-- Add Proxy is now a button that opens a modal to add + save proxies -->
           <button id="openAddProxy" class="primary" role="menuitem">Add Proxy</button>
-=======
-          <a href="#" role="menuitem">Sources</a>
-          <a href="#" class="primary" role="menuitem">Add Proxy</a>
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
         </div>
 
         <div class="nav-actions">
@@ -394,34 +365,12 @@
             <circle cx="11" cy="11" r="6" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
           </svg>
           <input id="search" placeholder="Search proxies, e.g. frylight" />
-<<<<<<< HEAD
           <div class="tag" id="resultTag">0 results</div>
-=======
-          <div class="tag">1 result</div>
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
         </div>
       </div>
 
       <section class="links" id="list" aria-live="polite">
-<<<<<<< HEAD
         <!-- JS will render proxy items here -->
-=======
-        <!-- Link item -->
-        <article class="link-item">
-          <div class="link-left">
-            <div class="favicon" aria-hidden="true">F</div>
-            <div class="link-meta">
-              <div class="link-title">Space — frylight.jumpingcrab.com</div>
-              <div class="link-url">https://frylight.jumpingcrab.com</div>
-            </div>
-          </div>
-
-          <div class="link-actions">
-            <a class="btn" href="https://frylight.jumpingcrab.com" target="_blank" rel="noopener noreferrer">Open</a>
-            <button class="btn primary" onclick="copyUrl('https://frylight.jumpingcrab.com')" aria-label="Copy link">Copy</button>
-          </div>
-        </article>
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
       </section>
 
       <div class="meta">Tip: use the search above to filter results</div>
@@ -431,9 +380,8 @@
   <!-- Mobile menu -->
   <div id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="mobile-panel" role="document">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-<<<<<<< HEAD
+      <a href="index.html">Home</a>
+      <!-- About removed from mobile menu as well -->
       <a href="https://discord.gg/unblock" target="_blank" rel="noopener noreferrer">Sources</a>
       <button id="mobileAddProxy" class="primary" style="display:inline-block; margin-top:8px;">Add Proxy</button>
     </div>
@@ -460,10 +408,6 @@
         <button id="cancelAdd" class="btn">Cancel</button>
         <button id="saveAdd" class="btn primary">Save Proxy</button>
       </div>
-=======
-      <a href="#">Sources</a>
-      <a href="#" class="primary" style="display:inline-block; margin-top:8px;">Add Proxy</a>
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
     </div>
   </div>
 
@@ -487,7 +431,6 @@
       }
     });
 
-<<<<<<< HEAD
     // LocalStorage key
     const STORAGE_KEY = 'proxies_v1';
 
@@ -528,9 +471,6 @@
     }
 
     // Clipboard copy with fallback
-=======
-    // Simple copy to clipboard with feedback
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
     function copyUrl(url){
       if (!navigator.clipboard) {
         fallbackCopy(url);
@@ -553,7 +493,6 @@
       ta.remove();
     }
 
-<<<<<<< HEAD
     // Open/close modal
     function openModal(){
       modal.classList.add('open');
@@ -744,46 +683,6 @@
       if (e.key === 'Escape') {
         if (modal.classList.contains('open')) closeModal();
       }
-=======
-    // Minimal toast
-    function showToast(msg){
-      const t = document.createElement('div');
-      t.textContent = msg;
-      Object.assign(t.style, {
-        position:'fixed',
-        right:'18px',
-        bottom:'18px',
-        background:'rgba(0,0,0,0.7)',
-        color:'#fff',
-        padding:'10px 14px',
-        borderRadius:'10px',
-        zIndex:9999,
-        fontSize:'13px',
-        boxShadow:'0 8px 26px rgba(2,6,23,0.6)'
-      });
-      document.body.appendChild(t);
-      setTimeout(()=> t.style.opacity = '0', 1400);
-      setTimeout(()=> t.remove(), 2000);
-    }
-
-    // Simple search filter
-    const search = document.getElementById('search');
-    const list = document.getElementById('list');
-    const tag = document.querySelector('.tag');
-
-    search.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      const items = Array.from(list.querySelectorAll('.link-item'));
-      let visible = 0;
-      items.forEach(item => {
-        const title = item.querySelector('.link-title').textContent.toLowerCase();
-        const url = item.querySelector('.link-url').textContent.toLowerCase();
-        const show = (title + ' ' + url).includes(q);
-        item.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-      tag.textContent = visible + (visible === 1 ? ' result' : ' results');
->>>>>>> 09d346130ca8e4e31ff9264ae42e2828494b5d2c
     });
   </script>
 </body>
