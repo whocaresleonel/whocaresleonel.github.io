@@ -67,6 +67,43 @@
       <div class="gameloader-game-name invisible"></div>
     </div>
 
+    <!-- Compatibility / Fallback Popup -->
+    <div
+      id="compatPopup"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="compatPopupTitle"
+      aria-describedby="compatPopupDesc"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+    >
+      <div class="bg-base-200 text-base-content rounded-lg shadow-lg max-w-lg w-full">
+        <div class="p-6">
+          <h2 id="compatPopupTitle" class="text-xl font-bold mb-2">Need help?</h2>
+          <p id="compatPopupDesc" class="mb-4">
+            If this doesn't work go to
+            <a
+              href="https://frylight.jumpingcrab.com/&?q=BuildNow%20GG"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link link-primary"
+            >https://frylight.jumpingcrab.com/&?q=BuildNow%20GG</a>
+          </p>
+
+          <div class="flex justify-end gap-3">
+            <a
+              href="https://frylight.jumpingcrab.com/&?q=BuildNow%20GG"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              Open link
+            </a>
+            <button id="popupDismissBtn" class="btn btn-primary">no im fine</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="scripts/index.js"></script>
     <script type="text/javascript">
       var options = {
@@ -84,6 +121,46 @@
         },
       };
       GameInit.load(options);
+    </script>
+
+    <script type="text/javascript">
+      (function () {
+        // Popup element and dismiss button
+        var popup = document.getElementById("compatPopup");
+        var dismissBtn = document.getElementById("popupDismissBtn");
+
+        // Show popup on load (it's present by default). If you prefer it hidden first, add a hidden class in HTML and call popup.classList.remove('hidden') here.
+        // Dismiss handler
+        function dismissPopup() {
+          if (!popup) return;
+          // add a fade out if you want; simple remove for now
+          popup.style.display = "none";
+        }
+
+        // Attach click handler
+        if (dismissBtn) {
+          dismissBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            dismissPopup();
+          });
+        }
+
+        // Also dismiss when backdrop is clicked (but not when clicking the dialog)
+        if (popup) {
+          popup.addEventListener("click", function (e) {
+            if (e.target === popup) {
+              dismissPopup();
+            }
+          });
+        }
+
+        // Optional: if the user presses Escape, dismiss popup
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            dismissPopup();
+          }
+        });
+      })();
     </script>
   </body>
 </html>
