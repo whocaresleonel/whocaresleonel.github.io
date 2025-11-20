@@ -1,8 +1,197 @@
-     <html>
-                    <head>
-                        <title>Leonels learn hub</title>
-                    </head>
-                    <body>
-                        <iframe src="https://st.8games.net/7/igra-grenni-original/" style="outline: none; border: none; width: 100vw; height: 100vh; position: fixed; inset: 0px;"></iframe>
-                    </body>
-                </html>
+<html lang="en-us"><head></head><body><module>
+<moduleprefs title="Google.com">
+<content type="html"><!--[CDATA[
+
+
+<!DOCTYPE html-->
+
+
+    <title>Granny Original</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/TemplateData/style.css">
+
+    <!-- SDKs preserved exactly as original -->
+    <script id="gamemonetize-sdk" src="https://cdn.jsdelivr.net/gh/testamalame/sef@main/sedk.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/sdk.js"></script>
+
+    <script type="text/javascript">
+        window.SDK_OPTIONS = {
+            gameId: "jp112o3o4hzgrnc7zaewjkrfk282pul8",
+            onEvent: function (a) {
+                switch (a.name) {
+                    case "SDK_GAME_PAUSE":
+                        if (typeof myGameInstance !== 'undefined' && myGameInstance)
+                            myGameInstance.SendMessage('AudioManager', 'MuteAudio');
+                        break;
+                    case "SDK_GAME_START":
+                        if (typeof myGameInstance !== 'undefined' && myGameInstance)
+                            myGameInstance.SendMessage('AudioManager', 'UnmuteAudio');
+                        break;
+                }
+            }
+        };
+        (function (a, b, c) {
+            var d = a.getElementsByTagName(b)[0];
+            a.getElementById(c) || (a = a.createElement(b), a.id = c, a.src = "https://cdn.jsdelivr.net/gh/testamalame/sef@main/sedk.js", d.parentNode.insertBefore(a, d));
+        })(document, "script", "gamemonetize-sdk");
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: url('https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/background.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        #unity-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        #unity-loading-bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 20px;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+        }
+        #unity-logo {
+            position: absolute;
+            top: calc(50% - 100px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+        }
+        #unity-progress-bar-empty {
+            width: 100%;
+            height: 100%;
+        }
+        #unity-progress-bar-full {
+            width: 0%;
+            height: 100%;
+            background: #4caf50;
+            border-radius: 8px;
+            transition: width .3s ease;
+        }
+        #unity-warning {
+            position: absolute;
+            left: 50%;
+            top: 5%;
+            transform: translate(-50%);
+            background: white;
+            padding: 10px;
+            display: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+
+
+    <div id="unity-container">
+        <canvas id="unity-canvas" style="position: absolute; width: 100%; height: 100%; cursor: default;"></canvas>
+        <div id="unity-loading-bar">
+            <div id="unity-logo">
+                <img src="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/logo.png">
+            </div>
+            <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+        </div>
+        <div id="unity-warning"></div>
+    </div>
+
+<script>
+async function mergeUnityWebFiles(baseUrl, filePrefix, totalParts, extension) {
+    const partUrls = [];
+    for (let i = 1; i <= totalParts; i++)
+        partUrls.push(`${baseUrl}/${filePrefix}_part${i}.${extension}`);
+
+    const buffers = [];
+    for (let i = 0; i < totalParts; i++) {
+        const response = await fetch(partUrls[i]);
+        const buffer = await response.arrayBuffer();
+        buffers.push(buffer);
+        document.querySelector("#unity-progress-bar-full").style.width = `${((i+1)/totalParts)*100}%`;
+    }
+
+    const totalLength = buffers.reduce((a,b)=>a+b.byteLength,0);
+    const combined = new Uint8Array(totalLength);
+    let offset = 0;
+    buffers.forEach(b => {
+        combined.set(new Uint8Array(b), offset);
+        offset += b.byteLength;
+    });
+    return combined;
+}
+
+var container = document.querySelector("#unity-container");
+var canvas = document.querySelector("#unity-canvas");
+var loadingBar = document.querySelector("#unity-loading-bar");
+var progressBarFull = document.querySelector("#unity-progress-bar-full");
+var warningBanner = document.querySelector("#unity-warning");
+
+let myGameInstance = null;
+
+function unityShowBanner(msg, type) {
+    var div = document.createElement('div');
+    div.innerHTML = msg;
+    warningBanner.appendChild(div);
+}
+
+var buildUrl = "https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/Build";
+var loaderUrl = buildUrl + "/Granny.loader.js";
+
+async function initializeGame() {
+    try {
+        const dataBuffer = await mergeUnityWebFiles(buildUrl, "Granny", 2, "data");
+        const wasmBuffer = await mergeUnityWebFiles(buildUrl, "Granny", 2, "wasm");
+
+        const dataBlobUrl = URL.createObjectURL(new Blob([dataBuffer]));
+        const wasmBlobUrl = URL.createObjectURL(new Blob([wasmBuffer]));
+
+        var config = {
+            dataUrl: dataBlobUrl,
+            frameworkUrl: buildUrl + "/Granny.framework.js",
+            codeUrl: wasmBlobUrl,
+            streamingAssetsUrl: "https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/StreamingAssets",
+            companyName: "Anastasia Kazantseva",
+            productName: "Granny",
+            productVersion: "1.0",
+            showBanner: unityShowBanner,
+        };
+
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress)=>{
+                progressBarFull.style.width = 100*progress+"%";
+            }).then((unityInstance)=>{
+                myGameInstance = unityInstance;
+                loadingBar.style.display="none";
+            });
+        };
+
+        document.body.appendChild(script);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+initializeGame();
+</script>
+
+<!-- GOOGLE AD REMOVED -->
+
+]]></content>
+</moduleprefs></module>
+<script src="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/Build/Granny.loader.js"></script>
+</body></html>
