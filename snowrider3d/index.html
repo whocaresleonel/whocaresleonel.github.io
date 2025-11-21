@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Inbox (3) - Gmail</title>
+     <title>Inbox (3) - Gmail</title>
     <link rel="icon" type="image/png" sizes="32x32"
       href="https://raw.githubusercontent.com/samw53/nebula/main/Gmail-logo.png">
     <link rel="stylesheet" href="TemplateData/style.css">
@@ -11,60 +11,6 @@
     <meta property="og:image" content="snow-rider-3d.png" />
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="Build/UnityLoader.js"></script>
-
-    <style>
-        /* ===== Password gate overlay ===== */
-        #gate-overlay{
-            position:fixed;
-            inset:0;
-            background:#111;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-family:system-ui, sans-serif;
-            z-index:9999;
-        }
-        #gate-box{
-            background:#fff;
-            padding:2.5rem 3rem;
-            border-radius:8px;
-            text-align:center;
-            min-width:280px;
-        }
-        #gate-box h2{margin-top:0}
-        #gate-box input{
-            width:100%;
-            padding:.6rem .75rem;
-            font-size:1rem;
-            margin:.75rem 0;
-            border:1px solid #bbb;
-            border-radius:4px;
-        }
-        #gate-box button{
-            width:100%;
-            padding:.6rem;
-            font-size:1rem;
-            background:#1a73e8;
-            color:#fff;
-            border:none;
-            border-radius:4px;
-            cursor:pointer;
-        }
-        #gate-box button:hover{background:#135cbc}
-        #gate-box .error{
-            color:#c62828;
-            font-size:.85rem;
-            margin-top:.4rem;
-            min-height:1.2rem;
-        }
-        /* little shake animation */
-        @keyframes shake{
-            0%,100%{transform:translateX(0)}
-            20%,60%{transform:translateX(-4px)}
-            40%,80%{transform:translateX(4px)}
-        }
-        .shake{animation:shake .3s ease}
-    </style>
 </head>
 
 <body style="overflow:hidden; margin:0; padding:0;">
@@ -72,74 +18,31 @@
         <div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
     </div>
 
+    <!-- password gate -->
     <script>
-        /* ========== CONFIG ========== */
-        const HASHED_PW = 'a8d5c71b6e8c3e9d674f3e3e1b3c2a88e9c3e99b8a9c1e6b7d4f3e2a1b0c9d8e'; // SHA-256 of '46b'
-        const MAX_TRIES   = 3;
-        /* ============================= */
-
-        (async function gate(){
-            let tries = 0;
-
-            const overlay = document.createElement('div');
-            overlay.id = 'gate-overlay';
-            overlay.innerHTML = `
-              <div id="gate-box">
-                  <h2>Enter password to play</h2>
-                  <input id="pwInput" type="password" placeholder="Password" autocomplete="off">
-                  <button id="pwBtn">Unlock</button>
-                  <div class="error" id="pwError"></div>
-              </div>`;
-            document.body.appendChild(overlay);
-
-            const input   = document.getElementById('pwInput');
-            const button  = document.getElementById('pwBtn');
-            const error   = document.getElementById('pwError');
-            const box     = document.getElementById('gate-box');
-
-            input.focus();
-
-            async function sha256(str){
-                const buf = new TextEncoder().encode(str);
-                const hash = await crypto.subtle.digest('SHA-256', buf);
-                return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
-            }
-
-            async function check(){
-                if(!input.value.trim()){input.focus();return;}
-                if(await sha256(input.value.trim()) === HASHED_PW){
-                    overlay.remove();
-                    document.documentElement.style.display='';
-                    startUnity();
-                }else{
+        (function () {
+            const pwd = '46b';
+            let input, tries = 0;
+            while (input !== pwd) {
+                input = prompt('Password:');
+                if (input !== pwd) {
                     tries++;
-                    box.classList.add('shake');
-                    error.textContent = `Wrong password (${MAX_TRIES-tries} tries left)`;
-                    input.value='';
-                    input.focus();
-                    setTimeout(()=>box.classList.remove('shake'),300);
-                    if(tries>=MAX_TRIES){
-                        overlay.remove();
+                    if (input === null || tries >= 3) {
                         document.documentElement.remove();
                         window.stop();
                         throw new Error('Access denied');
                     }
+                    alert('Wrong password. Try again.');
                 }
             }
-
-            button.addEventListener('click', check);
-            input.addEventListener('keyup', e=>{
-                if(e.key==='Enter')check();
-                if(e.key==='Escape')input.blur();
-            });
-        })();
-
-        function startUnity(){
+            // show the page
+            document.documentElement.style.display = '';
+            // then boot Unity
             var gameInstance = UnityLoader.instantiate("gameContainer", "Build/SnowRider3D-gd-1.json", {
                 onProgress: UnityProgress,
                 Module: { onRuntimeInitialized: function () { UnityProgress(gameInstance, "complete"); } }
             });
-        }
+        })();
     </script>
 </body>
 </html>
