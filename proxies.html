@@ -1,255 +1,689 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Proxies - Leonels Game Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>leonels learn proxys</title>
+
+  <!-- Modern system fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #000;
-      color: #fff;
-      min-height: 100vh;
+    :root{
+      --bg: #0f1724;
+      --card: rgba(255,255,255,0.04);
+      --muted: #9aa4b2;
+      --accent: linear-gradient(90deg,#7c5cff,#2ee7b6);
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius: 12px;
+      --max-width: 900px;
     }
-    .header-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      display: flex;
-      align-items: center;
-      z-index: 1001;
-      user-select: none;
-      padding: 0.5rem 2rem;
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(46,231,182,0.06), transparent 8%),
+                  radial-gradient(1000px 400px at 90% 90%, rgba(124,92,255,0.05), transparent 12%),
+                  var(--bg);
+      color: #e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding: 32px 20px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
     }
-    .header-bar .site-title {
-      font-size: 2rem;
-      font-weight: bold;
-      letter-spacing: 1px;
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
     }
-    .header-bar nav {
-      margin-left: 3rem;
-      padding-left: 0;
+
+    /* Header / Nav */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:28px;
     }
-    .header-bar a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 500;
-      padding: 0.3rem 0.6rem;
-      border-radius: 5px;
-      transition: background 0.2s;
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
     }
-    .header-bar a:hover {
-      background: rgba(255,255,255,0.07);
+    .logo{
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      background:linear-gradient(135deg,#7c5cff,#2ee7b6);
+      box-shadow:0 6px 20px rgba(46,231,182,0.08), inset 0 -8px 20px rgba(255,255,255,0.06);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:#061024;
+      font-size:16px;
     }
-    .container {
-      max-width: 800px;
-      margin: 7rem auto 2rem auto;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 0 24px rgba(0,0,0,0.3);
+    h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-0.02em;
     }
-    h1 {
-      text-align: center;
-      margin-top: 0;
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:500;
     }
-    ul {
-      list-style: none;
-      padding: 0;
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    li {
-      margin: 1rem 0;
-      background: rgba(255,255,255,0.08);
-      padding: 1rem;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+
+    .nav-links{
+      display:flex;
+      gap:8px;
+      align-items:center;
     }
-    .proxy-link {
-      color: #00eaff;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-    .proxy-link:hover {
-      color: #ff2555;
-    }
-    .note {
-      color: #ffd700;
-      margin-top: 1rem;
-      text-align: center;
-      font-size: 1rem;
-    }
-    .doc-link {
-      color: #00eaff;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-    .doc-link:hover {
-      color: #ff2555;
-    }
-    .favicon {
-      width: 22px;
-      height: 22px;
-      vertical-align: middle;
-      margin-right: 8px;
-      border-radius: 4px;
-      background: #222;
-      object-fit: cover;
-    }
-    #see-more-btn {
-      padding:0.7rem 2rem;
-      font-size:1rem;
-      background:#222;
-      color:#00eaff;
-      border:none;
-      border-radius:6px;
+
+    .nav-links a, .nav-links button{
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:14px;
+      transition:all .18s ease;
+      background:transparent;
+      border:0;
       cursor:pointer;
-      margin-top: 1.5rem;
     }
+    .nav-links a.primary, .nav-links button.primary{
+      background:linear-gradient(90deg, rgba(124,92,255,0.12), rgba(46,231,182,0.05));
+      color: #eafbf5;
+      box-shadow: 0 4px 18px rgba(2,6,23,0.5);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .nav-links a:hover, .nav-links button:hover{ transform:translateY(-2px); color: #fff; }
+    .nav-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    /* Mobile hamburger */
+    .hamburger{
+      display:none;
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,0.02);
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .hamburger svg{width:20px;height:20px;color:var(--muted)}
+
+    /* Content card */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:20px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px) saturate(110%);
+    }
+
+    .controls{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:16px;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .search{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex:1 1 320px;
+      background:var(--glass-2);
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .search input{
+      background:transparent;
+      border:0;
+      outline:none;
+      color:inherit;
+      padding:8px;
+      font-size:14px;
+      flex:1;
+    }
+    .tag{
+      font-size:13px;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    /* List */
+    .links{
+      display:grid;
+      gap:12px;
+      grid-template-columns:1fr;
+    }
+    .link-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:10px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      border:1px solid rgba(255,255,255,0.02);
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .link-item:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.6); }
+    .link-left{ display:flex; gap:12px; align-items:center; flex:1; min-width:0}
+    .favicon{
+      width:44px;
+      height:44px;
+      border-radius:8px;
+      background:linear-gradient(135deg,#2b8eff33, #7c5cff22);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:#fff;
+      flex:0 0 44px;
+      font-size:14px;
+    }
+    .link-meta{ overflow:hidden }
+    .link-title{ font-weight:700; font-size:15px; color:#fff; white-space:nowrap; text-overflow:ellipsis; overflow:hidden }
+    .link-url{ font-size:13px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+    .link-actions{ display:flex; gap:8px; align-items:center }
+    .btn{
+      background:transparent;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
+      padding:8px 10px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:13px;
+      cursor:pointer;
+      transition:all .12s ease;
+    }
+    .btn.primary{
+      background:var(--accent);
+      color:#061024;
+      padding:8px 12px;
+      border:none;
+      box-shadow:0 8px 24px rgba(124,92,255,0.16);
+    }
+    .btn:hover{ transform:translateY(-2px) }
+
+    /* Footer small */
+    .meta{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:right;
+    }
+
+    /* Responsive */
+    @media (max-width:820px){
+      .nav-links{ display:none }
+      .hamburger{ display:flex }
+      header{ align-items:flex-start; gap:10px }
+    }
+
+    /* Mobile menu overlay */
+    .mobile-menu{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:40;
+      background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+      align-items:flex-start;
+      justify-content:center;
+      padding:60px 20px;
+    }
+    .mobile-menu.open{ display:flex }
+    .mobile-panel{
+      width:100%;
+      max-width:420px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .mobile-panel a, .mobile-panel button{
+      display:block;
+      padding:12px 10px;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:10px;
+      margin-bottom:6px;
+      font-weight:600;
+      background:transparent;
+      border:0;
+      text-align:left;
+      cursor:pointer;
+    }
+    .mobile-panel a:hover, .mobile-panel button:hover{ color:#fff; background:rgba(255,255,255,0.02) }
+
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.6);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      padding:20px;
+    }
+    .modal-backdrop.open{ display:flex }
+    .modal{
+      width:100%;
+      max-width:520px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow:0 12px 40px rgba(2,6,23,0.6);
+    }
+    .form-row{ display:flex; gap:8px; margin-bottom:10px; align-items:center }
+    .form-row input, .form-row label{
+      font-size:14px;
+    }
+    .form-row input[type="text"]{
+      flex:1;
+      padding:10px 12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03);
+      color:inherit;
+      outline:none;
+    }
+    .form-actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:8px }
+    .small-muted{ color:var(--muted); font-size:13px }
   </style>
 </head>
 <body>
-  <div class="header-bar">
-    <span class="site-title">Leonels Game Hub</span>
-    <nav>
-      <a href="index.html">Home</a>
-    </nav>
-  </div>
   <div class="container">
-    <h1>Proxies</h1>
-    <p>Use these proxies to access blocked sites anywhere</p>
-    <ul id="proxy-list">
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=skyhigh-nu.vercel.app" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://skyhigh-nu.vercel.app/" target="_blank">Intersteller</a>
-        <small style="margin-left:10px;">Simple, fast proxy for bypassing goguardian and fortinet.</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=holyubofficial.net" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://holyubofficial.net/" target="_blank">Holy Unblocker</a>
-        <small style="margin-left:10px;">super popular proxy</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=104.243.45.193.ip.addr.tools" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://104.243.45.193.ip.addr.tools/" target="_blank">Daydreamx proxy (alt)</a>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=104.243.38.145.ip.addr.tools" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://104.243.38.145.ip.addr.tools/" target="_blank">Space proxy (alt)</a>
-        <small style="margin-left:10px;">easy to use proxy and most stable</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=skylight.crabdance.com" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://skylight.crabdance.com/" target="_blank">Daydreamx proxy</a>
-        <small style="margin-left:10px;">most stable proxy.</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=frylight.jumpingcrab.com" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://frylight.jumpingcrab.com/" target="_blank">Space proxy</a>
-        <small style="margin-left:10px;">most preferered.</small>
-      </li>
-      <li>
-        <img class="favicon" src="https://www.google.com/s2/favicons?domain=storemy.space" alt="" onerror="handleFaviconError(this)">
-        <a class="proxy-link" href="https://u:9de573@storemy.space/" target="_blank">AnuraOS proxy</a>
-        <small style="margin-left:10px;">(new proxy finally)im too tired to write descriptions deal with it</small>
-      </li>
-    </ul>
-    <ul id="hidden-links" style="display:none;">
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://log-in.amplifyz.cfd.cdn.cloudflare.net" target="_blank">log-in.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://register.amplifyz.cfd.cdn.cloudflare.net" target="_blank">register.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://archive.amplifyz.cfd.cdn.cloudflare.net" target="_blank">archive.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://homes.amplifyz.cfd.cdn.cloudflare.net" target="_blank">homes.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://search.amplifyz.cfd.cdn.cloudflare.net" target="_blank">search.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://info.ddnss.org" target="_blank">info.ddnss.org</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://104.243.38.145.ip.addr.tools" target="_blank">104.243.38.145.ip.addr.tools</a>
-      </li>
-      <li>
-        <img class="favicon" src="space.png" alt="Space Proxy">
-        <a class="proxy-link" href="https://study.bostoncareercounselor.com" target="_blank">study.bostoncareercounselor.com</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://host.amplifyz.cfd.cdn.cloudflare.net" target="_blank">host.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://blog.amplifyz.cfd.cdn.cloudflare.net" target="_blank">blog.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://app.amplifyz.cfd.cdn.cloudflare.net" target="_blank">app.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://inbox.amplifyz.cfd.cdn.cloudflare.net" target="_blank">inbox.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://account.amplifyz.cfd.cdn.cloudflare.net" target="_blank">account.amplifyz.cfd.cdn.cloudflare.net</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://web.ddnss.org" target="_blank">web.ddnss.org</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://104.243.45.193.ip.addr.tools" target="_blank">104.243.45.193.ip.addr.tools</a>
-      </li>
-      <li>
-        <img class="favicon" src="ddx.png" alt="Daydreamx Proxy">
-        <a class="proxy-link" href="https://math.bostoncareercounselor.com" target="_blank">math.bostoncareercounselor.com</a>
-      </li>
-    </ul>
-    <div style="text-align:center;">
-      <button id="see-more-btn">See more</button>
-    </div>
-    <p style="margin-top:2rem;text-align:center;">If one doesn't work, try another! More proxies coming soon.</p>
+    <header>
+      <a class="brand" href="index.html" aria-label="proxys home">
+        <span class="logo">PX</span>
+        <div>
+          <h1>proxys</h1>
+          <p class="subtitle">Quick access to your proxy endpoints</p>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <div class="nav-links" role="menu" aria-hidden="false">
+          <a href="index.html" role="menuitem">Home</a>
+          <!-- About removed as requested -->
+          <a href="https://discord.gg/unblock" role="menuitem" target="_blank" rel="noopener noreferrer">Sources</a>
+          <button id="openAddProxy" class="primary" role="menuitem">Add Proxy</button>
+        </div>
+
+        <div class="nav-actions">
+          <button class="hamburger" id="menuToggle" aria-label="Open menu" aria-haspopup="true" aria-controls="mobileMenu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="card" role="main">
+      <div class="controls">
+        <div class="search" role="search" aria-label="Search proxies">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9">
+            <path d="M21 21l-4.35-4.35" stroke="rgba(255,255,255,0.7)" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="11" cy="11" r="6" stroke="rgba(255,255,255,0.7)" stroke-width="1.6"/>
+          </svg>
+          <input id="search" placeholder="Search proxies, e.g. frylight" />
+          <div class="tag" id="resultTag">0 results</div>
+        </div>
+      </div>
+
+      <section class="links" id="list" aria-live="polite">
+        <!-- JS will render proxy items here -->
+      </section>
+
+      <div class="meta">Tip: use the search above to filter results</div>
+    </main>
   </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="mobile-panel" role="document">
+      <a href="index.html">Home</a>
+      <!-- About removed from mobile menu as well -->
+      <a href="https://discord.gg/unblock" target="_blank" rel="noopener noreferrer">Sources</a>
+      <button id="mobileAddProxy" class="primary" style="display:inline-block; margin-top:8px;">Add Proxy</button>
+    </div>
+  </div>
+
+  <!-- Add Proxy Modal -->
+  <div id="modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" role="document">
+      <h3 id="modalTitle" style="margin:0 0 10px 0">Add a new proxy</h3>
+      <div class="small-muted" style="margin-bottom:12px">Saved locally in your browser (localStorage). URLs should include the protocol (https://).</div>
+      <div class="form-row">
+        <label for="proxyTitle" class="small-muted" style="min-width:80px">Title</label>
+        <input id="proxyTitle" type="text" placeholder="e.g. Space — frylight" />
+      </div>
+      <div class="form-row">
+        <label for="proxyUrl" class="small-muted" style="min-width:80px">URL</label>
+        <input id="proxyUrl" type="text" placeholder="https://frylight.jumpingcrab.com" />
+      </div>
+      <div class="form-row">
+        <label for="proxySource" class="small-muted" style="min-width:80px">Source</label>
+        <input id="proxySource" type="text" placeholder="Optional (e.g. Discord)" />
+      </div>
+      <div class="form-actions">
+        <button id="cancelAdd" class="btn">Cancel</button>
+        <button id="saveAdd" class="btn primary">Save Proxy</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const btn = document.getElementById('see-more-btn');
-    const hidden = document.getElementById('hidden-links');
-    let expanded = false;
-    btn.onclick = function() {
-      expanded = !expanded;
-      hidden.style.display = expanded ? 'block' : 'none';
-      btn.textContent = expanded ? 'Show less' : 'See more';
-    };
-    // Favicon fallback handler for Google favicons
-    function handleFaviconError(img) {
-      if (!img.dataset.triedLocal) {
-        img.src = 'resources/favicon.ico';
-        img.dataset.triedLocal = "true";
-      } else {
-        img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" rx="4" fill="#222"/><text x="11" y="16" font-size="12" text-anchor="middle" fill="#fff">?</text></svg>';
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      mobileMenu.setAttribute('aria-hidden', String(!open));
+      menuToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    // Close mobile menu on overlay click
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        mobileMenu.classList.remove('open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // LocalStorage key
+    const STORAGE_KEY = 'proxies_v1';
+
+    // DOM refs
+    const list = document.getElementById('list');
+    const tag = document.getElementById('resultTag');
+    const search = document.getElementById('search');
+
+    // Modal refs
+    const modal = document.getElementById('modal');
+    const openAddProxy = document.getElementById('openAddProxy');
+    const mobileAddProxy = document.getElementById('mobileAddProxy');
+    const cancelAdd = document.getElementById('cancelAdd');
+    const saveAdd = document.getElementById('saveAdd');
+    const proxyTitle = document.getElementById('proxyTitle');
+    const proxyUrl = document.getElementById('proxyUrl');
+    const proxySource = document.getElementById('proxySource');
+
+    // Helper: show toast
+    function showToast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg;
+      Object.assign(t.style, {
+        position:'fixed',
+        right:'18px',
+        bottom:'18px',
+        background:'rgba(0,0,0,0.7)',
+        color:'#fff',
+        padding:'10px 14px',
+        borderRadius:'10px',
+        zIndex:9999,
+        fontSize:'13px',
+        boxShadow:'0 8px 26px rgba(2,6,23,0.6)'
+      });
+      document.body.appendChild(t);
+      setTimeout(()=> t.style.opacity = '0', 1400);
+      setTimeout(()=> t.remove(), 2000);
+    }
+
+    // Clipboard copy with fallback
+    function copyUrl(url){
+      if (!navigator.clipboard) {
+        fallbackCopy(url);
+        return;
+      }
+      navigator.clipboard.writeText(url).then(()=>{
+        showToast('Copied to clipboard');
+      }, ()=> {
+        fallbackCopy(url);
+      });
+    }
+
+    function fallbackCopy(text){
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast('Copied to clipboard'); }
+      catch(e) { showToast('Copy failed'); }
+      ta.remove();
+    }
+
+    // Open/close modal
+    function openModal(){
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      proxyTitle.value = '';
+      proxyUrl.value = '';
+      proxySource.value = '';
+      setTimeout(()=> proxyTitle.focus(), 50);
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+    openAddProxy.addEventListener('click', openModal);
+    mobileAddProxy.addEventListener('click', () => { openModal(); mobileMenu.classList.remove('open'); });
+    cancelAdd.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Proxies management
+    function loadProxies(){
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          // default initial proxy if none saved yet
+          const initial = [
+            { title: 'Space — frylight.jumpingcrab.com', url: 'https://frylight.jumpingcrab.com', source: '' }
+          ];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
+          return initial;
+        }
+        return JSON.parse(raw);
+      } catch (e) {
+        console.error('Failed to load proxies', e);
+        return [];
       }
     }
+
+    function saveProxies(arr){
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      } catch (e) {
+        console.error('Failed to save proxies', e);
+        showToast('Save failed (storage)');
+      }
+    }
+
+    function addProxy(obj){
+      const arr = loadProxies();
+      arr.unshift(obj); // newest first
+      saveProxies(arr);
+      renderList(search.value);
+      showToast('Proxy saved');
+    }
+
+    function removeProxy(index){
+      const arr = loadProxies();
+      arr.splice(index, 1);
+      saveProxies(arr);
+      renderList(search.value);
+      showToast('Proxy removed');
+    }
+
+    function renderList(filter = ''){
+      const q = (filter || '').toLowerCase().trim();
+      const items = loadProxies();
+      list.innerHTML = '';
+      let visible = 0;
+      items.forEach((it, idx) => {
+        const title = it.title || it.url;
+        const url = it.url || '';
+        const urlDisplay = url.replace(/(^\w+:|^)\/\//, ''); // nicer display
+        const combined = (title + ' ' + url).toLowerCase();
+        const show = combined.includes(q);
+        if (!show) return;
+
+        visible++;
+
+        // build item element
+        const article = document.createElement('article');
+        article.className = 'link-item';
+
+        const left = document.createElement('div');
+        left.className = 'link-left';
+
+        const favicon = document.createElement('div');
+        favicon.className = 'favicon';
+        // Show first letter(s) as favicon content
+        favicon.textContent = (title || '').split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase() || 'P';
+
+        const meta = document.createElement('div');
+        meta.className = 'link-meta';
+
+        const t = document.createElement('div');
+        t.className = 'link-title';
+        t.textContent = title;
+
+        const u = document.createElement('div');
+        u.className = 'link-url';
+        u.textContent = urlDisplay;
+
+        meta.appendChild(t);
+        meta.appendChild(u);
+        left.appendChild(favicon);
+        left.appendChild(meta);
+
+        const actions = document.createElement('div');
+        actions.className = 'link-actions';
+
+        const openA = document.createElement('a');
+        openA.className = 'btn';
+        openA.href = url;
+        openA.target = '_blank';
+        openA.rel = 'noopener noreferrer';
+        openA.textContent = 'Open';
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'btn primary';
+        copyBtn.textContent = 'Copy';
+        copyBtn.addEventListener('click', () => copyUrl(url));
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn';
+        delBtn.textContent = 'Delete';
+        delBtn.title = 'Remove this proxy';
+        delBtn.addEventListener('click', () => {
+          if (confirm('Remove this proxy?')) removeProxy(idx);
+        });
+
+        actions.appendChild(openA);
+        actions.appendChild(copyBtn);
+        actions.appendChild(delBtn);
+
+        article.appendChild(left);
+        article.appendChild(actions);
+
+        list.appendChild(article);
+      });
+
+      tag.textContent = visible + (visible === 1 ? ' result' : ' results');
+      // If no matches, optionally show a friendly empty state
+      if (visible === 0){
+        const empty = document.createElement('div');
+        empty.className = 'small-muted';
+        empty.style.padding = '12px';
+        empty.textContent = 'No proxies found. Add one with "Add Proxy".';
+        list.appendChild(empty);
+      }
+    }
+
+    // Wire up search
+    search.addEventListener('input', (e) => {
+      renderList(e.target.value);
+    });
+
+    // Save from modal
+    saveAdd.addEventListener('click', () => {
+      const title = proxyTitle.value.trim();
+      const url = proxyUrl.value.trim();
+      const source = proxySource.value.trim();
+      if (!url) {
+        showToast('Please enter a URL');
+        proxyUrl.focus();
+        return;
+      }
+      // Basic URL normalization: ensure protocol
+      let normalized = url;
+      if (!/^[a-zA-Z]+:\/\//.test(normalized)){
+        normalized = 'https://' + normalized;
+      }
+      const item = {
+        title: title || normalized,
+        url: normalized,
+        source: source
+      };
+      addProxy(item);
+      closeModal();
+    });
+
+    // Initialize and render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderList('');
+    });
+
+    // keyboard: close modal on Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (modal.classList.contains('open')) closeModal();
+      }
+    });
   </script>
 </body>
 </html>
