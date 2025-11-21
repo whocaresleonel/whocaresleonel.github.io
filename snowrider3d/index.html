@@ -3,16 +3,17 @@
 
 <head>
     <script>
-  const correctPassword = "46b";
+  const correctPasswords = ["46b", "32a", "92c", "84d", "67e"]; // add more if needed
   let pass = "";
 
-  while (pass !== correctPassword) {
+  while (!correctPasswords.includes(pass)) {
     pass = prompt("Password:");
     if (pass === null) {
       document.body.innerHTML = "<h2>Access denied</h2>";
       throw new Error("User cancelled");
     }
   }
+  alert("Access granted!");
 </script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
