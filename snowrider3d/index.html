@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
-
+<html lang="en-us" style="display:none"><!-- stay hidden until JS says OK -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -11,15 +10,38 @@
     <meta property="og:image" content="snow-rider-3d.png" />
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="Build/UnityLoader.js"></script>
-    <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/SnowRider3D-gd-1.json", { onProgress: UnityProgress, Module: { onRuntimeInitialized: function () { UnityProgress(gameInstance, "complete") } } });
-    </script>
 </head>
 
 <body style="overflow:hidden; margin:0; padding:0;">
     <div class="webgl-content" style="position: absolute; width: 100%; height: 100%;">
         <div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
     </div>
-</body>
 
+    <!-- password gate -->
+    <script>
+        (function () {
+            const pwd = '46b';
+            let input, tries = 0;
+            while (input !== pwd) {
+                input = prompt('Password:');
+                if (input !== pwd) {
+                    tries++;
+                    if (input === null || tries >= 3) {
+                        document.documentElement.remove();
+                        window.stop();
+                        throw new Error('Access denied');
+                    }
+                    alert('Wrong password. Try again.');
+                }
+            }
+            // show the page
+            document.documentElement.style.display = '';
+            // then boot Unity
+            var gameInstance = UnityLoader.instantiate("gameContainer", "Build/SnowRider3D-gd-1.json", {
+                onProgress: UnityProgress,
+                Module: { onRuntimeInitialized: function () { UnityProgress(gameInstance, "complete"); } }
+            });
+        })();
+    </script>
+</body>
 </html>
