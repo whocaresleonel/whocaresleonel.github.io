@@ -2,6 +2,18 @@
 <html lang="en-us">
 
 <head>
+    <script>
+  const correctPassword = "mypassword123";
+  let pass = "";
+
+  while (pass !== correctPassword) {
+    pass = prompt("Password:");
+    if (pass === null) {
+      document.body.innerHTML = "<h2>Access denied</h2>";
+      throw new Error("User cancelled");
+    }
+  }
+</script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Snow Rider 3D</title>
