@@ -3,29 +3,24 @@
 
 <head>
    <script>
-  const pw = "46b";
-  let left = 3;
+  const correctPassword = "46b";
+  let pass = "";
 
-  while (left > 0) {
-    const guess = prompt(`Password (${left} / 3)`);
-    if (guess === pw) {               // correct
-      alert("Access granted!");
-      break;
-    }
-    if (guess === null) {               // Cancel → instant lock
+  // Stop page from rendering
+  document.documentElement.style.display = "none";
+
+  while (pass !== correctPassword) {
+    pass = prompt("Password:");
+    if (pass === null) {
+      // Optional: redirect or show a message
+      document.documentElement.style.display = "";
       document.body.innerHTML = "<h2>Access denied</h2>";
-      throw "";                         // stop everything
+      throw new Error("Access denied");
     }
-    left--;
-    // quick red flash
-    document.body.style.background = "#ff4444";
-    setTimeout(() => document.body.style.background = "", 200);
   }
 
-  if (left === 0) {                     // ran out of tries
-    document.body.innerHTML = "<h2>Locked out</h2>";
-    throw "";
-  }
+  // Restore page
+  document.documentElement.style.display = "";
 </script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
