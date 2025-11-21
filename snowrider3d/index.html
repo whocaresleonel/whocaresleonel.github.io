@@ -2,18 +2,36 @@
 <html lang="en-us">
 
 <head>
-    <script>
-  const correctPasswords = ["46b", "32a", "92c", "84d", "67e"]; // add more if needed
-  let pass = "";
+    <style>
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-6px);}
+    75%{transform:translateX(6px);}
+  }
+  .shake{animation:shake .3s;background:#ff4444;color:#fff;}
+</style>
 
-  while (!correctPasswords.includes(pass)) {
-    pass = prompt("Password:");
-    if (pass === null) {
+<script>
+  const correctPassword = "46b";          // single password
+  for (let tries = 3; tries > 0; tries--) {
+    let pass = prompt(`Password (${tries} tries left):`);
+    if (pass === null) {                  // user pressed Cancel
       document.body.innerHTML = "<h2>Access denied</h2>";
       throw new Error("User cancelled");
     }
+    if (pass === correctPassword) {         // success
+      alert("Access granted!");
+      break;
+    }
+    // wrong → flash & shake
+    document.body.classList.add("shake");
+    setTimeout(() => document.body.classList.remove("shake"), 300);
+
+    if (tries === 1) {                    // last try failed
+      document.body.innerHTML = "<h2>Locked out</h2>";
+      throw new Error("No tries left");
+    }
   }
-  alert("Access granted!");
 </script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
