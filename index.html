@@ -4,70 +4,22 @@
     <meta charset="UTF-8">
     <meta name="description" content="The Best website for unblocked games!">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inbox (3) - Gmail</title>
+    <title>Nebula</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/samw53/nebula/main/Gmail-logo.png">
     <style>
-        /* ---- 0. Smooth scrolling ---- */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* ---- 1. Page fade-in ---- */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
         body {
             margin: auto;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             overflow: auto;
             background: #000;
             background-attachment: fixed;
-            filter: hue-rotate(260deg) saturate(1.15) brightness(.88);
-            animation: fadeIn .8s ease-out forwards;
+            transition: background-color 0.3s; /* Smooth background transition */
         }
 
-        /* ---- 2. Wave backgrounds ---- */
-        .wave {
-            background: rgb(255 255 255 / 25%);
-            border-radius: 1000% 1000% 0 0;
-            position: fixed;
-            width: 200%;
-            height: 12em;
-            animation: wave 10s -3s linear infinite;
-            transform: translate3d(0, 0, 0);
-            opacity: 0.8;
-            bottom: 0;
-            left: 0;
-            z-index: -1;
-        }
-        .wave:nth-of-type(2) {
-            bottom: -1.25em;
-            animation: wave 18s linear reverse infinite;
-            opacity: 0.8;
-        }
-        .wave:nth-of-type(3) {
-            bottom: -2.5em;
-            animation: wave 20s -1s reverse infinite;
-            opacity: 0.9;
-        }
-        @keyframes wave {
-            0% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(-50%);
-            }
-            100% {
-                transform: translateX(0);
-            }
+        .wave { /* Wave backgrounds removed for simplicity */
+            display: none;
         }
 
-        /* ---- 3. Header bar ---- */
         .header-bar {
             position: fixed;
             top: 0;
@@ -76,55 +28,83 @@
             background: rgba(0, 0, 0, 0.85);
             color: white;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between; /* Added space-between */
             align-items: center;
             z-index: 1001;
             user-select: none;
             padding: 0.5rem 2rem;
         }
+
         .header-bar .site-title {
             font-size: 2rem;
             font-weight: bold;
             letter-spacing: 1px;
-            margin-right: 2rem;
-            /* ---- pulse for logo/text ---- */
-            animation: pulse 3s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.03);
-                opacity: 0.85;
-            }
-        }
-        .header-bar nav {
-            display: flex;
-            gap: 1.5rem;
-        }
-        .header-bar a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 0.3rem 0.6rem;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .header-bar a:hover {
-            background: rgba(255, 255, 255, 0.1);
         }
 
-        /* ---- 4. Game grid ---- */
+        .header-bar .search-bar {
+            display: flex;
+        }
+
+        .header-bar input[type="text"] {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .header-bar button {
+            padding: 0.5rem 1rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header-bar .settings-button {
+            background: #3498db;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .settings-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            z-index: 1002;
+            display: none; /* Hidden by default */
+        }
+
+        .settings-panel label {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .settings-panel input[type="color"],
+        .settings-panel select {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
         .game-grid {
-            margin-top: 5rem;
+            margin-top: 5rem; /* Adjusted for header height */
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.2rem;
             padding: 1rem 2rem;
         }
+
         .game-grid a {
             display: block;
             background: rgba(255, 255, 255, 0.15);
@@ -136,35 +116,12 @@
             font-weight: 700;
             font-size: 1.1rem;
             box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
-            /* ---- card animations ---- */
-            transform: translateY(30px);
-            opacity: 0;
-            animation: slideUp 0.6s ease forwards;
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-        }
-        /* stagger the cards */
-        .game-grid a:nth-child(1) { animation-delay: 0.05s; }
-        .game-grid a:nth-child(2) { animation-delay: 0.1s; }
-        .game-grid a:nth-child(3) { animation-delay: 0.15s; }
-        .game-grid a:nth-child(4) { animation-delay: 0.2s; }
-        .game-grid a:nth-child(5) { animation-delay: 0.25s; }
-        .game-grid a:nth-child(6) { animation-delay: 0.3s; }
-        .game-grid a:nth-child(7) { animation-delay: 0.35s; }
-        .game-grid a:nth-child(8) { animation-delay: 0.4s; }
-        /* continue pattern if needed */
-
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            transition: background-color 0.3s, transform 0.2s;
         }
 
-        /* ---- 5. card hover ---- */
         .game-grid a:hover {
             background-color: rgba(255, 255, 255, 0.35);
             transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
         footer {
@@ -175,19 +132,32 @@
     </style>
 </head>
 <body>
+
   <div class="header-bar">
     <span class="site-title">Nebula</span>
-    <nav>
-      <a href="proxies.html">Proxies</a>
-    </nav>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search games...">
+      <button onclick="searchGames()">Search</button>
+    </div>
+    <button class="settings-button" onclick="toggleSettings()">Settings</button>
   </div>
 
-  <!-- waves -->
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
+  <div class="settings-panel" id="settingsPanel">
+    <h2>Settings</h2>
+    <label for="backgroundColor">Background Color:</label>
+    <input type="color" id="backgroundColor" value="#000">
 
-  <div class="game-grid">
+    <label for="styleSelector">Style:</label>
+    <select id="styleSelector">
+      <option value="default">Default</option>
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+    </select>
+    <button onclick="saveSettings()">Save</button>
+    <button onclick="toggleSettings()">Close</button>
+  </div>
+
+  <div class="game-grid" id="gameGrid">
     <a href="1">1</a>
     <a href="1v1.lol">1v1.lol</a>
     <a href="10minutestilldawn">10 Minutes Till Dawn</a>
@@ -285,58 +255,59 @@
     <div class="footer"></div>
   </footer>
 
-  <script type="text/javascript">
-    var infolinks_pid = 3436703;
-    var infolinks_wsid = 0;
-  </script>
-  <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
-
   <script>
-    let lastScrollTop = 0;
-    const headerBar = document.querySelector('.header-bar');
-    window.addEventListener('scroll', () => {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      headerBar.style.top = (scrollTop > lastScrollTop) ? '-70px' : '0';
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    });
-  </script>
+    // Search Functionality
+    function searchGames() {
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+      const gameLinks = document.querySelectorAll(".game-grid a");
 
-  <!-- Inserted ad script below -->
-  <script type="text/javascript">
-    atOptions = {
-      'key' : 'eafe10d82875d0d798d1f54516d1ca05',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
-    };
-  </script>
-  <script type="text/javascript" src="//www.highperformanceformat.com/eafe10d82875d0d798d1f54516d1ca05/invoke.js"></script>
-
-  <script>
-    (function () {
-        const pwd = '46b';
-        let input, tries = 0;
-        while (input !== pwd) {
-            input = prompt('Password:(check waypoint)');
-            if (input !== pwd) {
-                tries++;
-                if (input === null || tries >= 3) {
-                    document.documentElement.remove();
-                    window.stop();
-                    throw new Error('Access denied');
-                }
-                alert('Wrong password. Try again.');
-            }
+      gameLinks.forEach(link => {
+        const linkText = link.textContent.toLowerCase();
+        if (linkText.includes(searchTerm)) {
+          link.style.display = "block";
+        } else {
+          link.style.display = "none";
         }
-        // show the page
-        document.documentElement.style.display = '';
-        // then boot Unity
-        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/SnowRider3D-gd-1.json", {
-            onProgress: UnityProgress,
-            Module: { onRuntimeInitialized: function () { UnityProgress(gameInstance, "complete"); } }
-        });
-    })();
+      });
+    }
+
+    // Settings Functionality
+    function toggleSettings() {
+      const settingsPanel = document.getElementById("settingsPanel");
+      settingsPanel.style.display = (settingsPanel.style.display === "block") ? "none" : "block";
+    }
+
+    function saveSettings() {
+      const backgroundColor = document.getElementById("backgroundColor").value;
+      const style = document.getElementById("styleSelector").value;
+
+      localStorage.setItem("backgroundColor", backgroundColor);
+      localStorage.setItem("style", style);
+
+      applySettings();
+      toggleSettings();
+    }
+
+    function applySettings() {
+      const backgroundColor = localStorage.getItem("backgroundColor") || "#000";
+      const style = localStorage.getItem("style") || "default";
+
+      document.body.style.backgroundColor = backgroundColor;
+
+      if (style === "light") {
+        // Apply light theme styles (example)
+        document.body.style.color = "#000";
+        // Add more light theme styles here
+      } else {
+        // Apply default/dark theme styles
+        document.body.style.color = "#fff";
+        // Add more dark theme styles here
+      }
+    }
+
+    // Load settings on page load
+    applySettings();
   </script>
+
 </body>
 </html>
