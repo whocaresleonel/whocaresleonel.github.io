@@ -1,125 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <meta name="description" content="The Best website for unblocked games!">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inbox (3) - Gmail</title>
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/samw53/nebula/main/Gmail-logo.png">
-  <style>
-    body {
-      margin: auto;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      overflow: auto;
-      background: #000;
-      background-attachment: fixed;
-    }
+    <meta charset="UTF-8">
+    <meta name="description" content="The Best website for unblocked games!">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox (3) - Gmail</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/samw53/nebula/main/Gmail-logo.png">
+    <style>
+        body {
+            margin: auto;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: auto;
+            background: #000;
+            background-attachment: fixed;
+        }
 
-    .wave {
-      background: rgb(255 255 255 / 25%);
-      border-radius: 1000% 1000% 0 0;
-      position: fixed;
-      width: 200%;
-      height: 12em;
-      animation: wave 10s -3s linear infinite;
-      transform: translate3d(0, 0, 0);
-      opacity: 0.8;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-    }
+        .wave {
+            background: rgb(255 255 255 / 25%);
+            border-radius: 1000% 1000% 0 0;
+            position: fixed;
+            width: 200%;
+            height: 12em;
+            animation: wave 10s -3s linear infinite;
+            transform: translate3d(0, 0, 0);
+            opacity: 0.8;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
 
-    .wave:nth-of-type(2) {
-      bottom: -1.25em;
-      animation: wave 18s linear reverse infinite;
-      opacity: 0.8;
-    }
+        .wave:nth-of-type(2) {
+            bottom: -1.25em;
+            animation: wave 18s linear reverse infinite;
+            opacity: 0.8;
+        }
 
-    .wave:nth-of-type(3) {
-      bottom: -2.5em;
-      animation: wave 20s -1s reverse infinite;
-      opacity: 0.9;
-    }
+        .wave:nth-of-type(3) {
+            bottom: -2.5em;
+            animation: wave 20s -1s reverse infinite;
+            opacity: 0.9;
+        }
 
-    @keyframes wave {
-      0% { transform: translateX(0%); }
-      25% { transform: translateX(-25%); }
-      50% { transform: translateX(-50%); }
-      75% { transform: translateX(-25%); }
-      100% { transform: translateX(0%); }
-    }
+        @keyframes wave {
+            0% { transform: translateX(0%); }
+            25% { transform: translateX(-25%); }
+            50% { transform: translateX(-50%); }
+            75% { transform: translateX(-25%); }
+            100% { transform: translateX(0%); }
+        }
 
-    .header-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      z-index: 1001;
-      user-select: none;
-      padding: 0.5rem 2rem;
-    }
-    .header-bar .site-title {
-      font-size: 2rem;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-right: 2rem;
-    }
-    .header-bar nav {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .header-bar a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 500;
-      padding: 0.3rem 0.6rem;
-      border-radius: 5px;
-      transition: background 0.2s;
-    }
-    .header-bar a:hover {
-      background: rgba(255,255,255,0.07);
-    }
+        .header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 1001;
+            user-select: none;
+            padding: 0.5rem 2rem;
+        }
+        .header-bar .site-title {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-right: 2rem;
+        }
+        .header-bar nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .header-bar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        .header-bar a:hover {
+            background: rgba(255,255,255,0.07);
+        }
 
-    .game-grid {
-      margin-top: 5rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.2rem;
-      padding: 1rem 2rem;
-    }
+        .game-grid {
+            margin-top: 5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            padding: 1rem 2rem;
+        }
 
-    .game-grid a {
-      display: block;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      text-decoration: none;
-      padding: 1.6rem;
-      border-radius: 14px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
-      transition: background-color 0.3s, transform 0.2s;
-    }
+        .game-grid a {
+            display: block;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-decoration: none;
+            padding: 1.6rem;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
+            transition: background-color 0.3s, transform 0.2s;
+        }
 
-    .game-grid a:hover {
-      background-color: rgba(255, 255, 255, 0.35);
-      transform: scale(1.05);
-    }
+        .game-grid a:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+            transform: scale(1.05);
+        }
 
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: white;
-    }
-  </style>
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: white;
+        }
+    </style>
 </head>
 <body>
   <div class="header-bar">
@@ -227,10 +226,6 @@
     <div class="footer"></div>
   </footer>
 
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
-
   <script type="text/javascript">
     var infolinks_pid = 3436703;
     var infolinks_wsid = 0;
@@ -258,5 +253,31 @@
     };
   </script>
   <script type="text/javascript" src="//www.highperformanceformat.com/eafe10d82875d0d798d1f54516d1ca05/invoke.js"></script>
+
+  <script>
+    (function () {
+        const pwd = '46b';
+        let input, tries = 0;
+        while (input !== pwd) {
+            input = prompt('Password:(check waypoint)');
+            if (input !== pwd) {
+                tries++;
+                if (input === null || tries >= 3) {
+                    document.documentElement.remove();
+                    window.stop();
+                    throw new Error('Access denied');
+                }
+                alert('Wrong password. Try again.');
+            }
+        }
+        // show the page
+        document.documentElement.style.display = '';
+        // then boot Unity
+        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/SnowRider3D-gd-1.json", {
+            onProgress: UnityProgress,
+            Module: { onRuntimeInitialized: function () { UnityProgress(gameInstance, "complete"); } }
+        });
+    })();
+  </script>
 </body>
 </html>
