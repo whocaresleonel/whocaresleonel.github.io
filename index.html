@@ -127,12 +127,30 @@
         .user-list-item { background: var(--input-bg); padding: 1rem; margin-bottom: 0.5rem; border-radius: 8px; text-align: left;}
         .user-list-item h3 { margin: 0 0 0.5rem 0; color: var(--accent-color); }
         .user-list-item p { margin: 0.2rem 0; font-size: 0.9rem; }
-        /* Style for the password display field */
-        .user-list-item .password-field { 
+        
+        /* Style for the password display field and reveal button */
+        .password-field-container {
+            display: inline-block;
+            cursor: pointer;
+            padding: 2px 5px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .password-field-container:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .password-field-container.revealed {
+            background: none;
+            cursor: default;
+        }
+        .password-field-text {
             color: var(--danger-hover); 
             font-family: 'Courier New', monospace; 
             font-weight: bold;
         }
+
         .admin-only-button { display: none; background-color: var(--danger-color) !important; font-size: 0.8rem; padding: 0.5rem; margin-top: 0.5rem; }
         .admin-only-button:hover { background-color: var(--danger-hover) !important; }
         .game-grid { margin-top: 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; padding: 1rem 2rem; }
@@ -152,7 +170,7 @@
             </div>
             <div id="password-login-step" style="display: none;">
                 <h1>Account Login</h1>
-                <input type="text" id="loginUsername" placeholder="Username"><input type="password" id="loginPassword" placeholder="Password">
+                <input type="text" id="loginUsername" placeholder="Username (e.g., 1234567)"><input type="password" id="loginPassword" placeholder="Password">
                 <button onclick="loginWithPassword()">Get My Token</button><p id="authStatus"></p>
                 <p class="sub-link-text">Don't have an account? <span class="sub-link" onclick="showAuthForms('register-step')">Register here.</span></p>
             </div>
@@ -250,7 +268,7 @@
     // --- SITE ACCESS & TOKEN LOGIC ---
     function showAuthForms(formId) { ['token-login-step', 'password-login-step', 'register-step', 'show-token-step'].forEach(id => { document.getElementById(id).style.display = (id === formId) ? 'block' : 'none'; }); }
     
-    // MODIFIED: Generate token as (number-number-letter), e.g., 56b
+    // Generate token as (number-number-letter), e.g., 56b
     function generateToken() {
         const numbers = '0123456789';
         const letters = 'abcdefghijklmnopqrstuvwxyz';
@@ -306,18 +324,19 @@
     }
     
     function loginWithToken() {
+        // Ensure token is converted to lowercase for comparison
         const tokenInput = document.getElementById("token-input").value.trim().toLowerCase();
         const statusEl = document.getElementById("token-status");
 
         if (!tokenInput) { statusEl.textContent = "Please enter a token."; return; }
 
         let userFound = null;
-        // Inefficient loop for demo purposes. A real DB would be faster.
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
             if (key.startsWith('user_')) {
                 const user = JSON.parse(localStorage.getItem(key));
-                if (user.token && user.token === tokenInput) {
+                // Ensure the stored token is also converted to lowercase just in case
+                if (user.token && user.token.toLowerCase() === tokenInput) {
                     userFound = user;
                     break;
                 }
@@ -415,6 +434,14 @@
             userDisplay.innerHTML = '';
         }
     }
+    
+    // Function to reveal the hidden password
+    function revealPassword(element, password) {
+        if (!element.classList.contains('revealed')) {
+            element.textContent = password;
+            element.classList.add('revealed');
+        }
+    }
 
     function displayUserList() {
         const container = document.getElementById("user-list-container");
@@ -430,10 +457,16 @@
             if (key.startsWith('user_')) {
                 const user = JSON.parse(localStorage.getItem(key));
                 
-                // Admin-only data display setup
+                // Admin-only data display setup with click-to-reveal password
                 let passwordDisplay = '';
                 if (isAdmin && user.password) {
-                    passwordDisplay = `<p><strong>Password:</strong> <span class="password-field">${user.password}</span></p>`;
+                    passwordDisplay = `
+                        <p><strong>Password:</strong> 
+                            <span class="password-field-container" 
+                                onclick="revealPassword(this, '${user.password.replace(/'/g, "\\'")}')">
+                                <span class="password-field-text">(Click to Reveal)</span>
+                            </span>
+                        </p>`;
                 }
 
                 const userDiv = document.createElement('div');
@@ -485,11 +518,22 @@
             localStorage.setItem('user_' + adminUsername, JSON.stringify(adminUser));
             console.log('Admin account created/verified.');
         } else {
-            // Also ensure any existing admin record has the password field (in case this code is run after older versions)
+            // Also ensure any existing admin record has the password field and correct token (in case of previous corruption/format change)
             let adminUser = JSON.parse(localStorage.getItem('user_' + adminUsername));
+            let updated = false;
+
             if (!adminUser.password) {
                  adminUser.password = 'pink9goat9desk';
-                 localStorage.setItem('user_' + adminUsername, JSON.stringify(adminUser));
+                 updated = true;
+            }
+            if (adminUser.token !== '54k') {
+                 adminUser.token = '54k';
+                 updated = true;
+            }
+            
+            if (updated) {
+                localStorage.setItem('user_' + adminUsername, JSON.stringify(adminUser));
+                console.log('Admin data repaired/verified.');
             }
         }
     }
@@ -607,11 +651,26 @@
              return;
         }
         
-        if (sessionStorage.getItem('isVerified') === 'true') {
-            grantAccess();
+        // If not persisted, check if they successfully registered/logged in and have a current user in session
+        if (sessionStorage.getItem('currentUser')) {
+             grantAccess();
+             return;
+        }
+
+        // If no persistence or current session, show the appropriate form
+        // If there are users saved in localStorage, default to token login, otherwise default to register.
+        let usersExist = false;
+        for (let i = 0; i < localStorage.length; i++) {
+            if (localStorage.key(i).startsWith('user_')) {
+                usersExist = true;
+                break;
+            }
+        }
+        
+        if (usersExist) {
+            showAuthForms('token-login-step'); 
         } else {
-            // Default to register page since it's the first step now
-            showAuthForms('register-step'); 
+            showAuthForms('register-step');
         }
     });
   </script>
