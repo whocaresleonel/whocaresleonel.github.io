@@ -146,7 +146,7 @@
         <div class="verification-box">
             <div id="token-login-step" style="display: none;">
                 <h1>Welcome Back</h1><p>Enter your unique access token to continue.</p>
-                <input type="text" id="token-input" placeholder="e.g., a1b" autocomplete="off">
+                <input type="text" id="token-input" placeholder="e.g., 56b" autocomplete="off">
                 <button onclick="loginWithToken()">Enter Nebula</button><p id="token-status"></p>
                 <p class="sub-link-text"><span class="sub-link" onclick="showAuthForms('password-login-step')">Forgot Token? Login with password.</span></p>
             </div>
@@ -249,7 +249,23 @@
 
     // --- SITE ACCESS & TOKEN LOGIC ---
     function showAuthForms(formId) { ['token-login-step', 'password-login-step', 'register-step', 'show-token-step'].forEach(id => { document.getElementById(id).style.display = (id === formId) ? 'block' : 'none'; }); }
-    function generateToken() { const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'; let token = ''; for (let i = 0; i < 3; i++) { token += chars.charAt(Math.floor(Math.random() * chars.length)); } return token; }
+    
+    // MODIFIED: Generate token as (number-number-letter), e.g., 56b
+    function generateToken() {
+        const numbers = '0123456789';
+        const letters = 'abcdefghijklmnopqrstuvwxyz';
+        
+        let token = '';
+        
+        // Character 1: Number
+        token += numbers.charAt(Math.floor(Math.random() * numbers.length));
+        // Character 2: Number
+        token += numbers.charAt(Math.floor(Math.random() * numbers.length));
+        // Character 3: Letter
+        token += letters.charAt(Math.floor(Math.random() * letters.length));
+        
+        return token;
+    }
 
     function register() {
         const realName = document.getElementById("registerRealName").value.trim();
@@ -464,7 +480,7 @@
                 realName: 'Sam Wouters',
                 studentEmail: ADMIN_EMAIL,
                 password: 'pink9goat9desk', // Included password
-                token: 'kgg'
+                token: '54k' // Updated token to new format
             };
             localStorage.setItem('user_' + adminUsername, JSON.stringify(adminUser));
             console.log('Admin account created/verified.');
