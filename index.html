@@ -5,101 +5,175 @@
     <meta name="description" content="The Best website for unblocked games!">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nebula</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/samw53/nebula/main/Gmail-logo.png">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/samw53/nebula/main/Nebula.png">
     <style>
-        <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6924fbb1cd70fb195fa06d95/1jas7ebl7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
         body {
             margin: auto;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             overflow: auto;
-            background: #000;
+            background: #0c001a;
+            background-image: 
+                radial-gradient(circle at 20% 50%, #1a0033 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, #2d1b69 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, #4a148c 0%, transparent 50%);
             background-attachment: fixed;
-            transition: background-color 0.3s; /* Smooth background transition */
+            transition: background-color 0.3s;
+            animation: backgroundShift 20s ease infinite;
         }
 
-        .wave { /* Wave backgrounds removed for simplicity */
-            display: none;
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .header-bar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            color: white;
+            right: 0;
+            height: 64px;
+            padding: 0 2rem;
             display: flex;
-            justify-content: space-between; /* Added space-between */
             align-items: center;
+            gap: 1rem;
+            background: rgba(10, 0, 20, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
             z-index: 1001;
             user-select: none;
-            padding: 0.5rem 2rem;
+            animation: headerGlow 3s ease-in-out infinite alternate;
         }
 
-        .header-bar .site-title {
-            font-size: 2rem;
-            font-weight: bold;
-            letter-spacing: 1px;
+        @keyframes headerGlow {
+            from { box-shadow: 0 0 20px rgba(138, 43, 226, 0.3); }
+            to { box-shadow: 0 0 30px rgba(138, 43, 226, 0.5); }
         }
 
-        .header-bar .search-bar {
-            display: flex;
+        .logo {
+            width: 120px;
+            height: auto;
+            vertical-align: middle;
         }
 
-        .header-bar input[type="text"] {
-            padding: 0.5rem;
+        .search-box {
+            position: relative;
+            flex: 0 1 50px;
+            max-width: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-box:hover {
+            flex: 1 1 420px;
+            max-width: 420px;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 40px;
+            padding: 0 40px 0 14px;
             border: none;
-            border-radius: 5px;
-            margin-right: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scaleX(0);
+            transform-origin: right;
         }
 
-        .header-bar button {
-            padding: 0.5rem 1rem;
-            background: #4CAF50;
-            color: white;
+        .search-box:hover input {
+            transform: scaleX(1);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .search-box input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke-width: 2;
+            color: rgba(255, 255, 255, 0.85);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:hover .search-icon {
+            color: #8a2be2;
+            filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.8));
+        }
+
+        .settings-button {
+            margin-left: auto;
+            padding: 8px 16px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            background: rgba(138, 43, 226, 0.2);
+            color: #fff;
+            font-size: 14px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .header-bar .settings-button {
-            background: #3498db;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
+        .settings-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .settings-button:hover:before {
+            left: 100%;
+        }
+
+        .settings-button:hover {
+            background: rgba(138, 43, 226, 0.4);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            transform: translateY(-2px);
         }
 
         .settings-panel {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(10, 0, 20, 0.95);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             z-index: 1002;
-            display: none; /* Hidden by default */
+            display: none;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 0 0 40px rgba(138, 43, 226, 0.4);
+            animation: panelFadeIn 0.3s ease forwards;
+        }
+
+        @keyframes panelFadeIn {
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
         }
 
         .settings-panel label {
             color: white;
             margin-bottom: 0.5rem;
+            display: block;
         }
 
         .settings-panel input[type="color"],
@@ -108,10 +182,12 @@ s0.parentNode.insertBefore(s1,s0);
             border: none;
             border-radius: 5px;
             margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
         }
 
         .game-grid {
-            margin-top: 5rem; /* Adjusted for header height */
+            margin-top: 5rem;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.2rem;
@@ -120,7 +196,7 @@ s0.parentNode.insertBefore(s1,s0);
 
         .game-grid a {
             display: block;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(138, 43, 226, 0.1);
             color: white;
             text-decoration: none;
             padding: 1.6rem;
@@ -128,29 +204,56 @@ s0.parentNode.insertBefore(s1,s0);
             text-align: center;
             font-weight: 700;
             font-size: 1.1rem;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
-            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-grid a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .game-grid a:hover:before {
+            left: 100%;
         }
 
         .game-grid a:hover {
-            background-color: rgba(255, 255, 255, 0.35);
-            transform: scale(1.05);
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
         }
 
         footer {
             margin-top: 3rem;
             text-align: center;
             color: white;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
 
   <div class="header-bar">
-    <span class="site-title">Nebula</span>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search games...">
-      <button onclick="searchGames()">Search</button>
+    <img src="https://samw53.github.io/nebula/blob/main/Nebula.png?raw=true" alt="Nebula Logo" class="logo">
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24" stroke="currentColor">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+      </svg>
+      <input id="searchInput" type="text" placeholder="Search games…" onkeyup="searchGames()">
     </div>
     <button class="settings-button" onclick="toggleSettings()">Settings</button>
   </div>
@@ -158,7 +261,7 @@ s0.parentNode.insertBefore(s1,s0);
   <div class="settings-panel" id="settingsPanel">
     <h2>Settings</h2>
     <label for="backgroundColor">Background Color:</label>
-    <input type="color" id="backgroundColor" value="#000">
+    <input type="color" id="backgroundColor" value="#0c001a">
 
     <label for="styleSelector">Style:</label>
     <select id="styleSelector">
@@ -278,6 +381,7 @@ s0.parentNode.insertBefore(s1,s0);
         const linkText = link.textContent.toLowerCase();
         if (linkText.includes(searchTerm)) {
           link.style.display = "block";
+          link.style.animation = "fadeIn 0.5s ease";
         } else {
           link.style.display = "none";
         }
@@ -302,21 +406,27 @@ s0.parentNode.insertBefore(s1,s0);
     }
 
     function applySettings() {
-      const backgroundColor = localStorage.getItem("backgroundColor") || "#000";
+      const backgroundColor = localStorage.getItem("backgroundColor") || "#0c001a";
       const style = localStorage.getItem("style") || "default";
 
       document.body.style.backgroundColor = backgroundColor;
 
       if (style === "light") {
-        // Apply light theme styles (example)
         document.body.style.color = "#000";
-        // Add more light theme styles here
       } else {
-        // Apply default/dark theme styles
         document.body.style.color = "#fff";
-        // Add more dark theme styles here
       }
     }
+
+    // Add fade-in animation dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    `;
+    document.head.appendChild(style);
 
     // Load settings on page load
     applySettings();
