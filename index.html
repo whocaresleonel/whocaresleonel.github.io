@@ -1,287 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="The Best website for unblocked games!">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nebula</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/samw53/nebula/main/Nebula.png">
-    <style>
-        :root {
-            --bg-color: #0c001a; --text-color: #fff; --accent-color: #8a2be2;
-            --header-bg: rgba(10, 0, 20, 0.7); --panel-bg: rgba(10, 0, 20, 0.95);
-            --input-bg: rgba(255, 255, 255, 0.1); --glow-color: rgba(138, 43, 226, 0.4);
-            --danger-color: rgba(211, 47, 47, 0.5); --danger-hover: rgba(211, 47, 47, 0.8);
-            /* Theme variables for select options list */
-            --select-bg: #1e1e3f;
-            --select-text: #fff;
-        }
-        body.theme-light {
-            --bg-color: #f0f2f5; --text-color: #1c1e21; --accent-color: #4a148c;
-            --header-bg: rgba(255, 255, 255, 0.8); --panel-bg: rgba(255, 255, 255, 0.98);
-            --input-bg: rgba(0, 0, 0, 0.05); --glow-color: rgba(74, 20, 140, 0.3);
-            --danger-color: rgba(211, 47, 47, 0.8); --danger-hover: #d32f2f;
-            --select-bg: #fff;
-            --select-text: #1c1e21;
-        }
-        body.theme-purple {
-            --bg-color: #280d5f; --text-color: #fff; --accent-color: #d81b60;
-            --header-bg: rgba(40, 13, 95, 0.8);
-            --select-bg: #4f2e82;
-            --select-text: #fff;
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; overflow: auto; background: var(--bg-color); color: var(--text-color); transition: background-color 0.3s, color 0.3s; }
-
-        #verification-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
-        .verification-box { background: var(--panel-bg); padding: 2.5rem; border-radius: 15px; box-shadow: 0 0 50px var(--glow-color); text-align: center; width: 90%; max-width: 400px; }
-        .verification-box h1 { margin-top: 0; font-size: 1.8rem; }
-        .verification-box p { margin-bottom: 1.5rem; opacity: 0.8; }
-        .verification-box input, .verification-box button { width: 100%; padding: 0.8rem; box-sizing: border-box; border: none; border-radius: 8px; margin-bottom: 1rem; background: var(--input-bg); color: var(--text-color); font-family: 'Poppins', sans-serif; font-size: 1rem; }
-        .verification-box button { cursor: pointer; font-weight: bold; background-color: var(--accent-color); }
-        .verification-box .sub-link-text { font-size: 0.9rem; opacity: 0.8; margin-top: 1rem; }
-        .verification-box .sub-link { font-weight: bold; color: var(--accent-color); cursor: pointer; text-decoration: underline; }
-        #token-display { font-family: 'Courier New', Courier, monospace; font-size: 2.5rem; font-weight: bold; letter-spacing: 5px; padding: 1rem; background: var(--input-bg); border-radius: 8px; margin: 1rem 0; user-select: text; }
-        .disclaimer { font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; }
-
-        .header-bar { position: fixed; top: 0; left: 0; right: 0; height: 64px; padding: 0 2rem; display: flex; align-items: center; gap: 1rem; background: var(--header-bg); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(138, 43, 226, 0.2); z-index: 1000; user-select: none;}
-        .logo { width: 120px; height: auto; }
-        .search-box { position: relative; flex: 0 1 50px; max-width: 50px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .search-box:hover { flex: 1 1 420px; max-width: 420px; }
-        .search-box input { width: 100%; height: 40px; padding: 0 40px 0 14px; border: none; border-radius: 8px; background: var(--input-bg); color: var(--text-color); font-size: 14px; letter-spacing: 0.3px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: scaleX(0); transform-origin: right; font-family: 'Poppins', sans-serif; }
-        .search-box:hover input { transform: scaleX(1); }
-        .search-icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; fill: none; stroke-width: 2; color: rgba(255, 255, 255, 0.85); pointer-events: none; }
-        #userDisplay { margin-left: auto; display: flex; align-items: center; gap: 1rem; font-size: 14px; }
-        #logoutButton { padding: 8px 12px; border: none; border-radius: 8px; background: var(--danger-color); color: var(--text-color); cursor: pointer; transition: background 0.3s; }
-        #logoutButton:hover { background: var(--danger-hover); }
-        
-        /*--- SIDE TOOLBAR ---*/
-        .side-toolbar {
-            position: fixed; left: 15px; top: 50%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 10px;
-            padding: 10px; background: var(--header-bg);
-            backdrop-filter: blur(12px); border: 1px solid rgba(138, 43, 226, 0.2);
-            border-radius: 12px; z-index: 1001; cursor: grab;
-            transition: left 0.3s ease;
-        }
-        .side-toolbar button { background: transparent; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-color); transition: background-color 0.3s, transform 0.3s; }
-        .side-toolbar button:hover { background-color: var(--glow-color); transform: scale(1.1); }
-        .side-toolbar svg { width: 24px; height: 24px; stroke-width: 2; pointer-events: none; }
-        .admin-only-item { display: none; }
-        
-        /*--- Panel Styles & Animation ---*/
-        .panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); background: var(--panel-bg); padding: 2rem; border-radius: 15px; z-index: 1002; border: 1px solid rgba(138, 43, 226, 0.3); box-shadow: 0 0 40px var(--glow-color); width: 90%; max-width: 400px; max-height: 90vh; overflow-y: auto; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; }
-        .panel.visible { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
-        .panel h2 { margin-top: 0; }
-        .panel input, .panel button { width: 100%; padding: 0.75rem; box-sizing: border-box; border: none; border-radius: 5px; margin-bottom: 1rem; background: var(--input-bg); color: var(--text-color); font-family: 'Poppins', sans-serif; }
-        .panel button { cursor: pointer; font-weight: bold; background-color: var(--accent-color); }
-        .panel hr { border-color: rgba(255,255,255,0.2); margin: 1.5rem 0; }
-        .panel .close-btn { position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; width: auto; padding: 0; line-height: 1; margin: 0; }
-        
-        /* Improved Select/Theme Dropdown */
-        .panel label { display: block; margin-bottom: 0.5rem; font-weight: 500; opacity: 0.8; }
-        .panel select { 
-            width: 100%; 
-            padding: 0.75rem; 
-            box-sizing: border-box; 
-            border: none; 
-            border-radius: 8px; 
-            margin-bottom: 1rem; 
-            background: var(--input-bg); 
-            color: var(--text-color); 
-            font-family: 'Poppins', sans-serif; 
-            font-size: 1rem;
-            
-            /* Hide default browser arrow */
-            -webkit-appearance: none; 
-            -moz-appearance: none; 
-            appearance: none; 
-            
-            /* Custom CSS arrow (Down Chevron) - Fill color updated to match accent */
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="hsl(267, 100%, 72%)" d="M7.41 8.58L12 13.17L16.59 8.58L18 10L12 16L6 10z"/></svg>'); 
-            background-repeat: no-repeat; 
-            background-position: right 0.7em center; 
-            background-size: 1.2em;
-
-            border: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-        .panel select:focus {
-            border-color: var(--accent-color);
-            outline: none;
-        }
-        
-        .panel select option {
-            background: var(--select-bg);
-            color: var(--select-text);
-        }
-
-        #chatMessages { height: 200px; overflow-y: auto; border: 1px solid var(--input-bg); padding: 0.5rem; margin-bottom: 1rem; border-radius: 5px; word-wrap: break-word; }
-        #chatMessages p { margin: 0.5rem 0; }
-        #chatMessages b { color: var(--accent-color); }
-        .user-info-display p { margin: 0.5rem 0; background: var(--input-bg); padding: 0.5rem; border-radius: 5px;}
-        .user-info-display span { font-weight: bold; opacity: 0.7; }
-        #user-list-container { max-height: 400px; overflow-y: auto; }
-        .user-list-item { background: var(--input-bg); padding: 1rem; margin-bottom: 0.5rem; border-radius: 8px; text-align: left;}
-        .user-list-item h3 { margin: 0 0 0.5rem 0; color: var(--accent-color); }
-        .user-list-item p { margin: 0.2rem 0; font-size: 0.9rem; }
-        
-        /* Style for the password display field and reveal button */
-        .password-field-container {
-            display: inline-block;
-            cursor: pointer;
-            padding: 2px 5px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.05);
-            transition: background 0.2s;
-            user-select: none;
-        }
-        .password-field-container:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-        .password-field-container.revealed {
-            background: none;
-            cursor: default;
-        }
-        .password-field-text {
-            color: var(--danger-hover); 
-            font-family: 'Courier New', monospace; 
-            font-weight: bold;
-        }
-
-        .admin-only-button { display: none; background-color: var(--danger-color) !important; font-size: 0.8rem; padding: 0.5rem; margin-top: 0.5rem; }
-        .admin-only-button:hover { background-color: var(--danger-hover) !important; }
-        .game-grid { margin-top: 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; padding: 1rem 2rem; }
-        .game-grid a { display: block; background: rgba(138, 43, 226, 0.1); color: var(--text-color); text-decoration: none; padding: 1.6rem; border-radius: 14px; text-align: center; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .game-grid a:hover { background: rgba(138, 43, 226, 0.2); transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 30px var(--glow-color);}
-    </style>
-</head>
-<body>
-
-    <div id="verification-overlay">
-        <div class="verification-box">
-            <div id="token-login-step" style="display: none;">
-                <h1>Welcome Back</h1><p>Enter your unique access token to continue.</p>
-                <input type="text" id="token-input" placeholder="e.g., 56b" autocomplete="off">
-                <button onclick="loginWithToken()">Enter Nebula</button><p id="token-status"></p>
-                <p class="sub-link-text"><span class="sub-link" onclick="showAuthForms('password-login-step')">Forgot Token? Login with password.</span></p>
-            </div>
-            <div id="password-login-step" style="display: none;">
-                <h1>Account Login</h1>
-                <input type="text" id="loginUsername" placeholder="Username (e.g., 1234567)"><input type="password" id="loginPassword" placeholder="Password">
-                <button onclick="loginWithPassword()">Get My Token</button><p id="authStatus"></p>
-                <p class="sub-link-text">Don't have an account? <span class="sub-link" onclick="showAuthForms('register-step')">Register here.</span></p>
-            </div>
-            <div id="register-step">
-                <h1>Create Account</h1>
-                <input type="text" id="registerRealName" placeholder="Your Real Name"><input type="email" id="registerStudentEmail" placeholder="1234567@apps.nsd.org">
-                <input type="password" id="registerPassword" placeholder="Choose a Password">
-                <button onclick="register()">Register & Get Token</button><p id="registerStatus"></p>
-                <p class="disclaimer">Disclaimer: Data is stored locally in your browser and is not secure. Do not use real passwords. By registering, you consent to your info being visible to others on this site.</p>
-                <p class="sub-link-text">Already have an account? <span class="sub-link" onclick="showAuthForms('password-login-step')">Login here.</span></p>
-            </div>
-            <div id="show-token-step" style="display: none;">
-                <h1>Your Access Token</h1><p>This is your unique token. Save it! You will need it to log in next time.</p>
-                <div id="token-display"></div>
-                <button onclick="continueAndGrantAccess()">Continue to Site</button>
-            </div>
-        </div>
-    </div>
-
-    <main id="main-content" style="visibility: hidden; opacity: 0; transition: opacity 0.5s ease;">
-        <div class="header-bar">
-            <img src="https://samw53.github.io/nebula/Nebula.png" alt="Nebula Logo" class="logo">
-            <div class="search-box">
-              <svg class="search-icon" viewBox="0 0 24 24" stroke="currentColor"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
-              <input id="searchInput" type="text" placeholder="Search games…" onkeyup="searchGames()">
-            </div>
-            <div id="userDisplay"></div>
-        </div>
-        
-        <div class="side-toolbar">
-            <!-- New AI Button -->
-            <button onclick="openAIApp()" title="AI Assistant"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9c0-6-4-8-9-8s-9 2-9 8a9 9 0 0 0 9 9z"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
-            
-            <button id="users-toolbar-btn" class="admin-only-item" onclick="togglePanel('usersPanel')" title="Users"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></button>
-            <button onclick="togglePanel('settingsPanel')" title="Settings"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg></button>
-            <button onclick="togglePanel('accountPanel')" title="Account"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></button>
-            <button onclick="togglePanel('chatPanel')" title="Chat"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg></button>
-        </div>
-        
-        <div class="panel" id="settingsPanel">
-            <button class="close-btn" onclick="togglePanel('settingsPanel')">&times;</button>
-            <h2>Settings</h2>
-            
-            <label for="themeSelector">Theme:</label>
-            <select id="themeSelector" onchange="applyTheme(this.value); localStorage.setItem('theme', this.value);">
-                <option value="default">Default</option>
-                <option value="theme-light">Light</option>
-                <option value="theme-purple">Purple</option>
-            </select>
-            
-            <label for="cloakCheckbox">Cloak as Gmail:</label>
-            <input type="checkbox" id="cloakCheckbox" style="width: auto;" onchange="applyCloak(this.checked); localStorage.setItem('cloak', String(this.checked));">
-        </div>
-        <div class="panel" id="accountPanel">
-            <button class="close-btn" onclick="togglePanel('accountPanel')">&times;</button>
-            <div id="loggedInView" style="display: none;">
-                <h2>Manage Account</h2>
-                <div class="user-info-display">
-                    <p><span>Real Name:</span> <span id="displayRealName"></span></p>
-                    <p><span>Student Email:</span> <span id="displayStudentEmail"></span></p>
-                </div>
-                <hr>
-                <label for="newUsername">Change Display Username:</label><input type="text" id="newUsername">
-                <button onclick="updateAccount()">Save Username</button>
-                <p id="updateStatus"></p>
-            </div>
-        </div>
-        <div class="panel" id="usersPanel">
-            <button class="close-btn" onclick="togglePanel('usersPanel')">&times;</button>
-            <h2>Registered Users</h2>
-            <div id="user-list-container"></div>
-            <p class="disclaimer">⚠️ WARNING: This data is stored locally in your browser and is NOT secure. Passwords displayed here are easily accessible to anyone using this browser.</p>
-        </div>
-        <div class="panel" id="chatPanel">
-            <button class="close-btn" onclick="togglePanel('chatPanel')">&times;</button>
-            <h2>Chat</h2><div id="chatMessages"></div>
-            <input type="text" id="chatInput" placeholder="Login to type a message..." onkeydown="if(event.key === 'Enter') sendMessage()">
-            <button onclick="sendMessage()">Send</button>
-            <button class="admin-only-button" onclick="clearChats()">Clear All Chats</button>
-        </div>
-        <div class="game-grid" id="gameGrid">
-            <a href="1">1</a><a href="1v1.lol">1v1.lol</a><a href="10minutestilldawn">10 Minutes Till Dawn</a><a href="2048">2048</a><a href="adanceoffireandice">A Dance of Fire And Ice</a><a href="adarkroom">A Dark Room</a><a href="adrenalinechallenge">Adrenaline Challenge</a><a href="adventuredrivers">Adventure Drivers</a><a href="asteroids">Asteroids</a><a href="astray">Astray</a><a href="backcountry">Backcountry</a><a href="BuildNowGG">Build now. gg</a><a href="badicecream">Bad Ice Cream</a><a href="badicecream2">Bad Ice Cream 2</a><a href="badicecream3">Bad Ice Cream 3</a><a href="basketrandom">Basket Random</a><a href="bounceback">Bounceback</a><a href="boxingrandom">Boxing Random</a><a href="breaklock">BreakLock</a><a href="breakout">Breakout</a><a href="chess">Chess</a><a href="Clash-Royale/">Clash Royale</a><a href="Crazy-cattle-3d">Crazy-cattle-3d</a><a href="chromedino">Chrome Dino</a><a href="connect3">Connect 3</a><a href="cookieclicker">Cookie Clicker</a><a href="cubefield">Cubefield</a><a href="doodlejump">Doodle Jump</a><a href="ducklife">Duck Life</a><a href="ducklife2">Duck Life 2</a><a href="ducklife3">Duck Life 3</a><a href="ducklife4">Duck Life 4</a><a href="edgesurf">Edge Surf</a><a href="evilglitch">Evil Glitch</a><a href="factoryballsforever">Factory Balls Forever</a><a href="fireboyandwatergirlintheforesttemple">Fireboy and Watergirl in the Forest Temple</a><a href="flappybird">Flappy Bird</a><a href="funny-shooter">funny-shooter</a><a href="fifapacks">fifa packs</a><a href="friendlyfire">Friendly Fire</a><a href="geometrydash">Geometry Dash</a><a href="gopherkart">Gopher Kart</a><a href="granny">granny</a><a href="hextris">Hextris</a><a href="iceagebabyadventure">Ice Age Baby Adventure</a><a href="jumpingfrogspuzzle">Jumping frogs puzzle</a><a href="konnekt">Konnekt</a><a href="minecraft0.30">Minecraft 0.30</a><a href="minecraft1.3">Minecraft 1.3</a><a href="minecraft1.5.2">Minecraft 1.5.2</a><a href="madalin-stunt-cars2">Madalin stunt cars 2</a><a href="motox3m2">Moto X3M 2</a><a href="ovo">OvO</a><a href="pacman">Pac-Man</a><a href="pushback">Pushback</a><a href="racer">Racer</a><a href="radiusraid">Radius Raid</a><a href="retrobowl">Retro Bowl</a><a href="retrohaunt">Retrohaunt</a><a href="riddleschool">Riddle School</a><a href="riddleschool2">Riddle School 2</a><a href="riddleschool3">Riddle School 3</a><a href="riddleschool4">Riddle School 4</a><a href="riddleschool5">Riddle School 5</a><a href="roadblocks">Roadblocks</a><a href="sleepingbeauty">Sleeping Beauty</a><a href="slope">Slope</a><a href="snake">Snake</a><a href="snowrider3d">Snow Rider 3D</a><a href="soccerrandom">Soccer Random</a><a href="spacecompany">Space Company</a><a href="spaceinvaders">Space Invaders</a><a href="tetris">Tetris</a><a href="thechromaincident">The Chroma Incident</a><a href="thereisnogame">THERE IS NO GAME!</a><a href="towermaster">Tower Master</a><a href="tunnelrush">Tunnel Rush</a><a href="underrun">Under Run</a><a href="vex3">Vex 3</a><a href="vex4">Vex 4</a><a href="vex5">Vex 5</a><a href="vex6">Vex 6</a><a href="vex7">Vex 7</a><a href="volleyrandom">Volley Random</a><a href="Wordle-unlimited">Wordle unlimited</a><a href="webretro">Webretro (retro console emulator)</a><a href="worldshardestgame">World's Hardest Game</a><a href="worldshardestgame2">World's Hardest Game 2</a><a href="xx142b2.exe">xx142-b2.exe</a>
-        </div>
-    </main>
-
   <script>
     const ADMIN_EMAIL = '2010984@apps.nsd.org';
 
     // --- TOOLBAR FUNCTION ---
     function openAIApp() {
-        // Opens the specified link in a new window/tab
         window.open('https://cosinehq.web.app', '_blank');
     }
 
     // --- SITE ACCESS & TOKEN LOGIC ---
-    function showAuthForms(formId) { ['token-login-step', 'password-login-step', 'register-step', 'show-token-step'].forEach(id => { document.getElementById(id).style.display = (id === formId) ? 'block' : 'none'; }); }
+    function showAuthForms(formId) {
+        ['token-login-step', 'password-login-step', 'register-step', 'show-token-step'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = (id === formId) ? 'block' : 'none';
+            }
+        });
+    }
     
-    // Generate token as (number-number-letter), e.g., 56b
     function generateToken() {
         const numbers = '0123456789';
         const letters = 'abcdefghijklmnopqrstuvwxyz';
-        
         let token = '';
-        
-        // Character 1: Number
         token += numbers.charAt(Math.floor(Math.random() * numbers.length));
-        // Character 2: Number
         token += numbers.charAt(Math.floor(Math.random() * numbers.length));
-        // Character 3: Letter
         token += letters.charAt(Math.floor(Math.random() * letters.length));
-        
         return token;
     }
 
@@ -295,7 +36,7 @@
         if (!realName || !studentEmail || !password) { statusEl.textContent = "All fields are required."; return; }
         if (!emailRegex.test(studentEmail)) { statusEl.textContent = "Please use a valid student email (e.g., 1234567@apps.nsd.org)."; return; }
         
-        const username = studentEmail.split('@')[0]; // Auto-generate username from email
+        const username = studentEmail.split('@')[0];
         if (localStorage.getItem('user_' + username)) { statusEl.textContent = "This student email is already registered."; return; }
         
         const token = generateToken();
@@ -324,7 +65,6 @@
     }
     
     function loginWithToken() {
-        // Ensure token is converted to lowercase for comparison
         const tokenInput = document.getElementById("token-input").value.trim().toLowerCase();
         const statusEl = document.getElementById("token-status");
 
@@ -335,7 +75,6 @@
             const key = localStorage.key(i);
             if (key.startsWith('user_')) {
                 const user = JSON.parse(localStorage.getItem(key));
-                // Ensure the stored token is also converted to lowercase just in case
                 if (user.token && user.token.toLowerCase() === tokenInput) {
                     userFound = user;
                     break;
@@ -344,7 +83,6 @@
         }
 
         if (userFound) {
-            // STORE USERNAME IN localStorage FOR PERSISTENCE
             localStorage.setItem('persistedUser', userFound.username);
             grantAccess();
         } else {
@@ -353,7 +91,6 @@
     }
 
     function continueAndGrantAccess() {
-        // STORE USERNAME IN localStorage FOR PERSISTENCE
         const currentUser = sessionStorage.getItem('currentUser');
         if (currentUser) {
             localStorage.setItem('persistedUser', currentUser);
@@ -367,23 +104,15 @@
         const mainContent = document.getElementById('main-content');
         mainContent.style.visibility = 'visible';
         mainContent.style.opacity = '1';
-        // Initialize the main site's dynamic parts
         initializeSite();
     }
 
-
-    // --- ALL OTHER SITE FUNCTIONS ---
     let currentPanelId = null;
     function togglePanel(panelId) {if (currentPanelId === panelId) { document.getElementById(panelId).classList.remove('visible'); currentPanelId = null; return; } if (currentPanelId) { document.getElementById(currentPanelId).classList.remove('visible'); } document.getElementById(panelId).classList.add('visible'); currentPanelId = panelId; if (panelId === 'accountPanel') checkLoginStatus(); if (panelId === 'chatPanel') loadChatMessages(); if (panelId === 'usersPanel') displayUserList();}
     function searchGames() {const searchTerm = document.getElementById("searchInput").value.toLowerCase(); document.querySelectorAll(".game-grid a").forEach(link => { link.style.display = link.textContent.toLowerCase().includes(searchTerm) ? "block" : "none"; });}
     function applyTheme(theme) { document.body.className = ''; if (theme !== 'default') { document.body.classList.add(theme); }}
     function applyCloak(cloak) { document.title = cloak ? "Gmail - Inbox" : "Nebula"; document.querySelector("link[rel='icon']").href = cloak ? "https://raw.githubusercontent.com/samw53/nebula/main/Gmail-logo.png" : "https://raw.githubusercontent.com/samw53/nebula/main/Nebula.png"; }
-    function logout() {
-        // CLEAR PERSISTENCE ON LOGOUT
-        localStorage.removeItem('persistedUser');
-        sessionStorage.removeItem('currentUser');
-        location.reload();
-    }
+    function logout() { localStorage.removeItem('persistedUser'); sessionStorage.removeItem('currentUser'); location.reload(); }
     
     function updateAccount() {
         const currentUser = sessionStorage.getItem('currentUser'); if (!currentUser) return;
@@ -393,18 +122,16 @@
 
         if (newUsername && newUsername !== currentUser) {
             if (localStorage.getItem('user_' + newUsername)) { statusEl.textContent = "New username is taken."; return; }
-            // Update the username in the object before re-saving
             user.username = newUsername; 
             localStorage.removeItem('user_' + currentUser);
             localStorage.setItem('user_' + newUsername, JSON.stringify(user));
             sessionStorage.setItem('currentUser', newUsername);
-            // UPDATE PERSISTENCE ON USERNAME CHANGE
             localStorage.setItem('persistedUser', newUsername);
             statusEl.textContent = "Username updated successfully!";
         } else {
             statusEl.textContent = "No changes made.";
         }
-        checkLoginStatus(); // Refresh UI
+        checkLoginStatus();
         setTimeout(() => statusEl.textContent = "", 3000);
     }
     
@@ -412,7 +139,6 @@
         const currentUser = sessionStorage.getItem('currentUser');
         const userDisplay = document.getElementById('userDisplay');
         const loggedInView = document.getElementById('loggedInView');
-        // Hide/show admin buttons
         document.querySelectorAll('.admin-only-button').forEach(btn => btn.style.display = 'none');
         document.getElementById('users-toolbar-btn').style.display = 'none';
 
@@ -424,7 +150,6 @@
             document.getElementById('displayStudentEmail').textContent = user.studentEmail;
             userDisplay.innerHTML = `<span>Logged in: <strong>${currentUser}</strong></span><button id="logoutButton" onclick="logout()">Logout</button>`;
             
-            // Check if the logged-in user is the admin
             if (user.studentEmail === ADMIN_EMAIL) {
                 document.querySelectorAll('.admin-only-button').forEach(btn => btn.style.display = 'block');
                 document.getElementById('users-toolbar-btn').style.display = 'block';
@@ -435,159 +160,114 @@
         }
     }
     
-    // Function to reveal the hidden password
     function revealPassword(element, password) {
-        if (!element.classList.contains('revealed')) {
-            element.textContent = password;
+        const childSpan = element.querySelector('.password-field-text');
+        if (childSpan && !element.classList.contains('revealed')) {
+            childSpan.textContent = password;
             element.classList.add('revealed');
         }
     }
 
     function displayUserList() {
         const container = document.getElementById("user-list-container");
+        if (!container) return; // Exit if the container isn't found
+        container.innerHTML = "";
+
         const currentUser = sessionStorage.getItem('currentUser');
-        const currentUserData = currentUser ? JSON.parse(localStorage.getItem('user_' + currentUser)) : null;
+        if (!currentUser) return; // Only display if a user is logged in (to check for admin)
+
+        const currentUserData = JSON.parse(localStorage.getItem('user_' + currentUser));
         const isAdmin = currentUserData && currentUserData.studentEmail === ADMIN_EMAIL;
         
-        container.innerHTML = ""; // Clear list
-        if (!isAdmin) return; // Only allow admin to view
+        if (!isAdmin) return;
         
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
             if (key.startsWith('user_')) {
                 const user = JSON.parse(localStorage.getItem(key));
-                
-                // Admin-only data display setup with click-to-reveal password
                 let passwordDisplay = '';
-                if (isAdmin && user.password) {
-                    passwordDisplay = `
-                        <p><strong>Password:</strong> 
-                            <span class="password-field-container" 
-                                onclick="revealPassword(this, '${user.password.replace(/'/g, "\\'")}')">
-                                <span class="password-field-text">(Click to Reveal)</span>
-                            </span>
-                        </p>`;
+                if (user.password) {
+                    // Escape single quotes in the password to prevent breaking the onclick attribute
+                    const escapedPassword = user.password.replace(/'/g, "\\'");
+                    passwordDisplay = `<p><strong>Password:</strong> <span class="password-field-container" onclick="revealPassword(this, '${escapedPassword}')"><span class="password-field-text">(Click to Reveal)</span></span></p>`;
                 }
 
                 const userDiv = document.createElement('div');
                 userDiv.className = 'user-list-item';
                 let removeButtonHTML = '';
-                // Show remove button if admin is viewing, and it's not the admin's own account
-                if (isAdmin && user.studentEmail !== ADMIN_EMAIL) {
+                if (user.studentEmail !== ADMIN_EMAIL) {
                     removeButtonHTML = `<button class="admin-only-button" style="display: block;" onclick="removeUser('${user.username}')">Remove User</button>`;
                 }
 
-                userDiv.innerHTML = `
-                    <h3>${user.realName}</h3>
-                    <p><strong>Username:</strong> ${user.username}</p>
-                    <p><strong>Email:</strong> ${user.studentEmail}</p>
-                    ${passwordDisplay}
-                    ${removeButtonHTML}
-                `;
+                userDiv.innerHTML = `<h3>${user.realName}</h3><p><strong>Username:</strong> ${user.username}</p><p><strong>Email:</strong> ${user.studentEmail}</p>${passwordDisplay}${removeButtonHTML}`;
                 container.appendChild(userDiv);
             }
         }
     }
     
-    // --- NEW ADMIN FUNCTIONS ---
     function removeUser(usernameToRemove) {
         if (confirm(`Are you sure you want to permanently remove the user "${usernameToRemove}"?`)) {
             localStorage.removeItem('user_' + usernameToRemove);
-            displayUserList(); // Refresh the list immediately
+            displayUserList();
         }
     }
 
     function clearChats() {
         if (confirm('Are you sure you want to permanently delete ALL chat messages? This cannot be undone.')) {
             localStorage.removeItem('chatMessages');
-            loadChatMessages(); // Refresh the chat view to show it's empty
+            loadChatMessages();
         }
     }
 
     function ensureAdminExists() {
         const adminUsername = ADMIN_EMAIL.split('@')[0];
         if (!localStorage.getItem('user_' + adminUsername)) {
-            // Ensure the initial admin user entry includes the password
-            const adminUser = {
-                username: adminUsername,
-                realName: 'Sam Wouters',
-                studentEmail: ADMIN_EMAIL,
-                password: 'pink9goat9desk', // Included password
-                token: '54k' // Updated token to new format
-            };
+            const adminUser = { username: adminUsername, realName: 'Sam Wouters', studentEmail: ADMIN_EMAIL, password: 'pink9goat9desk', token: '54k' };
             localStorage.setItem('user_' + adminUsername, JSON.stringify(adminUser));
-            console.log('Admin account created/verified.');
         } else {
-            // Also ensure any existing admin record has the password field and correct token (in case of previous corruption/format change)
             let adminUser = JSON.parse(localStorage.getItem('user_' + adminUsername));
-            let updated = false;
-
-            if (!adminUser.password) {
+            if (!adminUser.password || adminUser.token !== '54k') {
                  adminUser.password = 'pink9goat9desk';
-                 updated = true;
-            }
-            if (adminUser.token !== '54k') {
                  adminUser.token = '54k';
-                 updated = true;
-            }
-            
-            if (updated) {
-                localStorage.setItem('user_' + adminUsername, JSON.stringify(adminUser));
-                console.log('Admin data repaired/verified.');
+                 localStorage.setItem('user_' + adminUsername, JSON.stringify(adminUser));
             }
         }
     }
     
     function sendMessage() {
         const currentUser = sessionStorage.getItem('currentUser');
-        if (!currentUser) {
-            alert("Please log in to send a message.");
-            return;
-        }
+        if (!currentUser) { alert("Please log in to send a message."); return; }
         const input = document.getElementById("chatInput");
         const messageText = input.value.trim();
         
         if (messageText !== "") {
             const messages = JSON.parse(localStorage.getItem("chatMessages") || "[]");
-            const message = {
-                user: currentUser,
-                text: messageText,
-                timestamp: new Date().toISOString()
-            };
-            messages.push(message);
+            messages.push({ user: currentUser, text: messageText, timestamp: new Date().toISOString() });
             localStorage.setItem("chatMessages", JSON.stringify(messages));
             input.value = "";
-            loadChatMessages(); // Refresh chat view
+            loadChatMessages();
         }
     }
 
     function loadChatMessages() {
         const container = document.getElementById("chatMessages");
         const messages = JSON.parse(localStorage.getItem("chatMessages") || "[]");
-        container.innerHTML = ""; // Clear existing messages
-        
+        container.innerHTML = "";
         messages.forEach(msg => {
-            // Fetch the real name for the user who sent the message
             const user = JSON.parse(localStorage.getItem('user_' + msg.user));
-            const displayName = user ? user.realName : msg.user; // Fallback to username if user not found
-            
+            const displayName = user ? user.realName : msg.user;
             const p = document.createElement("p");
             p.innerHTML = `<b>${displayName}:</b> ${msg.text}`;
             container.appendChild(p);
         });
-        
-        container.scrollTop = container.scrollHeight; // Auto-scroll to bottom
+        container.scrollTop = container.scrollHeight;
     }
 
     function makeToolbarDraggable(toolbar) { 
         let offsetX, offsetY, isDragging = false; 
         toolbar.addEventListener('mousedown', (e) => { 
-            // Only allow drag if clicking directly on the toolbar, not a button
-            if (e.target.closest('button')) return; // Ignore drag if clicking on a child button
-            if (e.target !== toolbar) return; // Ignore drag if clicking on padding/gap
-            
+            if (e.target.closest('button')) return;
             isDragging = true; 
-            toolbar.classList.add('dragging'); 
             offsetX = e.clientX - toolbar.offsetLeft; 
             offsetY = e.clientY - toolbar.offsetTop; 
             toolbar.style.transform = 'none'; 
@@ -596,23 +276,18 @@
         }); 
         function onMouseMove(e) { 
             if (!isDragging) return; 
-            let newX = e.clientX - offsetX; 
-            let newY = e.clientY - offsetY; 
-            toolbar.style.left = `${newX}px`; 
-            toolbar.style.top = `${newY}px`; 
+            toolbar.style.left = `${e.clientX - offsetX}px`; 
+            toolbar.style.top = `${e.clientY - offsetY}px`; 
         } 
         function onMouseUp() { 
             isDragging = false; 
-            toolbar.classList.remove('dragging'); 
             document.removeEventListener('mousemove', onMouseMove); 
             document.removeEventListener('mouseup', onMouseUp); 
             localStorage.setItem('toolbarPosition', JSON.stringify({ x: toolbar.style.left, y: toolbar.style.top })); 
         } 
     }
 
-    // --- MAIN INITIALIZATION FUNCTION ---
     function initializeSite() {
-        // 1. Load Theme & Cloak Settings
         const savedTheme = localStorage.getItem("theme") || "default";
         applyTheme(savedTheme);
         document.getElementById("themeSelector").value = savedTheme;
@@ -620,60 +295,52 @@
         applyCloak(savedCloak);
         document.getElementById("cloakCheckbox").checked = savedCloak;
         
-        // 2. Position Toolbar
         const toolbar = document.querySelector('.side-toolbar');
         const savedPosition = JSON.parse(localStorage.getItem('toolbarPosition'));
         if (savedPosition) {
-            toolbar.style.transform = 'none'; // Important: override initial transform
+            toolbar.style.transform = 'none';
             toolbar.style.left = savedPosition.x;
             toolbar.style.top = savedPosition.y;
         } else {
-            // Ensure toolbar starts in its default fixed position if no saved position exists
             toolbar.style.left = '15px';
             toolbar.style.top = '50%';
             toolbar.style.transform = 'translateY(-50%)';
         }
         makeToolbarDraggable(toolbar);
         
-        // 3. Check Login & Load Dynamic Content
         checkLoginStatus();
+        displayUserList(); // Also display the list when the site initializes after login
     }
     
-    // --- Initial Load ---
     document.addEventListener('DOMContentLoaded', () => {
-        ensureAdminExists();
-        
-        // CHECK FOR PERSISTED USER TOKEN LOGIN
-        const persistedUser = localStorage.getItem('persistedUser');
-        if (persistedUser && localStorage.getItem('user_' + persistedUser)) {
-             sessionStorage.setItem('currentUser', persistedUser);
-             grantAccess();
-             return;
-        }
-        
-        // If not persisted, check if they successfully registered/logged in and have a current user in session
-        if (sessionStorage.getItem('currentUser')) {
-             grantAccess();
-             return;
-        }
-
-        // If no persistence or current session, show the appropriate form
-        // If there are users saved in localStorage, default to token login, otherwise default to register.
-        let usersExist = false;
-        for (let i = 0; i < localStorage.length; i++) {
-            if (localStorage.key(i).startsWith('user_')) {
-                usersExist = true;
-                break;
+        try {
+            ensureAdminExists();
+            
+            const persistedUser = localStorage.getItem('persistedUser');
+            if (persistedUser && localStorage.getItem('user_' + persistedUser)) {
+                 sessionStorage.setItem('currentUser', persistedUser);
+                 grantAccess();
+                 return;
             }
-        }
-        
-        if (usersExist) {
-            showAuthForms('token-login-step'); 
-        } else {
-            showAuthForms('register-step');
+            
+            let usersExist = false;
+            for (let i = 0; i < localStorage.length; i++) {
+                if (localStorage.key(i).startsWith('user_')) {
+                    usersExist = true;
+                    break;
+                }
+            }
+            
+            if (usersExist) {
+                showAuthForms('token-login-step'); 
+            } else {
+                showAuthForms('register-step');
+            }
+        } catch (error) {
+            console.error("Critical error on page load:", error);
+            document.body.innerHTML = 'A critical error occurred. Please check the console (F12) for details.';
         }
     });
   </script>
-
 </body>
 </html>
