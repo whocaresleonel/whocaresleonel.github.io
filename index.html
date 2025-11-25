@@ -12,16 +12,23 @@
             --header-bg: rgba(10, 0, 20, 0.7); --panel-bg: rgba(10, 0, 20, 0.95);
             --input-bg: rgba(255, 255, 255, 0.1); --glow-color: rgba(138, 43, 226, 0.4);
             --danger-color: rgba(211, 47, 47, 0.5); --danger-hover: rgba(211, 47, 47, 0.8);
+            /* Define text/bg for select options list (browser default fallback) */
+            --select-bg: #1e1e3f;
+            --select-text: #fff;
         }
         body.theme-light {
             --bg-color: #f0f2f5; --text-color: #1c1e21; --accent-color: #4a148c;
             --header-bg: rgba(255, 255, 255, 0.8); --panel-bg: rgba(255, 255, 255, 0.98);
             --input-bg: rgba(0, 0, 0, 0.05); --glow-color: rgba(74, 20, 140, 0.3);
             --danger-color: rgba(211, 47, 47, 0.8); --danger-hover: #d32f2f;
+            --select-bg: #fff;
+            --select-text: #1c1e21;
         }
         body.theme-purple {
             --bg-color: #280d5f; --text-color: #fff; --accent-color: #d81b60;
             --header-bg: rgba(40, 13, 95, 0.8);
+            --select-bg: #4f2e82;
+            --select-text: #fff;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -59,7 +66,6 @@
             border-radius: 12px; z-index: 1001; cursor: grab;
             transition: left 0.3s ease;
         }
-        .side-toolbar.hidden { left: -60px; }
         .side-toolbar button { background: transparent; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-color); transition: background-color 0.3s, transform 0.3s; }
         .side-toolbar button:hover { background-color: var(--glow-color); transform: scale(1.1); }
         .side-toolbar svg { width: 24px; height: 24px; stroke-width: 2; pointer-events: none; }
@@ -73,7 +79,47 @@
         .panel button { cursor: pointer; font-weight: bold; background-color: var(--accent-color); }
         .panel hr { border-color: rgba(255,255,255,0.2); margin: 1.5rem 0; }
         .panel .close-btn { position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; width: auto; padding: 0; line-height: 1; margin: 0; }
-        .panel select { width: 100%; padding: 0.75rem; box-sizing: border-box; border: none; border-radius: 5px; margin-bottom: 1rem; background: var(--input-bg); color: var(--text-color); font-family: 'Poppins', sans-serif; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.7em top 50%, 0 0; background-size: 0.65em auto, 100%; }
+        
+        /* Improved Select/Theme Dropdown */
+        .panel label { display: block; margin-bottom: 0.5rem; font-weight: 500; opacity: 0.8; }
+        .panel select { 
+            width: 100%; 
+            padding: 0.75rem; 
+            box-sizing: border-box; 
+            border: none; 
+            border-radius: 8px; 
+            margin-bottom: 1rem; 
+            background: var(--input-bg); 
+            color: var(--text-color); 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 1rem;
+            
+            /* Hide default browser arrow */
+            -webkit-appearance: none; 
+            -moz-appearance: none; 
+            appearance: none; 
+            
+            /* Custom CSS arrow (Down Chevron) */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%238A2BE2" d="M7.41 8.58L12 13.17L16.59 8.58L18 10L12 16L6 10z"/></svg>'); 
+            background-repeat: no-repeat; 
+            background-position: right 0.7em center; 
+            background-size: 1.2em;
+
+            border: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .panel select:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+        
+        /* Attempt to style the options list itself (limited cross-browser success) */
+        .panel select option {
+            background: var(--select-bg);
+            color: var(--select-text);
+            padding: 0.5rem;
+        }
+
         #chatMessages { height: 200px; overflow-y: auto; border: 1px solid var(--input-bg); padding: 0.5rem; margin-bottom: 1rem; border-radius: 5px; word-wrap: break-word; }
         #chatMessages p { margin: 0.5rem 0; }
         #chatMessages b { color: var(--accent-color); }
@@ -88,17 +134,6 @@
         .game-grid { margin-top: 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; padding: 1rem 2rem; }
         .game-grid a { display: block; background: rgba(138, 43, 226, 0.1); color: var(--text-color); text-decoration: none; padding: 1.6rem; border-radius: 14px; text-align: center; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .game-grid a:hover { background: rgba(138, 43, 226, 0.2); transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 30px var(--glow-color);}
-        
-        /*--- Toolbar Toggle Button ---*/
-        #toolbarToggleBtn {
-            position: fixed; top: 50%; left: 0;
-            transform: translateY(-50%);
-            background: var(--header-bg); border: none; color: var(--text-color);
-            cursor: pointer; padding: 10px; font-size: 1.2rem;
-            transition: left 0.3s ease; z-index: 1002;
-        }
-        .toolbar-hidden #toolbarToggleBtn { left: 0; }
-        .toolbar-hidden .side-toolbar { left: -60px; }
     </style>
 </head>
 <body>
@@ -133,7 +168,7 @@
         </div>
     </div>
 
-    <main id="main-content" class="toolbar-hidden" style="visibility: hidden; opacity: 0; transition: opacity 0.5s ease;">
+    <main id="main-content" style="visibility: hidden; opacity: 0; transition: opacity 0.5s ease;">
         <div class="header-bar">
             <img src="https://samw53.github.io/nebula/Nebula.png" alt="Nebula Logo" class="logo">
             <div class="search-box">
@@ -142,8 +177,6 @@
             </div>
             <div id="userDisplay"></div>
         </div>
-
-        <button id="toolbarToggleBtn" onclick="toggleToolbar()">&#9654;</button>
         
         <div class="side-toolbar">
             <button id="users-toolbar-btn" class="admin-only-item" onclick="togglePanel('usersPanel')" title="Users"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></button>
@@ -155,10 +188,14 @@
         <div class="panel" id="settingsPanel">
             <button class="close-btn" onclick="togglePanel('settingsPanel')">&times;</button>
             <h2>Settings</h2>
+            
             <label for="themeSelector">Theme:</label>
             <select id="themeSelector" onchange="applyTheme(this.value); localStorage.setItem('theme', this.value);">
-                <option value="default">Default</option><option value="theme-light">Light</option><option value="theme-purple">Purple</option>
+                <option value="default">Default</option>
+                <option value="theme-light">Light</option>
+                <option value="theme-purple">Purple</option>
             </select>
+            
             <label for="cloakCheckbox">Cloak as Gmail:</label>
             <input type="checkbox" id="cloakCheckbox" style="width: auto;" onchange="applyCloak(this.checked); localStorage.setItem('cloak', String(this.checked));">
         </div>
@@ -287,7 +324,7 @@
     }
 
 
-    // --- ALL OTHER SITE FUNCTIONS (UNCHANGED) ---
+    // --- ALL OTHER SITE FUNCTIONS ---
     let currentPanelId = null;
     function togglePanel(panelId) {if (currentPanelId === panelId) { document.getElementById(panelId).classList.remove('visible'); currentPanelId = null; return; } if (currentPanelId) { document.getElementById(currentPanelId).classList.remove('visible'); } document.getElementById(panelId).classList.add('visible'); currentPanelId = panelId; if (panelId === 'accountPanel') checkLoginStatus(); if (panelId === 'chatPanel') loadChatMessages(); if (panelId === 'usersPanel') displayUserList();}
     function searchGames() {const searchTerm = document.getElementById("searchInput").value.toLowerCase(); document.querySelectorAll(".game-grid a").forEach(link => { link.style.display = link.textContent.toLowerCase().includes(searchTerm) ? "block" : "none"; });}
@@ -452,23 +489,33 @@
         container.scrollTop = container.scrollHeight; // Auto-scroll to bottom
     }
 
-    function makeToolbarDraggable(toolbar) { let offsetX, offsetY, isDragging = false; toolbar.addEventListener('mousedown', (e) => { if (e.target !== toolbar) return; isDragging = true; toolbar.classList.add('dragging'); offsetX = e.clientX - toolbar.offsetLeft; offsetY = e.clientY - toolbar.offsetTop; toolbar.style.transform = 'none'; document.addEventListener('mousemove', onMouseMove); document.addEventListener('mouseup', onMouseUp); }); function onMouseMove(e) { if (!isDragging) return; let newX = e.clientX - offsetX; let newY = e.clientY - offsetY; toolbar.style.left = `${newX}px`; toolbar.style.top = `${newY}px`; } function onMouseUp() { isDragging = false; toolbar.classList.remove('dragging'); document.removeEventListener('mousemove', onMouseMove); document.removeEventListener('mouseup', onMouseUp); localStorage.setItem('toolbarPosition', JSON.stringify({ x: toolbar.style.left, y: toolbar.style.top })); } }
-
-    // --- NEW TOOLBAR TOGGLE FUNCTION ---
-    function toggleToolbar() {
-        const mainContent = document.getElementById('main-content');
-        const toggleBtn = document.getElementById('toolbarToggleBtn');
-        const isHidden = mainContent.classList.contains('toolbar-hidden');
-
-        if (isHidden) {
-            mainContent.classList.remove('toolbar-hidden');
-            toggleBtn.innerHTML = '&#9664;'; // Left arrow
-            localStorage.setItem('toolbarHidden', 'false');
-        } else {
-            mainContent.classList.add('toolbar-hidden');
-            toggleBtn.innerHTML = '&#9654;'; // Right arrow
-            localStorage.setItem('toolbarHidden', 'true');
-        }
+    function makeToolbarDraggable(toolbar) { 
+        let offsetX, offsetY, isDragging = false; 
+        toolbar.addEventListener('mousedown', (e) => { 
+            // Only allow drag if clicking directly on the toolbar, not a button
+            if (e.target !== toolbar) return; 
+            isDragging = true; 
+            toolbar.classList.add('dragging'); 
+            offsetX = e.clientX - toolbar.offsetLeft; 
+            offsetY = e.clientY - toolbar.offsetTop; 
+            toolbar.style.transform = 'none'; 
+            document.addEventListener('mousemove', onMouseMove); 
+            document.addEventListener('mouseup', onMouseUp); 
+        }); 
+        function onMouseMove(e) { 
+            if (!isDragging) return; 
+            let newX = e.clientX - offsetX; 
+            let newY = e.clientY - offsetY; 
+            toolbar.style.left = `${newX}px`; 
+            toolbar.style.top = `${newY}px`; 
+        } 
+        function onMouseUp() { 
+            isDragging = false; 
+            toolbar.classList.remove('dragging'); 
+            document.removeEventListener('mousemove', onMouseMove); 
+            document.removeEventListener('mouseup', onMouseUp); 
+            localStorage.setItem('toolbarPosition', JSON.stringify({ x: toolbar.style.left, y: toolbar.style.top })); 
+        } 
     }
 
     // --- MAIN INITIALIZATION FUNCTION ---
@@ -488,22 +535,15 @@
             toolbar.style.transform = 'none'; // Important: override initial transform
             toolbar.style.left = savedPosition.x;
             toolbar.style.top = savedPosition.y;
+        } else {
+            // Ensure toolbar starts in its default fixed position if no saved position exists
+            toolbar.style.left = '15px';
+            toolbar.style.top = '50%';
+            toolbar.style.transform = 'translateY(-50%)';
         }
         makeToolbarDraggable(toolbar);
         
-        // 3. Set Toolbar Visibility
-        const isToolbarHidden = localStorage.getItem('toolbarHidden') === 'true';
-        const mainContent = document.getElementById('main-content');
-        const toggleBtn = document.getElementById('toolbarToggleBtn');
-        if (isToolbarHidden) {
-            mainContent.classList.add('toolbar-hidden');
-            toggleBtn.innerHTML = '&#9654;'; // Right arrow
-        } else {
-            mainContent.classList.remove('toolbar-hidden');
-            toggleBtn.innerHTML = '&#9664;'; // Left arrow
-        }
-        
-        // 4. Check Login & Load Dynamic Content
+        // 3. Check Login & Load Dynamic Content
         checkLoginStatus();
     }
     
