@@ -7,16 +7,42 @@
     <title>Nebula</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/samw53/nebula/main/Nebula.png">
     <style>
+        :root {
+            --bg-color: #0c001a;
+            --text-color: #fff;
+            --accent-color: #8a2be2;
+            --header-bg: rgba(10, 0, 20, 0.7);
+        }
+
+        .theme-light {
+            --bg-color: #fff;
+            --text-color: #000;
+            --accent-color: #4a148c;
+            --header-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        .theme-dark {
+            --bg-color: #0c001a;
+            --text-color: #fff;
+            --accent-color: #8a2be2;
+            --header-bg: rgba(10, 0, 20, 0.7);
+        }
+
+        .theme-purple {
+            --bg-color: #280d5f;
+            --text-color: #fff;
+            --accent-color: #d81b60;
+            --header-bg: rgba(40, 13, 95, 0.8);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
         body {
             margin: auto;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Poppins', sans-serif;
             overflow: auto;
-            background: #0c001a;
-            background-image: 
-                radial-gradient(circle at 20% 50%, #1a0033 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, #2d1b69 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, #4a148c 0%, transparent 50%);
-            background-attachment: fixed;
+            background: var(--bg-color);
+            color: var(--text-color);
             transition: background-color 0.3s;
             animation: backgroundShift 20s ease infinite;
         }
@@ -37,7 +63,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            background: rgba(10, 0, 20, 0.7);
+            background: var(--header-bg);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(138, 43, 226, 0.2);
             z-index: 1001;
@@ -75,7 +101,7 @@
             border: none;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.08);
-            color: #fff;
+            color: var(--text-color);
             font-size: 14px;
             letter-spacing: 0.3px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -119,7 +145,7 @@
             border: none;
             border-radius: 8px;
             background: rgba(138, 43, 226, 0.2);
-            color: #fff;
+            color: var(--text-color);
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -171,7 +197,7 @@
         }
 
         .settings-panel label {
-            color: white;
+            color: var(--text-color);
             margin-bottom: 0.5rem;
             display: block;
         }
@@ -183,7 +209,7 @@
             border-radius: 5px;
             margin-bottom: 1rem;
             background: rgba(255, 255, 255, 0.1);
-            color: white;
+            color: var(--text-color);
         }
 
         .game-grid {
@@ -197,7 +223,7 @@
         .game-grid a {
             display: block;
             background: rgba(138, 43, 226, 0.1);
-            color: white;
+            color: var(--text-color);
             text-decoration: none;
             padding: 1.6rem;
             border-radius: 14px;
@@ -234,7 +260,7 @@
         footer {
             margin-top: 3rem;
             text-align: center;
-            color: white;
+            color: var(--text-color);
             animation: float 6s ease-in-out infinite;
         }
 
@@ -247,7 +273,7 @@
 <body>
 
   <div class="header-bar">
-    <img src="https://samw53.github.io/nebula/blob/main/Nebula.png?raw=true" alt="Nebula Logo" class="logo">
+    <img src="https://samw53.github.io/nebula/Nebula.png" alt="Nebula Logo" class="logo">
     <div class="search-box">
       <svg class="search-icon" viewBox="0 0 24 24" stroke="currentColor">
         <circle cx="11" cy="11" r="8" />
@@ -260,15 +286,17 @@
 
   <div class="settings-panel" id="settingsPanel">
     <h2>Settings</h2>
-    <label for="backgroundColor">Background Color:</label>
-    <input type="color" id="backgroundColor" value="#0c001a">
-
-    <label for="styleSelector">Style:</label>
-    <select id="styleSelector">
+    <label for="themeSelector">Theme:</label>
+    <select id="themeSelector">
       <option value="default">Default</option>
-      <option value="dark">Dark</option>
       <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="purple">Purple</option>
     </select>
+
+    <label for="cloakCheckbox">Cloak as Gmail:</label>
+    <input type="checkbox" id="cloakCheckbox">
+
     <button onclick="saveSettings()">Save</button>
     <button onclick="toggleSettings()">Close</button>
   </div>
@@ -365,7 +393,7 @@
     <a href="xx142b2.exe">xx142-b2.exe</a>
   </div>
 
-  <p style="color:white; text-align:center;">(More games coming soon!)</p>
+  <p style="color:var(--text-color); text-align:center;">(More games coming soon!)</p>
 
   <footer>
     <div class="footer"></div>
@@ -395,27 +423,41 @@
     }
 
     function saveSettings() {
-      const backgroundColor = document.getElementById("backgroundColor").value;
-      const style = document.getElementById("styleSelector").value;
+      const theme = document.getElementById("themeSelector").value;
+      const cloak = document.getElementById("cloakCheckbox").checked;
 
-      localStorage.setItem("backgroundColor", backgroundColor);
-      localStorage.setItem("style", style);
+      applyTheme(theme);
+      applyCloak(cloak);
 
-      applySettings();
+      localStorage.setItem("theme", theme);
+      localStorage.setItem("cloak", cloak);
+
       toggleSettings();
     }
 
-    function applySettings() {
-      const backgroundColor = localStorage.getItem("backgroundColor") || "#0c001a";
-      const style = localStorage.getItem("style") || "default";
+    function applyTheme(theme) {
+      document.body.className = theme; // Apply theme class to body
+    }
 
-      document.body.style.backgroundColor = backgroundColor;
-
-      if (style === "light") {
-        document.body.style.color = "#000";
+    function applyCloak(cloak) {
+      if (cloak) {
+        document.title = "Gmail - Inbox";
+        document.querySelector("link[rel='icon']").href = "https://raw.githubusercontent.com/samw53/nebula/main/Gmail-logo.png";
       } else {
-        document.body.style.color = "#fff";
+        document.title = "Nebula";
+        document.querySelector("link[rel='icon']").href = "https://raw.githubusercontent.com/samw53/nebula/main/Nebula.png";
       }
+    }
+
+    function applySettings() {
+      const theme = localStorage.getItem("theme") || "default";
+      const cloak = localStorage.getItem("cloak") || false;
+
+      applyTheme(theme);
+      applyCloak(cloak);
+
+      document.getElementById("themeSelector").value = theme;
+      document.getElementById("cloakCheckbox").checked = cloak === "true"; // Convert string to boolean
     }
 
     // Add fade-in animation dynamically
