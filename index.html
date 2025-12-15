@@ -1,137 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4639624745704856"
-    crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <meta name="description" content="The Best website for unblocked games!">
-  <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,leonels game hub,leonels unblocked games,leonel's games unblocked">
-  <meta name="author" content="Leonel H">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="description" content="The Best website for unblocked games!" />
+  <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,leonels game hub,leonels unblocked games,leonel's games unblocked" />
+  <meta name="author" content="Leonel H" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Leonels Game Hub</title>
-  <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+  <link id="favicon" rel="icon" type="image/x-icon" href="resources/favicon.ico" />
   <style>
-    body {
-      margin: auto;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      overflow: auto;
-      background: #000;
-      background-attachment: fixed;
+    :root{
+      --btn-primary-bg: #7c4dff;
+      --btn-primary-bg-hover: #6a3df8;
+      --btn-primary-bg-active: #5a2ff0;
+      --btn-primary-ring: rgba(124, 77, 255, 0.45);
+      --btn-secondary-bg: rgba(255,255,255,0.10);
+      --btn-secondary-bg-hover: rgba(255,255,255,0.18);
+      --btn-secondary-bg-active: rgba(255,255,255,0.24);
+      --btn-text: #fff;
+      --border-subtle: rgba(255,255,255,0.14);
+      --bg-pane: rgba(18,18,20,0.96);
     }
 
-    .wave {
-      background: rgb(255 255 255 / 25%);
-      border-radius: 1000% 1000% 0 0;
-      position: fixed;
-      width: 200%;
-      height: 12em;
-      animation: wave 10s -3s linear infinite;
-      transform: translate3d(0, 0, 0);
-      opacity: 0.8;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-    }
+    body { margin: auto; font-family: -apple-system, BlinkMacSystemFont, sans-serif; overflow: auto; background: #000; background-attachment: fixed; background-size: cover; background-position: center; }
+    .header-bar { position: fixed; top: 0; left: 0; width: 100%; background: rgba(0,0,0,0.85); color: #fff; display: flex; justify-content: flex-start; align-items: center; z-index: 1001; user-select: none; padding: 0.5rem 2rem; }
+    .header-bar .site-title { font-size: 2rem; font-weight: bold; letter-spacing: 1px; margin-right: 2rem; }
+    .header-bar nav { display: flex; gap: 1.5rem; }
+    .header-bar a { color: #fff; text-decoration: none; font-size: 1.1rem; font-weight: 500; padding: 0.3rem 0.6rem; border-radius: 10px; transition: background 0.2s, transform .12s; }
+    .header-bar a:hover { background: rgba(255,255,255,0.10); transform: translateY(-1px); }
 
-    .wave:nth-of-type(2) {
-      bottom: -1.25em;
-      animation: wave 18s linear reverse infinite;
-      opacity: 0.8;
-    }
-
-    .wave:nth-of-type(3) {
-      bottom: -2.5em;
-      animation: wave 20s -1s reverse infinite;
-      opacity: 0.9;
-    }
-
-    @keyframes wave {
-      0% { transform: translateX(0%); }
-      25% { transform: translateX(-25%); }
-      50% { transform: translateX(-50%); }
-      75% { transform: translateX(-25%); }
-      100% { transform: translateX(0%); }
-    }
-
-    .header-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      display: flex;
-      justify-content: flex-start;
+    /* Polished global button styles */
+    button{ font: inherit; }
+    .btn,
+    #open-settings-btn,
+    .win-btn {
+      position: relative;
+      display: inline-flex;
       align-items: center;
-      z-index: 1001;
+      justify-content: center;
+      gap: .35rem;
+      padding: .6rem .9rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      color: var(--btn-text);
+      transition: transform .12s ease, filter .12s ease, background .12s ease, box-shadow .12s ease;
+      backdrop-filter: saturate(120%);
+      cursor: pointer;
+      outline: none;
       user-select: none;
-      padding: 0.5rem 2rem;
     }
-    .header-bar .site-title {
-      font-size: 2rem;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-right: 2rem;
+    .btn:focus-visible,
+    #open-settings-btn:focus-visible,
+    .win-btn:focus-visible {
+      box-shadow: 0 0 0 4px var(--btn-primary-ring);
     }
-    .header-bar nav {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .header-bar a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 500;
-      padding: 0.3rem 0.6rem;
-      border-radius: 5px;
-      transition: background 0.2s;
-    }
-    .header-bar a:hover {
-      background: rgba(255,255,255,0.07);
+    .btn:active,
+    #open-settings-btn:active,
+    .win-btn:active {
+      transform: translateY(1px) scale(0.99);
+      filter: brightness(.98);
     }
 
-    .game-grid {
-      margin-top: 5rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.2rem;
-      padding: 1rem 2rem;
+    /* Primary + secondary variants */
+    .btn,
+    #open-settings-btn {
+      background: var(--btn-primary-bg);
+      border-color: rgba(124,77,255,0.35);
+    }
+    .btn:hover,
+    #open-settings-btn:hover {
+      background: var(--btn-primary-bg-hover);
+      filter: brightness(1.04);
+      box-shadow: 0 8px 18px rgba(106,61,248,.35);
+    }
+    .btn.secondary {
+      background: var(--btn-secondary-bg);
+      border-color: var(--border-subtle);
+      color: #fff;
+    }
+    .btn.secondary:hover { background: var(--btn-secondary-bg-hover); }
+    .btn.secondary:active { background: var(--btn-secondary-bg-active); }
+
+    /* Settings launcher button */
+    #open-settings-btn { position: fixed; top: 0.8rem; right: 0.8rem; z-index: 2147483000; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
+
+    /* Window and controls */
+    .window { position: fixed; top: 5.5rem; right: 2rem; width: 460px; max-width: calc(100vw - 2rem); background: var(--bg-pane); color: #fff; border: 1px solid var(--border-subtle); border-radius: 16px; box-shadow: 0 24px 64px rgba(0,0,0,.6); z-index: 2147483000; display: none; backdrop-filter: blur(6px); user-select: none; }
+    .window.minimized { width: 340px; bottom: 1rem; right: 1rem; top: auto; }
+    .window.minimized .window-content { display: none; }
+    .window.maximized { top: 0; left: 0; right: 0; bottom: 0; width: auto; height: auto; border-radius: 0; max-width: none; }
+
+    .window-titlebar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.75rem; gap: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); cursor: move; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .window-controls { display: flex; gap: 8px; }
+
+    /* Polished window buttons */
+    .win-btn {
+      width: 32px; height: 32px;
+      background: var(--btn-secondary-bg);
+      border-color: rgba(255,255,255,0.18);
+      border-radius: 10px;
+    }
+    .win-btn:hover { background: var(--btn-secondary-bg-hover); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+    .win-btn.close { background: #ff4d4f; border-color: #ff7779; }
+    .win-btn.close:hover { background: #ff3638; }
+    .win-btn.minimize::before { content: "—"; font-weight: 700; transform: translateY(-1px); }
+    .win-btn.maximize::before { content: "▢"; font-size: 12px; }
+    .win-btn.close::before { content: "✕"; }
+
+    .window-content { user-select: auto; padding: 1rem; overflow: auto; max-height: calc(100vh - 9rem); }
+    .section { margin-bottom: 1.25rem; }
+    .section h3 { margin: 0 0 0.6rem 0; font-size: 1.05rem; }
+    .field { display: flex; gap: .6rem; margin-top: .6rem; align-items: center; }
+    .field label { min-width: 120px; }
+    .field input[type="text"], .field select {
+      flex: 1; padding: .55rem .7rem; border-radius: 12px; border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.06); color: #fff; outline: none; transition: box-shadow .12s ease;
+    }
+    .field input[type="text"]:focus, .field select:focus { box-shadow: 0 0 0 3px var(--btn-primary-ring); }
+
+    /* Presets and preview */
+    .favicon-row { display: grid; grid-template-columns: 1fr 160px; gap: 0.8rem; align-items: start; }
+    .preset-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
+    .preset-item { border: 1px solid var(--border-subtle); border-radius: 12px; padding: 10px; background: rgba(255,255,255,0.06); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: transform .12s ease, background .12s ease, box-shadow .12s ease; }
+    .preset-item:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,0,0,.25); }
+    .preset-item.selected { outline: 2px solid var(--btn-primary-bg); }
+    .preset-thumb { width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: #222; }
+    .preset-label { font-size: 12px; opacity: .85; text-align: center; }
+
+    .side-preview { border: 1px solid var(--border-subtle); border-radius: 12px; padding: 10px; background: rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 8px; align-items: center; }
+    .preview-thumb { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; background: #222; box-shadow: inset 0 0 0 1px var(--border-subtle); }
+    .preview-label { font-size: 12px; opacity: .85; max-width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* Polished file picker */
+    .file-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+    .file-picker input[type="file"] {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+      border: 0;
+    }
+    .file-picker .file-trigger {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .6rem .9rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--btn-secondary-bg);
+      color: var(--btn-text);
+      cursor: pointer;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, box-shadow .12s ease;
+      backdrop-filter: saturate(120%);
+    }
+    .file-picker .file-trigger:hover { background: var(--btn-secondary-bg-hover); box-shadow: 0 8px 18px rgba(0,0,0,.25); }
+    .file-picker .file-trigger:active { background: var(--btn-secondary-bg-active); transform: translateY(1px) scale(.99); }
+    .file-picker .file-trigger:focus-visible { box-shadow: 0 0 0 4px var(--btn-primary-ring); }
+
+    .file-picker .file-name {
+      min-width: 160px;
+      padding: .45rem .7rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.06);
+      color: #ddd;
+      font-size: 12px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
-    .game-grid a {
-      display: block;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      text-decoration: none;
-      padding: 1.6rem;
-      border-radius: 14px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
-      transition: background-color 0.3s, transform 0.2s;
+    /* Helper stack to group actions */
+    .field .stack {
+      display: flex; gap: .6rem; align-items: center; flex-wrap: wrap;
     }
 
-    .game-grid a:hover {
-      background-color: rgba(255, 255, 255, 0.35);
-      transform: scale(1.05);
-    }
+    /* Background video element (behind content) */
+    #video-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; display: none; }
+    .bg-tip { font-size: 12px; opacity: .8; }
 
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: white;
-    }
+    /* Games grid */
+    .game-grid { margin-top: 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; padding: 1rem 2rem; }
+    .game-grid a { display: block; background: rgba(255, 255, 255, 0.15); color: white; text-decoration: none; padding: 1.6rem; border-radius: 14px; text-align: center; font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 8px rgba(0, 0, 0, 0.35); transition: background-color 0.3s, transform 0.2s, box-shadow .12s ease; }
+    .game-grid a:hover { background-color: rgba(255, 255, 255, 0.35); transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 24px rgba(0,0,0,.35); }
+
+    footer { margin-top: 3rem; text-align: center; color: white; }
   </style>
 </head>
 <body>
   <div class="header-bar">
     <span class="site-title">Leonels Game Hub</span>
-    <nav>
-      <a href="proxies.html">Proxies</a>
-    </nav>
+    <nav><a href="proxies.html">Proxies</a></nav>
   </div>
 
+  <button id="open-settings-btn" type="button">Settings</button>
+  <video id="video-bg" autoplay muted loop playsinline></video>
+
+  <!-- Draggable Settings Window -->
+  <div class="window" id="settingsWindow" role="dialog" aria-label="Settings" aria-hidden="true">
+    <div class="window-titlebar" id="settingsTitlebar">
+      <span class="window-title">Settings</span>
+      <div class="window-controls">
+        <button class="win-btn minimize" title="Minimize" aria-label="Minimize"></button>
+        <button class="win-btn maximize" title="Maximize" aria-label="Maximize"></button>
+        <button class="win-btn close" title="Close" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="section">
+        <h3>Personalization</h3>
+        <div class="field">
+          <label for="websiteTitle">Website Title</label>
+          <input type="text" id="websiteTitle" placeholder="Enter new title" />
+          <button class="btn" id="applyTitle">Apply</button>
+        </div>
+
+        <div class="section">
+          <h3>Website Icon (Favicon)</h3>
+          <div class="favicon-row">
+            <div>
+              <div class="preset-list" id="presetList">
+                <div class="preset-item" data-src="resources/favicon.ico">
+                  <img class="preset-thumb" src="resources/favicon.ico" alt="Default" />
+                  <div class="preset-label">Default</div>
+                </div>
+                <div class="preset-item" data-src="resources/img1.png">
+                  <img class="preset-thumb" src="resources/img1.png" alt="img1.png" />
+                  <div class="preset-label">img1.png</div>
+                </div>
+                <div class="preset-item" data-src="resources/img2.jpg">
+                  <img class="preset-thumb" src="resources/img2.jpg" alt="img2.jpg" />
+                  <div class="preset-label">img2.jpg</div>
+                </div>
+              </div>
+
+              
+              <div class="field" style="margin-top:0.8rem;">
+                <div class="file-picker">
+                  <input type="file" id="faviconFile" accept="image/*" />
+                  <label class="file-trigger" for="faviconFile">Choose file</label>
+                  <span id="faviconFileName" class="file-name">No file chosen</span>
+                </div>
+                <div class="stack">
+                  <button class="btn" id="applyFavicon">Apply Custom</button>
+                  <button class="btn secondary" id="resetFavicon" title="Use default icon">Reset</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="side-preview">
+              <img id="faviconPreview" class="preview-thumb" src="resources/favicon.ico" alt="Preview" />
+              <div id="faviconPreviewLabel" class="preview-label">Preview: Default</div>
+            </div>
+          </div>
+          <small class="bg-tip">Tip: 32×32 or 64×64 PNG/JPG works well for favicons.</small>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Background</h3>
+        -  You can set a custom image or video background. 
+        <div class="field">
+          <label for="bgType">Type</label>
+          <select id="bgType">
+            <option value="none">None</option>
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bgFile">Upload</label>
+          <!-- Polished file picker for background -->
+          <div class="file-picker">
+            <input type="file" id="bgFile" accept="image/*,video/*" />
+            <label class="file-trigger" for="bgFile">Choose file</label>
+            <span id="bgFileName" class="file-name">No file chosen</span>
+          </div>
+          <div class="stack">
+            <button class="btn" id="applyBackground">Apply</button>
+            <button class="btn secondary" id="clearBackground">Clear</button>
+          </div>
+        </div>
+        <small class="bg-tip">For videos, use small MP4/WebM clips; for images, use landscape PNG/JPG.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Games Grid  -->
   <div class="game-grid">
     <a href="1">1</a>
     <a href="1v1.lol">1v1.lol</a>
@@ -219,7 +377,7 @@
     <a href="vex6">Vex 6</a>
     <a href="vex7">Vex 7</a>
     <a href="volleyrandom">Volley Random</a>
-     <a href="Wordle-unlimited">Wordle unlimited</a>
+    <a href="Wordle-unlimited">Wordle unlimited</a>
     <a href="webretro">Webretro (retro console emulator)</a>
     <a href="worldshardestgame">World's Hardest Game</a>
     <a href="worldshardestgame2">World's Hardest Game 2</a>
@@ -227,41 +385,273 @@
   </div>
 
   <p style="color:white; text-align:center;">(More games coming soon!)</p>
-
-  <footer>
-    <div class="footer"></div>
-  </footer>
-
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
-
-  <script type="text/javascript">
-    var infolinks_pid = 3436703;
-    var infolinks_wsid = 0;
-  </script>
-  <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+  <footer><div class="footer"></div></footer>
 
   <script>
+    // Hide header on scroll
     let lastScrollTop = 0;
     const headerBar = document.querySelector('.header-bar');
     window.addEventListener('scroll', () => {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       headerBar.style.top = (scrollTop > lastScrollTop) ? '-70px' : '0';
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
   </script>
 
-  <!-- Inserted ad script below -->
-  <script type="text/javascript">
-    atOptions = {
-      'key' : 'eafe10d82875d0d798d1f54516d1ca05',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
-    };
+  <script>
+    (function () {
+      function qs(sel, root = document) { return root.querySelector(sel); }
+      const settingsWin = qs('#settingsWindow');
+      const titlebar = qs('#settingsTitlebar');
+      const openBtn = qs('#open-settings-btn');
+      const btnMin = qs('.win-btn.minimize', settingsWin);
+      const btnMax = qs('.win-btn.maximize', settingsWin);
+      const btnClose = qs('.win-btn.close', settingsWin);
+
+      function showWindow() { settingsWin.style.display = 'block'; settingsWin.setAttribute('aria-hidden','false'); clampToViewport(); }
+      function hideWindow() { settingsWin.style.display = 'none'; settingsWin.setAttribute('aria-hidden','true'); }
+      function toggleMinimize() { settingsWin.classList.toggle('minimized'); }
+      function toggleMaximize() {
+        if (settingsWin.classList.contains('maximized')) {
+          settingsWin.classList.remove('maximized');
+          settingsWin.style.left = ''; settingsWin.style.top = '5.5rem'; settingsWin.style.right = '2rem'; settingsWin.style.bottom = '';
+        } else {
+          settingsWin.classList.remove('minimized');
+          settingsWin.classList.add('maximized');
+          settingsWin.style.left = '0'; settingsWin.style.top = '0';
+          settingsWin.style.right = '0'; settingsWin.style.bottom = '0';
+        }
+      }
+
+      function clampToViewport() {
+        if (settingsWin.classList.contains('maximized')) return;
+        const rect = settingsWin.getBoundingClientRect();
+        let left = rect.left;
+        let top  = rect.top;
+        left = Math.max(4, Math.min(left, window.innerWidth - rect.width - 4));
+        top  = Math.max(4, Math.min(top,  window.innerHeight - rect.height - 4));
+        settingsWin.style.left = left + 'px';
+        settingsWin.style.top  = top + 'px';
+        settingsWin.style.right = 'auto';
+        settingsWin.style.bottom = 'auto';
+      }
+
+      // Dragging
+      let dragging = false, offX = 0, offY = 0;
+      titlebar.addEventListener('mousedown', (e) => {
+        if (settingsWin.classList.contains('maximized')) return;
+        dragging = true;
+        const r = settingsWin.getBoundingClientRect();
+        offX = e.clientX - r.left;
+        offY = e.clientY - r.top;
+        settingsWin.style.left = r.left + 'px';
+        settingsWin.style.top  = r.top + 'px';
+        settingsWin.style.right = 'auto';
+        settingsWin.style.bottom = 'auto';
+        e.preventDefault();
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        const r = settingsWin.getBoundingClientRect();
+        let left = e.clientX - offX;
+        let top  = e.clientY - offY;
+        left = Math.max(4, Math.min(left, window.innerWidth - r.width - 4));
+        top  = Math.max(4, Math.min(top,  window.innerHeight - r.height - 4));
+        settingsWin.style.left = left + 'px';
+        settingsWin.style.top  = top + 'px';
+      });
+      window.addEventListener('mouseup', () => { dragging = false; });
+
+      // Wire controls
+      openBtn.addEventListener('click', showWindow);
+      btnClose.addEventListener('click', hideWindow);
+      btnMin.addEventListener('click', toggleMinimize);
+      btnMax.addEventListener('click', toggleMaximize);
+      window.addEventListener('resize', clampToViewport);
+      titlebar.addEventListener('dblclick', toggleMaximize);
+
+      // Personalization (Title)
+      const titleInput = qs('#websiteTitle');
+      const applyTitle = qs('#applyTitle');
+      applyTitle.addEventListener('click', () => {
+        const t = (titleInput.value || '').trim();
+        if (!t) return;
+        document.title = t;
+        localStorage.setItem('websiteTitle', t);
+      });
+      titleInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') applyTitle.click(); });
+
+      // Favicon presets + custom
+      const presetList = qs('#presetList');
+      const faviconLink = qs('#favicon');
+      const faviconPreview = qs('#faviconPreview');
+      const faviconPreviewLabel = qs('#faviconPreviewLabel');
+      const faviconFile = qs('#faviconFile');
+      const applyFavicon = qs('#applyFavicon');
+      const resetFavicon = qs('#resetFavicon');
+      const DEFAULT_FAVICON = 'resources/favicon.ico';
+
+      function getSafeLabel(src) {
+        if (!src) return 'Icon';
+        if (src.startsWith('data:')) return 'Custom icon';
+        try {
+          const url = new URL(src, window.location.href);
+          const base = url.pathname.split('/').filter(Boolean).pop() || 'Icon';
+          return base;
+        } catch {
+          const base = src.split('/').filter(Boolean).pop() || 'Icon';
+          return base;
+        }
+      }
+      function truncate(str, max = 28) { return str && str.length > max ? str.slice(0, max - 3) + '...' : str; }
+
+      function setFavicon(href) {
+        faviconLink.href = href;
+        faviconPreview.src = href;
+        const label = truncate(getSafeLabel(href));
+        faviconPreviewLabel.textContent = 'Preview: ' + (label || 'Icon');
+      }
+
+      function clearPresetSelection() {
+        presetList.querySelectorAll('.preset-item').forEach(el => el.classList.remove('selected'));
+      }
+
+      // Click on preset icons
+      presetList.addEventListener('click', (e) => {
+        const item = e.target.closest('.preset-item');
+        if (!item) return;
+        const src = item.getAttribute('data-src');
+        clearPresetSelection();
+        item.classList.add('selected');
+        setFavicon(src);
+        localStorage.removeItem('websiteFaviconDataURL');
+        localStorage.setItem('websiteFaviconPreset', src);
+      });
+
+      // Apply custom favicon (stores as data URL for persistence)
+      applyFavicon.addEventListener('click', () => {
+        const file = faviconFile.files && faviconFile.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          clearPresetSelection();
+          setFavicon(dataUrl);
+          localStorage.setItem('websiteFaviconDataURL', dataUrl);
+          localStorage.removeItem('websiteFaviconPreset');
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Reset to default
+      resetFavicon.addEventListener('click', () => {
+        clearPresetSelection();
+        setFavicon(DEFAULT_FAVICON);
+        localStorage.removeItem('websiteFaviconDataURL');
+        localStorage.setItem('websiteFaviconPreset', DEFAULT_FAVICON);
+        const def = presetList.querySelector('[data-src="resources/favicon.ico"]');
+        if (def) def.classList.add('selected');
+      });
+
+      // Restore saved preferences
+      const savedTitle = localStorage.getItem('websiteTitle');
+      if (savedTitle) { document.title = savedTitle; titleInput.value = savedTitle; }
+
+      const savedFavData = localStorage.getItem('websiteFaviconDataURL');
+      const savedFavPreset = localStorage.getItem('websiteFaviconPreset');
+      if (savedFavData) {
+        setFavicon(savedFavData);
+      } else if (savedFavPreset) {
+        setFavicon(savedFavPreset);
+        const presetEl = presetList.querySelector(`[data-src="${CSS.escape(savedFavPreset)}"]`);
+        if (presetEl) presetEl.classList.add('selected');
+      } else {
+        const def = presetList.querySelector('[data-src="resources/favicon.ico"]');
+        if (def) def.classList.add('selected');
+        setFavicon(DEFAULT_FAVICON);
+      }
+
+      // Background customization (image/video) with persistence
+      const bgType = qs('#bgType');
+      const bgFile = qs('#bgFile');
+      const applyBackground = qs('#applyBackground');
+      const clearBackground = qs('#clearBackground');
+      const videoBg = qs('#video-bg');
+
+      function applyBg(type, dataUrl) {
+        // Reset first
+        videoBg.style.display = 'none';
+        videoBg.src = '';
+        document.body.style.backgroundImage = '';
+        document.body.style.backgroundColor = '#000';
+
+        if (type === 'image' && dataUrl) {
+          document.body.style.backgroundImage = `url(${dataUrl})`;
+          document.body.style.backgroundSize = 'cover';
+          document.body.style.backgroundPosition = 'center';
+        } else if (type === 'video' && dataUrl) {
+          videoBg.src = dataUrl;
+          videoBg.style.display = 'block';
+        }
+      }
+
+      applyBackground.addEventListener('click', () => {
+        const type = bgType.value;
+        const file = bgFile.files && bgFile.files[0];
+        if (!file || type === 'none') {
+          localStorage.removeItem('bgType');
+          localStorage.removeItem('bgData');
+          applyBg('none', null);
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          localStorage.setItem('bgType', type);
+          localStorage.setItem('bgData', dataUrl);
+          applyBg(type, dataUrl);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      clearBackground.addEventListener('click', () => {
+        localStorage.removeItem('bgType');
+        localStorage.removeItem('bgData');
+        applyBg('none', null);
+        bgFile.value = '';
+        bgType.value = 'none';
+      });
+
+      const savedBgType = localStorage.getItem('bgType');
+      const savedBgData = localStorage.getItem('bgData');
+      if (savedBgType && savedBgData) {
+        bgType.value = savedBgType;
+        applyBg(savedBgType, savedBgData);
+      }
+
+      // Polished file picker: show selected filenames
+      function shortName(file) {
+        if (!file) return 'No file chosen';
+        const name = file.name || 'Selected file';
+        return name.length > 32 ? name.slice(0, 29) + '...' : name;
+      }
+      const faviconFileInput = document.getElementById('faviconFile');
+      const faviconFileName = document.getElementById('faviconFileName');
+      if (faviconFileInput && faviconFileName) {
+        faviconFileInput.addEventListener('change', () => {
+          const file = faviconFileInput.files && faviconFileInput.files[0];
+          faviconFileName.textContent = shortName(file);
+        });
+      }
+      const bgFileInput = document.getElementById('bgFile');
+      const bgFileName = document.getElementById('bgFileName');
+      if (bgFileInput && bgFileName) {
+        bgFileInput.addEventListener('change', () => {
+          const file = bgFileInput.files && bgFileInput.files[0];
+          bgFileName.textContent = shortName(file);
+        });
+      }
+    })();
   </script>
-  <script type="text/javascript" src="//www.highperformanceformat.com/eafe10d82875d0d798d1f54516d1ca05/invoke.js"></script>
 </body>
 </html>
