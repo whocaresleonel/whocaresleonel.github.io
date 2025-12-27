@@ -652,8 +652,9 @@
         });
       }
     })();
-  </script>
-  <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
+  window.onload = function() {
     atOptions = {
       'key' : 'eafe10d82875d0d798d1f54516d1ca05',
       'format' : 'iframe',
@@ -661,10 +662,12 @@
       'width' : 728,
       'params' : {}
     };
+    
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://www.highperformanceformat.com/eafe10d82875d0d798d1f54516d1ca05/invoke.js';
+    document.body.appendChild(script);
+  };
   </script>
-  <script
-    type="text/javascript"
-    src="https://www.highperformanceformat.com/eafe10d82875d0d798d1f54516d1ca05/invoke.js"
-  ></script>
 </body>
 </html>
