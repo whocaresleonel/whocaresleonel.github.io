@@ -1,7 +1,4 @@
-User-agent: Googlebot
-Allow: /
-
 User-agent: *
-Allow: /
+Disallow:
 
 Sitemap: https://whocaresleonel.github.io/sitemap.xml
