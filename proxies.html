@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>leonels learn hub</title>
 
-  <!-- Modern system fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -22,7 +21,6 @@
       --max-width: 900px;
     }
 
-    /* Reset + base */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -41,291 +39,189 @@
       justify-content:center;
     }
 
-    .container{
-      width:100%;
-      max-width:var(--max-width);
-    }
+    .container{ width:100%; max-width:var(--max-width); }
 
-    /* Header / Nav */
     header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:28px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; margin-bottom:28px;
     }
 
     .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      text-decoration:none;
-      color:inherit;
+      display:flex; gap:12px; align-items:center;
+      text-decoration:none; color:inherit;
     }
+
     .logo{
-      width:44px;
-      height:44px;
-      border-radius:10px;
+      width:44px; height:44px; border-radius:10px;
       background:linear-gradient(135deg,#7c5cff,#2ee7b6);
       box-shadow:0 6px 20px rgba(46,231,182,0.08), inset 0 -8px 20px rgba(255,255,255,0.06);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:#061024;
-      font-size:16px;
-    }
-    h1{
-      margin:0;
-      font-size:18px;
-      letter-spacing:-0.02em;
-    }
-    .subtitle{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:500;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-weight:700; color:#061024; font-size:16px;
     }
 
-    nav{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
+    h1{ margin:0; font-size:18px; letter-spacing:-0.02em; }
+    .subtitle{ margin:0; color:var(--muted); font-size:13px; font-weight:500; }
 
-    .nav-links{
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
+    nav{ display:flex; align-items:center; gap:12px; }
+    .nav-links{ display:flex; gap:8px; align-items:center; }
 
     .nav-links a, .nav-links button{
-      color:var(--muted);
-      text-decoration:none;
-      padding:8px 12px;
-      border-radius:10px;
-      font-weight:600;
-      font-size:14px;
-      transition:all .18s ease;
-      background:transparent;
-      border:0;
-      cursor:pointer;
+      color:var(--muted); text-decoration:none; padding:8px 12px;
+      border-radius:10px; font-weight:600; font-size:14px;
+      transition:all .18s ease; background:transparent; border:0; cursor:pointer;
     }
+
     .nav-links a.primary, .nav-links button.primary{
       background:linear-gradient(90deg, rgba(124,92,255,0.12), rgba(46,231,182,0.05));
-      color: #eafbf5;
-      box-shadow: 0 4px 18px rgba(2,6,23,0.5);
+      color: #eafbf5; box-shadow: 0 4px 18px rgba(2,6,23,0.5);
       border:1px solid rgba(255,255,255,0.03);
     }
+
     .nav-links a:hover, .nav-links button:hover{ transform:translateY(-2px); color: #fff; }
-    .nav-actions{
-      display:flex;
-      gap:8px;
-      align-items:center;
+
+    .nav-actions{ display:flex; gap:8px; align-items:center; }
+
+    .hamburger{
+      display:none; width:44px; height:44px; border-radius:10px;
+      background:var(--glass); border:1px solid rgba(255,255,255,0.02);
+      align-items:center; justify-content:center; cursor:pointer;
     }
 
-    /* Mobile hamburger */
-    .hamburger{
-      display:none;
-      width:44px;
-      height:44px;
-      border-radius:10px;
-      background:var(--glass);
-      border:1px solid rgba(255,255,255,0.02);
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-    }
     .hamburger svg{width:20px;height:20px;color:var(--muted)}
 
-    /* Content card */
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius: var(--radius);
-      padding:20px;
+      border-radius: var(--radius); padding:20px;
       box-shadow: 0 10px 30px rgba(2,6,23,0.6);
       border: 1px solid rgba(255,255,255,0.03);
       backdrop-filter: blur(6px) saturate(110%);
     }
 
     .controls{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      margin-bottom:16px;
-      justify-content:space-between;
-      flex-wrap:wrap;
+      display:flex; gap:12px; align-items:center; margin-bottom:16px;
+      justify-content:space-between; flex-wrap:wrap;
     }
+
     .search{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      flex:1 1 320px;
-      background:var(--glass-2);
-      padding:8px 10px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,0.02);
-    }
-    .search input{
-      background:transparent;
-      border:0;
-      outline:none;
-      color:inherit;
-      padding:8px;
-      font-size:14px;
-      flex:1;
-    }
-    .tag{
-      font-size:13px;
-      color:var(--muted);
-      padding:8px 10px;
-      border-radius:999px;
-      background:transparent;
+      display:flex; gap:8px; align-items:center; flex:1 1 320px;
+      background:var(--glass-2); padding:8px 10px; border-radius:10px;
       border:1px solid rgba(255,255,255,0.02);
     }
 
-    /* List */
-    .links{
-      display:grid;
-      gap:12px;
-      grid-template-columns:1fr;
+    .search input{
+      background:transparent; border:0; outline:none; color:inherit;
+      padding:8px; font-size:14px; flex:1;
     }
+
+    .tag{
+      font-size:13px; color:var(--muted); padding:8px 10px;
+      border-radius:999px; background:transparent;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    .links{ display:grid; gap:12px; grid-template-columns:1fr; }
+
     .link-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:12px 14px;
-      border-radius:10px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 14px; border-radius:10px;
       background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
       border:1px solid rgba(255,255,255,0.02);
       transition:transform .12s ease, box-shadow .12s ease;
     }
+
     .link-item:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.6); }
-    .link-left{ display:flex; gap:12px; align-items:center; flex:1; min-width:0}
+
+    .link-left{ display:flex; gap:12px; align-items:center; flex:1; min-width:0 }
+
     .favicon{
-      width:44px;
-      height:44px;
-      border-radius:8px;
+      width:44px; height:44px; border-radius:8px;
       background:linear-gradient(135deg,#2b8eff33, #7c5cff22);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:#fff;
-      flex:0 0 44px;
-      font-size:14px;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-weight:700; color:#fff; flex:0 0 44px; font-size:14px;
     }
+
     .link-meta{ overflow:hidden }
     .link-title{ font-weight:700; font-size:15px; color:#fff; white-space:nowrap; text-overflow:ellipsis; overflow:hidden }
     .link-url{ font-size:13px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
     .link-actions{ display:flex; gap:8px; align-items:center }
+
     .btn{
-      background:transparent;
-      color:var(--muted);
+      background:transparent; color:var(--muted);
       border:1px solid rgba(255,255,255,0.02);
-      padding:8px 10px;
-      border-radius:10px;
-      font-weight:600;
-      font-size:13px;
-      cursor:pointer;
-      transition:all .12s ease;
+      padding:8px 10px; border-radius:10px;
+      font-weight:600; font-size:13px; cursor:pointer; transition:all .12s ease;
     }
+
     .btn.primary{
-      background:var(--accent);
-      color:#061024;
-      padding:8px 12px;
-      border:none;
+      background:var(--accent); color:#061024; padding:8px 12px; border:none;
       box-shadow:0 8px 24px rgba(124,92,255,0.16);
     }
+
     .btn:hover{ transform:translateY(-2px) }
 
-    /* Footer small */
-    .meta{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px;
-      text-align:right;
-    }
+    .meta{ margin-top:14px; color:var(--muted); font-size:13px; text-align:right; }
 
-    /* Responsive */
     @media (max-width:820px){
       .nav-links{ display:none }
       .hamburger{ display:flex }
       header{ align-items:flex-start; gap:10px }
     }
 
-    /* Mobile menu overlay */
     .mobile-menu{
-      display:none;
-      position:fixed;
-      inset:0;
-      z-index:40;
+      display:none; position:fixed; inset:0; z-index:40;
       background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
-      align-items:flex-start;
-      justify-content:center;
-      padding:60px 20px;
+      align-items:flex-start; justify-content:center; padding:60px 20px;
     }
+
     .mobile-menu.open{ display:flex }
+
     .mobile-panel{
-      width:100%;
-      max-width:420px;
+      width:100%; max-width:420px;
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px;
-      padding:18px;
-      border:1px solid rgba(255,255,255,0.03);
+      border-radius:14px; padding:18px; border:1px solid rgba(255,255,255,0.03);
     }
+
     .mobile-panel a, .mobile-panel button{
-      display:block;
-      padding:12px 10px;
-      color:var(--muted);
-      text-decoration:none;
-      border-radius:10px;
-      margin-bottom:6px;
-      font-weight:600;
-      background:transparent;
-      border:0;
-      text-align:left;
-      cursor:pointer;
+      display:block; padding:12px 10px; color:var(--muted);
+      text-decoration:none; border-radius:10px; margin-bottom:6px;
+      font-weight:600; background:transparent; border:0; text-align:left; cursor:pointer;
     }
+
     .mobile-panel a:hover, .mobile-panel button:hover{ color:#fff; background:rgba(255,255,255,0.02) }
 
-    /* Modal */
     .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.6);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:999;
-      padding:20px;
+      position:fixed; inset:0; background:rgba(0,0,0,0.6);
+      display:none; align-items:center; justify-content:center;
+      z-index:999; padding:20px;
     }
+
     .modal-backdrop.open{ display:flex }
+
     .modal{
-      width:100%;
-      max-width:520px;
+      width:100%; max-width:520px;
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:12px;
-      padding:18px;
-      border:1px solid rgba(255,255,255,0.03);
+      border-radius:12px; padding:18px; border:1px solid rgba(255,255,255,0.03);
       box-shadow:0 12px 40px rgba(2,6,23,0.6);
     }
+
     .form-row{ display:flex; gap:8px; margin-bottom:10px; align-items:center }
-    .form-row input, .form-row label{
-      font-size:14px;
-    }
+    .form-row input, .form-row label{ font-size:14px }
     .form-row input[type="text"]{
-      flex:1;
-      padding:10px 12px;
-      border-radius:8px;
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.03);
-      color:inherit;
-      outline:none;
+      flex:1; padding:10px 12px; border-radius:8px;
+      background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03);
+      color:inherit; outline:none;
     }
+
     .form-actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:8px }
     .small-muted{ color:var(--muted); font-size:13px }
+
+    .bottom-ad-wrap{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      margin-top:18px;
+      margin-bottom:8px;
+    }
   </style>
 </head>
 <body>
@@ -342,7 +238,6 @@
       <nav aria-label="Main navigation">
         <div class="nav-links" role="menu" aria-hidden="false">
           <a href="index.html" role="menuitem">Home</a>
-          <!-- About removed as requested -->
           <a href="https://discord.gg/unblock" role="menuitem" target="_blank" rel="noopener noreferrer">Sources</a>
           <button id="openAddProxy" class="primary" role="menuitem">Add Proxy</button>
         </div>
@@ -369,25 +264,19 @@
         </div>
       </div>
 
-      <section class="links" id="list" aria-live="polite">
-        <!-- JS will render proxy items here -->
-      </section>
-
+      <section class="links" id="list" aria-live="polite"></section>
       <div class="meta">Tip: use the search above to filter results</div>
     </main>
   </div>
 
-  <!-- Mobile menu -->
   <div id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="mobile-panel" role="document">
       <a href="index.html">Home</a>
-      <!-- About removed from mobile menu as well -->
       <a href="https://discord.gg/unblock" target="_blank" rel="noopener noreferrer">Sources</a>
       <button id="mobileAddProxy" class="primary" style="display:inline-block; margin-top:8px;">Add Proxy</button>
     </div>
   </div>
 
-  <!-- Add Proxy Modal -->
   <div id="modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" role="document">
       <h3 id="modalTitle" style="margin:0 0 10px 0">Add a new proxy</h3>
@@ -412,17 +301,13 @@
   </div>
 
   <script>
-    // Mobile menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
-
     menuToggle.addEventListener('click', () => {
       const open = mobileMenu.classList.toggle('open');
       mobileMenu.setAttribute('aria-hidden', String(!open));
       menuToggle.setAttribute('aria-expanded', String(open));
     });
-
-    // Close mobile menu on overlay click
     mobileMenu.addEventListener('click', (e) => {
       if (e.target === mobileMenu) {
         mobileMenu.classList.remove('open');
@@ -431,15 +316,10 @@
       }
     });
 
-    // LocalStorage key
     const STORAGE_KEY = 'proxies_v1';
-
-    // DOM refs
     const list = document.getElementById('list');
     const tag = document.getElementById('resultTag');
     const search = document.getElementById('search');
-
-    // Modal refs
     const modal = document.getElementById('modal');
     const openAddProxy = document.getElementById('openAddProxy');
     const mobileAddProxy = document.getElementById('mobileAddProxy');
@@ -449,38 +329,17 @@
     const proxyUrl = document.getElementById('proxyUrl');
     const proxySource = document.getElementById('proxySource');
 
-    // Helper: show toast
     function showToast(msg){
       const t = document.createElement('div');
       t.textContent = msg;
       Object.assign(t.style, {
-        position:'fixed',
-        right:'18px',
-        bottom:'18px',
-        background:'rgba(0,0,0,0.7)',
-        color:'#fff',
-        padding:'10px 14px',
-        borderRadius:'10px',
-        zIndex:9999,
-        fontSize:'13px',
+        position:'fixed', right:'18px', bottom:'18px', background:'rgba(0,0,0,0.7)', color:'#fff',
+        padding:'10px 14px', borderRadius:'10px', zIndex:9999, fontSize:'13px',
         boxShadow:'0 8px 26px rgba(2,6,23,0.6)'
       });
       document.body.appendChild(t);
       setTimeout(()=> t.style.opacity = '0', 1400);
       setTimeout(()=> t.remove(), 2000);
-    }
-
-    // Clipboard copy with fallback
-    function copyUrl(url){
-      if (!navigator.clipboard) {
-        fallbackCopy(url);
-        return;
-      }
-      navigator.clipboard.writeText(url).then(()=>{
-        showToast('Copied to clipboard');
-      }, ()=> {
-        fallbackCopy(url);
-      });
     }
 
     function fallbackCopy(text){
@@ -493,57 +352,48 @@
       ta.remove();
     }
 
-    // Open/close modal
+    function copyUrl(url){
+      if (!navigator.clipboard) return fallbackCopy(url);
+      navigator.clipboard.writeText(url).then(()=> showToast('Copied to clipboard'), ()=> fallbackCopy(url));
+    }
+
     function openModal(){
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
-      proxyTitle.value = '';
-      proxyUrl.value = '';
-      proxySource.value = '';
+      proxyTitle.value = ''; proxyUrl.value = ''; proxySource.value = '';
       setTimeout(()=> proxyTitle.focus(), 50);
     }
+
     function closeModal(){
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
     }
+
     openAddProxy.addEventListener('click', openModal);
     mobileAddProxy.addEventListener('click', () => { openModal(); mobileMenu.classList.remove('open'); });
     cancelAdd.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-    // Proxies management
     function loadProxies(){
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) {
-          // default initial proxy if none saved yet
-          const initial = [
-            { title: 'Space — whocaresleonel.jumpingcrab.com', url: 'https://whocaresleonel.jumpingcrab.com', source: '' }
-          ];
+          const initial = [{ title: 'Space — whocaresleonel.jumpingcrab.com', url: 'https://whocaresleonel.jumpingcrab.com', source: '' }];
           localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
           return initial;
         }
         return JSON.parse(raw);
-      } catch (e) {
-        console.error('Failed to load proxies', e);
-        return [];
-      }
+      } catch (e) { return []; }
     }
 
     function saveProxies(arr){
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-      } catch (e) {
-        console.error('Failed to save proxies', e);
-        showToast('Save failed (storage)');
-      }
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+      catch (e) { showToast('Save failed (storage)'); }
     }
 
     function addProxy(obj){
       const arr = loadProxies();
-      arr.unshift(obj); // newest first
+      arr.unshift(obj);
       saveProxies(arr);
       renderList(search.value);
       showToast('Proxy saved');
@@ -562,17 +412,15 @@
       const items = loadProxies();
       list.innerHTML = '';
       let visible = 0;
+
       items.forEach((it, idx) => {
         const title = it.title || it.url;
         const url = it.url || '';
-        const urlDisplay = url.replace(/(^\w+:|^)\/\//, ''); // nicer display
+        const urlDisplay = url.replace(/(^\w+:|^)\/\//, '');
         const combined = (title + ' ' + url).toLowerCase();
-        const show = combined.includes(q);
-        if (!show) return;
-
+        if (!combined.includes(q)) return;
         visible++;
 
-        // build item element
         const article = document.createElement('article');
         article.className = 'link-item';
 
@@ -581,7 +429,6 @@
 
         const favicon = document.createElement('div');
         favicon.className = 'favicon';
-        // Show first letter(s) as favicon content
         favicon.textContent = (title || '').split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase() || 'P';
 
         const meta = document.createElement('div');
@@ -618,10 +465,7 @@
         const delBtn = document.createElement('button');
         delBtn.className = 'btn';
         delBtn.textContent = 'Delete';
-        delBtn.title = 'Remove this proxy';
-        delBtn.addEventListener('click', () => {
-          if (confirm('Remove this proxy?')) removeProxy(idx);
-        });
+        delBtn.addEventListener('click', () => { if (confirm('Remove this proxy?')) removeProxy(idx); });
 
         actions.appendChild(openA);
         actions.appendChild(copyBtn);
@@ -629,12 +473,11 @@
 
         article.appendChild(left);
         article.appendChild(actions);
-
         list.appendChild(article);
       });
 
       tag.textContent = visible + (visible === 1 ? ' result' : ' results');
-      // If no matches, optionally show a friendly empty state
+
       if (visible === 0){
         const empty = document.createElement('div');
         empty.className = 'small-muted';
@@ -644,56 +487,45 @@
       }
     }
 
-    // Wire up search
-    search.addEventListener('input', (e) => {
-      renderList(e.target.value);
-    });
+    search.addEventListener('input', (e) => renderList(e.target.value));
 
-    // Save from modal
     saveAdd.addEventListener('click', () => {
       const title = proxyTitle.value.trim();
       const url = proxyUrl.value.trim();
       const source = proxySource.value.trim();
-      if (!url) {
-        showToast('Please enter a URL');
-        proxyUrl.focus();
-        return;
-      }
-      // Basic URL normalization: ensure protocol
+      if (!url) { showToast('Please enter a URL'); proxyUrl.focus(); return; }
       let normalized = url;
-      if (!/^[a-zA-Z]+:\/\//.test(normalized)){
-        normalized = 'https://' + normalized;
-      }
-      const item = {
-        title: title || normalized,
-        url: normalized,
-        source: source
-      };
-      addProxy(item);
+      if (!/^[a-zA-Z]+:\/\//.test(normalized)) normalized = 'https://' + normalized;
+      addProxy({ title: title || normalized, url: normalized, source: source });
       closeModal();
     });
 
-    // Initialize and render
-    document.addEventListener('DOMContentLoaded', () => {
-      renderList('');
-    });
-
-    // keyboard: close modal on Esc
+    document.addEventListener('DOMContentLoaded', () => renderList(''));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (modal.classList.contains('open')) closeModal();
-      }
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
   </script>
+
   <script>
-  atOptions = {
-    'key' : '7c02938062ce17cbc97cf704a9bec83a',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://freelygreatestscammer.com/7c02938062ce17cbc97cf704a9bec83a/invoke.js"></script>
+    window.addEventListener('load', function () {
+      var wrap = document.createElement('div');
+      wrap.className = 'bottom-ad-wrap';
+
+      window.atOptions = {
+        'key' : '7c02938062ce17cbc97cf704a9bec83a',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+
+      var s = document.createElement('script');
+      s.src = 'https://freelygreatestscammer.com/7c02938062ce17cbc97cf704a9bec83a/invoke.js';
+      s.async = true;
+
+      wrap.appendChild(s);
+      document.body.appendChild(wrap);
+    });
+  </script>
 </body>
 </html>

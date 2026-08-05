@@ -29,62 +29,24 @@
     .header-bar a { color: #fff; text-decoration: none; font-size: 1.1rem; font-weight: 500; padding: 0.3rem 0.6rem; border-radius: 10px; transition: background 0.2s, transform .12s; }
     .header-bar a:hover { background: rgba(255,255,255,0.10); transform: translateY(-1px); }
 
-    /* Polished global button styles */
     button{ font: inherit; }
-    .btn,
-    #open-settings-btn,
-    .win-btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .35rem;
-      padding: .6rem .9rem;
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      color: var(--btn-text);
+    .btn, #open-settings-btn, .win-btn {
+      position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .35rem;
+      padding: .6rem .9rem; border-radius: 12px; border: 1px solid var(--border-subtle); color: var(--btn-text);
       transition: transform .12s ease, filter .12s ease, background .12s ease, box-shadow .12s ease;
-      backdrop-filter: saturate(120%);
-      cursor: pointer;
-      outline: none;
-      user-select: none;
+      backdrop-filter: saturate(120%); cursor: pointer; outline: none; user-select: none;
     }
-    .btn:focus-visible,
-    #open-settings-btn:focus-visible,
-    .win-btn:focus-visible {
-      box-shadow: 0 0 0 4px var(--btn-primary-ring);
-    }
-    .btn:active,
-    #open-settings-btn:active,
-    .win-btn:active {
-      transform: translateY(1px) scale(0.99);
-      filter: brightness(.98);
-    }
+    .btn:focus-visible, #open-settings-btn:focus-visible, .win-btn:focus-visible { box-shadow: 0 0 0 4px var(--btn-primary-ring); }
+    .btn:active, #open-settings-btn:active, .win-btn:active { transform: translateY(1px) scale(0.99); filter: brightness(.98); }
 
-    /* Primary + secondary variants */
-    .btn,
-    #open-settings-btn {
-      background: var(--btn-primary-bg);
-      border-color: rgba(124,77,255,0.35);
-    }
-    .btn:hover,
-    #open-settings-btn:hover {
-      background: var(--btn-primary-bg-hover);
-      filter: brightness(1.04);
-      box-shadow: 0 8px 18px rgba(106,61,248,.35);
-    }
-    .btn.secondary {
-      background: var(--btn-secondary-bg);
-      border-color: var(--border-subtle);
-      color: #fff;
-    }
+    .btn, #open-settings-btn { background: var(--btn-primary-bg); border-color: rgba(124,77,255,0.35); }
+    .btn:hover, #open-settings-btn:hover { background: var(--btn-primary-bg-hover); filter: brightness(1.04); box-shadow: 0 8px 18px rgba(106,61,248,.35); }
+    .btn.secondary { background: var(--btn-secondary-bg); border-color: var(--border-subtle); color: #fff; }
     .btn.secondary:hover { background: var(--btn-secondary-bg-hover); }
     .btn.secondary:active { background: var(--btn-secondary-bg-active); }
 
-    /* Settings launcher button */
     #open-settings-btn { position: fixed; top: 0.8rem; right: 0.8rem; z-index: 2147483000; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
 
-    /* Window and controls */
     .window { position: fixed; top: 5.5rem; right: 2rem; width: 460px; max-width: calc(100vw - 2rem); background: var(--bg-pane); color: #fff; border: 1px solid var(--border-subtle); border-radius: 16px; box-shadow: 0 24px 64px rgba(0,0,0,.6); z-index: 2147483000; display: none; backdrop-filter: blur(6px); user-select: none; }
     .window.minimized { width: 340px; bottom: 1rem; right: 1rem; top: auto; }
     .window.minimized .window-content { display: none; }
@@ -93,13 +55,7 @@
     .window-titlebar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.75rem; gap: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); cursor: move; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border-top-left-radius: 16px; border-top-right-radius: 16px; }
     .window-controls { display: flex; gap: 8px; }
 
-    /* Polished window buttons */
-    .win-btn {
-      width: 32px; height: 32px;
-      background: var(--btn-secondary-bg);
-      border-color: rgba(255,255,255,0.18);
-      border-radius: 10px;
-    }
+    .win-btn { width: 32px; height: 32px; background: var(--btn-secondary-bg); border-color: rgba(255,255,255,0.18); border-radius: 10px; }
     .win-btn:hover { background: var(--btn-secondary-bg-hover); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
     .win-btn.close { background: #ff4d4f; border-color: #ff7779; }
     .win-btn.close:hover { background: #ff3638; }
@@ -118,7 +74,6 @@
     }
     .field input[type="text"]:focus, .field select:focus { box-shadow: 0 0 0 3px var(--btn-primary-ring); }
 
-    /* Presets and preview */
     .favicon-row { display: grid; grid-template-columns: 1fr 160px; gap: 0.8rem; align-items: start; }
     .preset-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
     .preset-item { border: 1px solid var(--border-subtle); border-radius: 12px; padding: 10px; background: rgba(255,255,255,0.06); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: transform .12s ease, background .12s ease, box-shadow .12s ease; }
@@ -131,85 +86,60 @@
     .preview-thumb { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; background: #222; box-shadow: inset 0 0 0 1px var(--border-subtle); }
     .preview-label { font-size: 12px; opacity: .85; max-width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* Polished file picker */
-    .file-picker {
-      display: inline-flex;
-      align-items: center;
-      gap: .6rem;
-      flex-wrap: wrap;
-    }
-    .file-picker input[type="file"] {
-      position: absolute !important;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
-      border: 0;
-    }
+    .file-picker { display: inline-flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+    .file-picker input[type="file"] { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
     .file-picker .file-trigger {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: .6rem .9rem;
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      background: var(--btn-secondary-bg);
-      color: var(--btn-text);
-      cursor: pointer;
-      transition: transform .12s ease, filter .12s ease, background .12s ease, box-shadow .12s ease;
-      backdrop-filter: saturate(120%);
+      position: relative; display: inline-flex; align-items: center; justify-content: center; padding: .6rem .9rem;
+      border-radius: 12px; border: 1px solid var(--border-subtle); background: var(--btn-secondary-bg); color: var(--btn-text);
+      cursor: pointer; transition: transform .12s ease, filter .12s ease, background .12s ease, box-shadow .12s ease; backdrop-filter: saturate(120%);
     }
     .file-picker .file-trigger:hover { background: var(--btn-secondary-bg-hover); box-shadow: 0 8px 18px rgba(0,0,0,.25); }
     .file-picker .file-trigger:active { background: var(--btn-secondary-bg-active); transform: translateY(1px) scale(.99); }
     .file-picker .file-trigger:focus-visible { box-shadow: 0 0 0 4px var(--btn-primary-ring); }
-
     .file-picker .file-name {
-      min-width: 160px;
-      padding: .45rem .7rem;
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      background: rgba(255,255,255,0.06);
-      color: #ddd;
-      font-size: 12px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      min-width: 160px; padding: .45rem .7rem; border-radius: 12px; border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.06); color: #ddd; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-
-    /* Helper stack to group actions */
-    .field .stack {
-      display: flex; gap: .6rem; align-items: center; flex-wrap: wrap;
-    }
-
-    /* Background video element (behind content) */
-    #video-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; display: none; }
+    .field .stack { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
     .bg-tip { font-size: 12px; opacity: .8; }
 
-    /* Games grid */
-    .game-grid { margin-top: 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; padding: 1rem 2rem; }
+    .page-shell {
+      margin-top: 5rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) 180px;
+      gap: 1rem;
+      align-items: start;
+    }
+    .side-ad {
+      position: sticky;
+      top: 5.8rem;
+      min-height: 300px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: .5rem;
+      overflow: hidden;
+    }
+    .side-ad .ad-slot { width: 100%; display: flex; justify-content: center; }
+
+    .game-grid { margin-top: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; padding: 1rem; }
     .game-grid a { display: block; background: rgba(255, 255, 255, 0.15); color: white; text-decoration: none; padding: 1.6rem; border-radius: 14px; text-align: center; font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 8px rgba(0, 0, 0, 0.35); transition: background-color 0.3s, transform 0.2s, box-shadow .12s ease; }
     .game-grid a:hover { background-color: rgba(255, 255, 255, 0.35); transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 24px rgba(0,0,0,.35); }
 
+    .bottom-ad-wrap { margin: 2rem auto 0; display: flex; justify-content: center; width: 100%; }
     footer { margin-top: 3rem; text-align: center; color: white; }
+
+    @media (max-width: 1100px) {
+      .page-shell { grid-template-columns: 1fr; }
+      .side-ad { position: static; min-height: auto; }
+    }
   </style>
 </head>
-<script>
-  atOptions = {
-    'key' : 'a74a30494f790e8df483e9f3923bcb64',
-    'format' : 'iframe',
-    'height' : 250,
-    'width' : 300,
-    'params' : {}
-  };
-</script>
-<script src="https://freelygreatestscammer.com/a74a30494f790e8df483e9f3923bcb64/invoke.js"></script>
-<script>
-  atOptions = {
-    'key' : '7c02938062ce17cbc97cf704a9bec83a',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://freelygreatestscammer.com/7c02938062ce17cbc97cf704a9bec83a/invoke.js"></script>
+
 <body>
   <div class="header-bar">
     <span class="site-title">Leonels Game Hub</span>
@@ -217,9 +147,7 @@
   </div>
 
   <button id="open-settings-btn" type="button">Settings</button>
-  <video id="video-bg" autoplay muted loop playsinline></video>
 
-  <!-- Draggable Settings Window -->
   <div class="window" id="settingsWindow" role="dialog" aria-label="Settings" aria-hidden="true">
     <div class="window-titlebar" id="settingsTitlebar">
       <span class="window-title">Settings</span>
@@ -257,7 +185,6 @@
                 </div>
               </div>
 
-              
               <div class="field" style="margin-top:0.8rem;">
                 <div class="file-picker">
                   <input type="file" id="faviconFile" accept="image/*" />
@@ -279,38 +206,13 @@
           <small class="bg-tip">Tip: 32×32 or 64×64 PNG/JPG works well for favicons.</small>
         </div>
       </div>
-
-      <div class="section">
-        <h3>Background</h3>
-        -  You can set a custom image or video background. 
-        <div class="field">
-          <label for="bgType">Type</label>
-          <select id="bgType">
-            <option value="none">None</option>
-            <option value="image">Image</option>
-            <option value="video">Video</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="bgFile">Upload</label>
-          <!-- Polished file picker for background -->
-          <div class="file-picker">
-            <input type="file" id="bgFile" accept="image/*,video/*" />
-            <label class="file-trigger" for="bgFile">Choose file</label>
-            <span id="bgFileName" class="file-name">No file chosen</span>
-          </div>
-          <div class="stack">
-            <button class="btn" id="applyBackground">Apply</button>
-            <button class="btn secondary" id="clearBackground">Clear</button>
-          </div>
-        </div>
-        <small class="bg-tip">For videos, use small MP4/WebM clips; for images, use landscape PNG/JPG.</small>
-      </div>
     </div>
   </div>
 
-  <!-- Games Grid  -->
-  <div class="game-grid">
+  <div class="page-shell">
+    <aside class="side-ad left-ad"><div class="ad-slot" id="leftAdSlot"></div></aside>
+
+    <div class="game-grid">
     <a href="1">1</a>
     <a href="1v1.lol">1v1.lol</a>
     <a href="10minutestilldawn">10 Minutes Till Dawn</a>
@@ -405,9 +307,12 @@
     <a href="worldshardestgame2">World's Hardest Game 2</a>
     <a href="xx142b2.exe">xx142-b2.exe</a>
     <a href="Zombies/">Zombies</a>
+    </div>
+
+    <aside class="side-ad right-ad"><div class="ad-slot" id="rightAdSlot"></div></aside>
   </div>
+
   <script>
-    // Hide header on scroll
     let lastScrollTop = 0;
     const headerBar = document.querySelector('.header-bar');
     window.addEventListener('scroll', () => {
@@ -441,47 +346,37 @@
           settingsWin.style.right = '0'; settingsWin.style.bottom = '0';
         }
       }
-
       function clampToViewport() {
         if (settingsWin.classList.contains('maximized')) return;
         const rect = settingsWin.getBoundingClientRect();
-        let left = rect.left;
-        let top  = rect.top;
+        let left = rect.left, top = rect.top;
         left = Math.max(4, Math.min(left, window.innerWidth - rect.width - 4));
         top  = Math.max(4, Math.min(top,  window.innerHeight - rect.height - 4));
         settingsWin.style.left = left + 'px';
         settingsWin.style.top  = top + 'px';
-        settingsWin.style.right = 'auto';
-        settingsWin.style.bottom = 'auto';
+        settingsWin.style.right = 'auto'; settingsWin.style.bottom = 'auto';
       }
 
-      // Dragging
       let dragging = false, offX = 0, offY = 0;
       titlebar.addEventListener('mousedown', (e) => {
         if (settingsWin.classList.contains('maximized')) return;
         dragging = true;
         const r = settingsWin.getBoundingClientRect();
-        offX = e.clientX - r.left;
-        offY = e.clientY - r.top;
-        settingsWin.style.left = r.left + 'px';
-        settingsWin.style.top  = r.top + 'px';
-        settingsWin.style.right = 'auto';
-        settingsWin.style.bottom = 'auto';
+        offX = e.clientX - r.left; offY = e.clientY - r.top;
+        settingsWin.style.left = r.left + 'px'; settingsWin.style.top = r.top + 'px';
+        settingsWin.style.right = 'auto'; settingsWin.style.bottom = 'auto';
         e.preventDefault();
       });
       window.addEventListener('mousemove', (e) => {
         if (!dragging) return;
         const r = settingsWin.getBoundingClientRect();
-        let left = e.clientX - offX;
-        let top  = e.clientY - offY;
+        let left = e.clientX - offX, top = e.clientY - offY;
         left = Math.max(4, Math.min(left, window.innerWidth - r.width - 4));
         top  = Math.max(4, Math.min(top,  window.innerHeight - r.height - 4));
-        settingsWin.style.left = left + 'px';
-        settingsWin.style.top  = top + 'px';
+        settingsWin.style.left = left + 'px'; settingsWin.style.top  = top + 'px';
       });
       window.addEventListener('mouseup', () => { dragging = false; });
 
-      // Wire controls
       openBtn.addEventListener('click', showWindow);
       btnClose.addEventListener('click', hideWindow);
       btnMin.addEventListener('click', toggleMinimize);
@@ -489,7 +384,6 @@
       window.addEventListener('resize', clampToViewport);
       titlebar.addEventListener('dblclick', toggleMaximize);
 
-      // Personalization (Title)
       const titleInput = qs('#websiteTitle');
       const applyTitle = qs('#applyTitle');
       applyTitle.addEventListener('click', () => {
@@ -500,7 +394,6 @@
       });
       titleInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') applyTitle.click(); });
 
-      // Favicon presets + custom
       const presetList = qs('#presetList');
       const faviconLink = qs('#favicon');
       const faviconPreview = qs('#faviconPreview');
@@ -513,74 +406,53 @@
       function getSafeLabel(src) {
         if (!src) return 'Icon';
         if (src.startsWith('data:')) return 'Custom icon';
-        try {
-          const url = new URL(src, window.location.href);
-          const base = url.pathname.split('/').filter(Boolean).pop() || 'Icon';
-          return base;
-        } catch {
-          const base = src.split('/').filter(Boolean).pop() || 'Icon';
-          return base;
-        }
+        try { return new URL(src, window.location.href).pathname.split('/').filter(Boolean).pop() || 'Icon'; }
+        catch { return src.split('/').filter(Boolean).pop() || 'Icon'; }
       }
       function truncate(str, max = 28) { return str && str.length > max ? str.slice(0, max - 3) + '...' : str; }
-
       function setFavicon(href) {
-        faviconLink.href = href;
-        faviconPreview.src = href;
-        const label = truncate(getSafeLabel(href));
-        faviconPreviewLabel.textContent = 'Preview: ' + (label || 'Icon');
+        faviconLink.href = href; faviconPreview.src = href;
+        faviconPreviewLabel.textContent = 'Preview: ' + (truncate(getSafeLabel(href)) || 'Icon');
       }
+      function clearPresetSelection() { presetList.querySelectorAll('.preset-item').forEach(el => el.classList.remove('selected')); }
 
-      function clearPresetSelection() {
-        presetList.querySelectorAll('.preset-item').forEach(el => el.classList.remove('selected'));
-      }
-
-      // Click on preset icons
       presetList.addEventListener('click', (e) => {
         const item = e.target.closest('.preset-item');
         if (!item) return;
         const src = item.getAttribute('data-src');
-        clearPresetSelection();
-        item.classList.add('selected');
-        setFavicon(src);
+        clearPresetSelection(); item.classList.add('selected'); setFavicon(src);
         localStorage.removeItem('websiteFaviconDataURL');
         localStorage.setItem('websiteFaviconPreset', src);
       });
 
-      // Apply custom favicon (stores as data URL for persistence)
       applyFavicon.addEventListener('click', () => {
         const file = faviconFile.files && faviconFile.files[0];
         if (!file) return;
         const reader = new FileReader();
         reader.onload = () => {
           const dataUrl = reader.result;
-          clearPresetSelection();
-          setFavicon(dataUrl);
+          clearPresetSelection(); setFavicon(dataUrl);
           localStorage.setItem('websiteFaviconDataURL', dataUrl);
           localStorage.removeItem('websiteFaviconPreset');
         };
         reader.readAsDataURL(file);
       });
 
-      // Reset to default
       resetFavicon.addEventListener('click', () => {
-        clearPresetSelection();
-        setFavicon(DEFAULT_FAVICON);
+        clearPresetSelection(); setFavicon(DEFAULT_FAVICON);
         localStorage.removeItem('websiteFaviconDataURL');
         localStorage.setItem('websiteFaviconPreset', DEFAULT_FAVICON);
         const def = presetList.querySelector('[data-src="resources/favicon.ico"]');
         if (def) def.classList.add('selected');
       });
 
-      // Restore saved preferences
       const savedTitle = localStorage.getItem('websiteTitle');
       if (savedTitle) { document.title = savedTitle; titleInput.value = savedTitle; }
 
       const savedFavData = localStorage.getItem('websiteFaviconDataURL');
       const savedFavPreset = localStorage.getItem('websiteFaviconPreset');
-      if (savedFavData) {
-        setFavicon(savedFavData);
-      } else if (savedFavPreset) {
+      if (savedFavData) setFavicon(savedFavData);
+      else if (savedFavPreset) {
         setFavicon(savedFavPreset);
         const presetEl = presetList.querySelector(`[data-src="${CSS.escape(savedFavPreset)}"]`);
         if (presetEl) presetEl.classList.add('selected');
@@ -590,65 +462,6 @@
         setFavicon(DEFAULT_FAVICON);
       }
 
-      // Background customization (image/video) with persistence
-      const bgType = qs('#bgType');
-      const bgFile = qs('#bgFile');
-      const applyBackground = qs('#applyBackground');
-      const clearBackground = qs('#clearBackground');
-      const videoBg = qs('#video-bg');
-
-      function applyBg(type, dataUrl) {
-        // Reset first
-        videoBg.style.display = 'none';
-        videoBg.src = '';
-        document.body.style.backgroundImage = '';
-        document.body.style.backgroundColor = '#000';
-
-        if (type === 'image' && dataUrl) {
-          document.body.style.backgroundImage = `url(${dataUrl})`;
-          document.body.style.backgroundSize = 'cover';
-          document.body.style.backgroundPosition = 'center';
-        } else if (type === 'video' && dataUrl) {
-          videoBg.src = dataUrl;
-          videoBg.style.display = 'block';
-        }
-      }
-
-      applyBackground.addEventListener('click', () => {
-        const type = bgType.value;
-        const file = bgFile.files && bgFile.files[0];
-        if (!file || type === 'none') {
-          localStorage.removeItem('bgType');
-          localStorage.removeItem('bgData');
-          applyBg('none', null);
-          return;
-        }
-        const reader = new FileReader();
-        reader.onload = () => {
-          const dataUrl = reader.result;
-          localStorage.setItem('bgType', type);
-          localStorage.setItem('bgData', dataUrl);
-          applyBg(type, dataUrl);
-        };
-        reader.readAsDataURL(file);
-      });
-
-      clearBackground.addEventListener('click', () => {
-        localStorage.removeItem('bgType');
-        localStorage.removeItem('bgData');
-        applyBg('none', null);
-        bgFile.value = '';
-        bgType.value = 'none';
-      });
-
-      const savedBgType = localStorage.getItem('bgType');
-      const savedBgData = localStorage.getItem('bgData');
-      if (savedBgType && savedBgData) {
-        bgType.value = savedBgType;
-        applyBg(savedBgType, savedBgData);
-      }
-
-      // Polished file picker: show selected filenames
       function shortName(file) {
         if (!file) return 'No file chosen';
         const name = file.name || 'Selected file';
@@ -662,31 +475,65 @@
           faviconFileName.textContent = shortName(file);
         });
       }
-      const bgFileInput = document.getElementById('bgFile');
-      const bgFileName = document.getElementById('bgFileName');
-      if (bgFileInput && bgFileName) {
-        bgFileInput.addEventListener('change', () => {
-          const file = bgFileInput.files && bgFileInput.files[0];
-          bgFileName.textContent = shortName(file);
-        });
-      }
     })();
-    </script>
-    <script type="text/javascript">
-  window.onload = function() {
-    atOptions = {
-      'key' : 'eafe10d82875d0d798d1f54516d1ca05',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
+  </script>
+
+ <script>
+  (function () {
+    function mountAd(slotId, key) {
+      const slot = document.getElementById(slotId);
+      if (!slot) return;
+
+      // clear only the inner slot
+      slot.innerHTML = '';
+
+      // create a unique wrapper to isolate each invocation
+      const holder = document.createElement('div');
+      holder.style.width = '160px';
+      holder.style.height = '600px';
+      holder.style.display = 'block';
+      slot.appendChild(holder);
+
+      window.atOptions = {
+        key: key,
+        format: 'iframe',
+        height: 600,
+        width: 160,
+        params: {}
+      };
+
+      const s = document.createElement('script');
+      s.src = 'https://freelygreatestscammer.com/' + key + '/invoke.js';
+      s.type = 'text/javascript';
+      s.async = false;
+      holder.appendChild(s);
+    }
+
+    // stagger calls so the global atOptions isn't clobbered
+    mountAd('leftAdSlot', '6b1574da8f90096b851992ff4c984966');
+    setTimeout(() => {
+      mountAd('rightAdSlot', '6b1574da8f90096b851992ff4c984966');
+    }, 800);
+  })();
+</script>
+
+  <script type="text/javascript">
+    window.onload = function() {
+      atOptions = {
+        'key' : 'eafe10d82875d0d798d1f54516d1ca05',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://www.highperformanceformat.com/eafe10d82875d0d798d1f54516d1ca05/invoke.js';
+      var wrap = document.createElement('div');
+      wrap.className = 'bottom-ad-wrap';
+      wrap.appendChild(script);
+      document.body.appendChild(wrap);
     };
-    
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://www.highperformanceformat.com/eafe10d82875d0d798d1f54516d1ca05/invoke.js';
-    document.body.appendChild(script);
-  };
   </script>
 </body>
 </html>
